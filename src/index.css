@@ -1,0 +1,104 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: 'Outfit', sans-serif;
+  --font-mono: 'Space Mono', monospace;
+  
+  --color-brand-black: #030303;
+  --color-brand-dark: #070715;
+  --color-brand-cyan: #00f5ff;
+  --color-brand-blue: #00d2ff;
+  --color-brand-purple: #b800ff;
+  
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-pulse-slow: pulse-slow 8s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes pulse-slow {
+  0%, 100% { opacity: 0.2; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(1.1); }
+}
+
+@utility bg-grid-pattern {
+  background-size: 50px 50px;
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+}
+
+@utility glass-card {
+  background: rgba(10, 10, 20, 0.5);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+@utility glass-card-hover {
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  
+  &:hover {
+    background: rgba(12, 12, 30, 0.7);
+    border-color: rgba(0, 245, 255, 0.3);
+    box-shadow: 0 0 40px rgba(0, 245, 255, 0.1);
+    transform: translateY(-4px);
+  }
+}
+
+@utility neon-glow-cyan {
+  box-shadow: 0 0 20px rgba(0, 245, 255, 0.2);
+}
+
+@utility neon-glow-purple {
+  box-shadow: 0 0 20px rgba(184, 0, 255, 0.2);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #030303;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 9999px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 245, 255, 0.4);
+}
+
+html, body {
+  background-color: #030303;
+  color: #f3f4f6;
+  font-family: 'Outfit', sans-serif;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+}
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Hide admin link styling but make it accessible */
+.admin-hidden-trigger {
+  opacity: 0;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  width: 5px;
+  height: 5px;
+  z-index: -999;
+  cursor: default;
+}
