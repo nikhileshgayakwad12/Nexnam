@@ -41,10 +41,8 @@ export default function Footer() {
   };
 
   const socialLinks = [
-    { name: "Twitter", icon: TwitterIcon, href: "https://twitter.com/nexnam" },
-    { name: "LinkedIn", icon: LinkedinIcon, href: "https://linkedin.com/company/nexnam" },
-    { name: "GitHub", icon: GithubIcon, href: "https://github.com/nexnam" },
-    { name: "Instagram", icon: InstagramIcon, href: "https://instagram.com/nexnam" }
+    { name: "LinkedIn", icon: LinkedinIcon, href: "https://www.linkedin.com/in/nexnam-tech-2a7b643a8?utm_source=share_via&utm_content=profile&utm_medium=member_android" },
+    { name: "Instagram", icon: InstagramIcon, href: "https://www.instagram.com/nexnamtech?igsh=MWxoOXJqa3ZjNjJ5MA==" }
   ];
 
   return (
@@ -154,26 +152,26 @@ export default function Footer() {
                 <div className="flex flex-col">
                   <span className="text-xs text-white/40 font-mono">EMAIL</span>
                   <a
-                    href="mailto:hello@nexnam.com"
+                    href="mailto:nexnam49@gmail.com"
                     onMouseEnter={playHover}
                     onClick={playClick}
                     className="text-sm text-white/70 hover:text-brand-cyan transition-colors"
                   >
-                    hello@nexnam.com
+                    nexnam49@gmail.com
                   </a>
                 </div>
               </li>
               <li className="flex items-start gap-3">
-                <Globe className="w-4 h-4 text-brand-blue mt-0.5 shrink-0" />
+                <MapPin className="w-4 h-4 text-brand-blue mt-0.5 shrink-0" />
                 <div className="flex flex-col">
-                  <span className="text-xs text-white/40 font-mono">LOCATIONS</span>
+                  <span className="text-xs text-white/40 font-mono">ADDRESS</span>
                   <span className="text-sm text-white/70">
-                    Remote-first, Global Support
+                    Indore, Madhya Pradesh
                   </span>
                 </div>
               </li>
               <li className="flex items-start gap-3">
-                <MapPin className="w-4 h-4 text-brand-purple mt-0.5 shrink-0" />
+                <Globe className="w-4 h-4 text-brand-purple mt-0.5 shrink-0" />
                 <div className="flex flex-col">
                   <span className="text-xs text-white/40 font-mono">RESPONSE TIME</span>
                   <span className="text-sm text-white/70 font-mono">
@@ -202,8 +200,26 @@ export default function Footer() {
             >
               Admin Portal
             </Link>
-            <span className="hover:text-brand-cyan transition-colors cursor-pointer" onMouseEnter={playHover} onClick={playClick}>Privacy Policy</span>
-            <span className="hover:text-brand-cyan transition-colors cursor-pointer" onMouseEnter={playHover} onClick={playClick}>Terms of Service</span>
+            <a
+              href="https://www.termsfeed.com/live/45ff7155-602a-4865-b44a-348da4945cd8"
+              target="_blank"
+              rel="noopener noreferrer"
+              onMouseEnter={playHover}
+              onClick={playClick}
+              className="hover:text-brand-cyan transition-colors"
+            >
+              Privacy Policy
+            </a>
+            <a
+              href="https://www.termsfeed.com/live/a6c01320-62ab-47c6-8c12-b998c23808d2"
+              target="_blank"
+              rel="noopener noreferrer"
+              onMouseEnter={playHover}
+              onClick={playClick}
+              className="hover:text-brand-cyan transition-colors"
+            >
+              Terms of Service
+            </a>
           </div>
         </div>
       </div>

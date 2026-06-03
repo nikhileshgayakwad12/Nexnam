@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ArrowRight, Sparkles, ShieldCheck, Flame, Compass, HeartHandshake } from "lucide-react";
@@ -10,9 +10,44 @@ import ProjectCard from "../components/ProjectCard";
 import CTASection from "../components/CTASection";
 import { defaultServices } from "../data/servicesData";
 import { defaultProjects } from "../data/projectsData";
+import { supabase } from "../lib/supabaseClient";
+
+// Helper mapper to normalize Supabase columns to ProjectCard keys
+const mapProject = (p) => {
+  const toArray = (val) => {
+    if (!val) return [];
+    if (Array.isArray(val)) return val;
+    if (typeof val === "string") {
+      if (val.trim().startsWith("[")) {
+        try {
+          const parsed = JSON.parse(val);
+          if (Array.isArray(parsed)) return parsed;
+        } catch (e) {}
+      }
+      return val.split(",").map((s) => s.trim()).filter((s) => s.length > 0);
+    }
+    return [];
+  };
+
+  return {
+    id: p.id,
+    title: p.title,
+    category: p.category,
+    shortDesc: p.description,
+    longDesc: p.description,
+    features: toArray(p.features),
+    technologies: toArray(p.tech_stack),
+    demoUrl: p.live_demo,
+    caseStudyUrl: "#",
+    gradientClass: p.image_url && p.image_url.startsWith("from-") ? p.image_url : "from-cyan-500 via-blue-600 to-indigo-700",
+    imageUrl: p.image_url && !p.image_url.startsWith("from-") ? p.image_url : null,
+    created_at: p.created_at
+  };
+};
 
 export default function Home() {
   const navigate = useNavigate();
+  const [projects, setProjects] = useState([]);
 
   useEffect(() => {
     updateSEO(
@@ -20,6 +55,23 @@ export default function Home() {
       "We design and develop modern websites, landing pages, apps, and digital solutions that help startups, creators, students, and businesses grow online.",
       "Nexnam, website development, app development, landing page design, tech startup, digital solutions"
     );
+
+    const fetchFeaturedProjects = async () => {
+      try {
+        const { data, error } = await supabase
+          .from("projects")
+          .select("*")
+          .order("created_at", { ascending: false });
+        if (error) throw error;
+        if (data && data.length > 0) {
+          setProjects(data.map(mapProject));
+        }
+      } catch (err) {
+        console.error("Failed to load featured projects from Supabase:", err);
+      }
+    };
+
+    fetchFeaturedProjects();
   }, []);
 
   const stats = [
@@ -32,8 +84,8 @@ export default function Home() {
   // Show top 3 services on home page
   const featuredServices = defaultServices.slice(0, 3);
   
-  // Show top 2 projects on home page
-  const featuredProjects = defaultProjects.slice(0, 2);
+  // Show top 2 projects on home page (dynamic from Supabase, fallback to defaultProjects)
+  const featuredProjects = projects.length > 0 ? projects.slice(0, 2) : defaultProjects.slice(0, 2);
 
   const processSteps = [
     { num: "01", name: "Understand", desc: "We deep-dive into your core startup idea and target customers." },

@@ -8,12 +8,26 @@ import { updateSEO } from "../utils/seoHelper";
 import { playHover, playClick, playSuccess } from "../utils/soundManager";
 import { defaultServices } from "../data/servicesData";
 import { defaultProjects } from "../data/projectsData";
+import { supabase } from "../lib/supabaseClient";
+
+// Date formatting helper
+const formatDate = (dateStr) => {
+  if (!dateStr) return "N/A";
+  try {
+    return new Date(dateStr).toLocaleDateString(undefined, {
+      month: "short",
+      day: "numeric",
+      hour: "2-digit",
+      minute: "2-digit"
+    });
+  } catch (e) {
+    return dateStr;
+  }
+};
 
 export default function AdminPanel() {
   // Authentication States
-  const [isLoggedIn, setIsLoggedIn] = useState(
-    sessionStorage.getItem("nexnam_admin_auth") === "true"
-  );
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [loginEmail, setLoginEmail] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
   const [loginError, setLoginError] = useState("");
@@ -22,7 +36,7 @@ export default function AdminPanel() {
   // Active Tab State
   const [activeTab, setActiveTab] = useState("overview"); // overview, services, projects, inquiries
 
-  // Data States (synced with LocalStorage)
+  // Data States
   const [services, setServices] = useState([]);
   const [projects, setProjects] = useState([]);
   const [inquiries, setInquiries] = useState([]);
@@ -55,52 +69,105 @@ export default function AdminPanel() {
     caseStudyUrl: "#"
   });
 
-  // Populate dynamic LocalStorage structures on load
+  // Initial Sync and Auth setups
   useEffect(() => {
     updateSEO("Secure Admin Console | Nexnam", "Secure administrative platform for managing Nexnam's startup records.");
 
     if (!localStorage.getItem("nexnam_services")) {
       localStorage.setItem("nexnam_services", JSON.stringify(defaultServices));
     }
-    const storedProjects = localStorage.getItem("nexnam_projects");
-    if (!storedProjects) {
-      localStorage.setItem("nexnam_projects", JSON.stringify(defaultProjects));
-    } else {
-      try {
-        const parsed = JSON.parse(storedProjects);
-        const hasOld = parsed.some(p => ["localconnect", "unimate", "collection-tracker", "digital-minimalism-app"].includes(p.id));
-        if (hasOld) {
-          localStorage.setItem("nexnam_projects", JSON.stringify(defaultProjects));
-        }
-      } catch (e) {
-        console.error("Failed to migrate stored projects in admin", e);
-      }
-    }
-    if (!localStorage.getItem("nexnam_visitors")) {
-      localStorage.setItem("nexnam_visitors", "1428");
-    }
-
     setServices(JSON.parse(localStorage.getItem("nexnam_services")));
-    setProjects(JSON.parse(localStorage.getItem("nexnam_projects")));
-    setInquiries(JSON.parse(localStorage.getItem("nexnam_inquiries") || "[]"));
-    setMockVisitors(parseInt(localStorage.getItem("nexnam_visitors") || "1428"));
+    setMockVisitors(1428);
+
+    // Initial check of the auth session
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setIsLoggedIn(!!session);
+    });
+
+    // Listen for auth changes
+    const { data: { subscription: authSub } } = supabase.auth.onAuthStateChange((_event, session) => {
+      setIsLoggedIn(!!session);
+    });
+
+    return () => {
+      authSub.unsubscribe();
+    };
   }, []);
+
+  // Fetch Supabase Projects & Inquiries dynamically when logged in
+  const fetchProjects = async () => {
+    try {
+      const { data, error } = await supabase
+        .from("projects")
+        .select("*")
+        .order("created_at", { ascending: false });
+      if (error) throw error;
+      setProjects(data || []);
+    } catch (err) {
+      console.error("Error loading projects from Supabase in AdminPanel:", err);
+    }
+  };
+
+  const fetchInquiries = async () => {
+    try {
+      const { data, error } = await supabase
+        .from("contact_messages")
+        .select("*")
+        .order("created_at", { ascending: false });
+      if (error) throw error;
+      setInquiries(data || []);
+    } catch (err) {
+      console.error("Error loading inquiries from Supabase in AdminPanel:", err);
+    }
+  };
+
+  useEffect(() => {
+    if (!isLoggedIn) return;
+
+    fetchProjects();
+    fetchInquiries();
+
+    // Subscribe to projects realtime changes
+    const projectsChannel = supabase
+      .channel("admin-projects-channel")
+      .on(
+        "postgres_changes",
+        { event: "*", schema: "public", table: "projects" },
+        () => {
+          fetchProjects();
+        }
+      )
+      .subscribe();
+
+    // Subscribe to messages realtime changes
+    const inquiriesChannel = supabase
+      .channel("admin-inquiries-channel")
+      .on(
+        "postgres_changes",
+        { event: "*", schema: "public", table: "contact_messages" },
+        () => {
+          fetchInquiries();
+        }
+      )
+      .subscribe();
+
+    return () => {
+      supabase.removeChannel(projectsChannel);
+      supabase.removeChannel(inquiriesChannel);
+    };
+  }, [isLoggedIn]);
 
   // Increment mock visitors count slowly
   useEffect(() => {
     if (!isLoggedIn) return;
     const interval = setInterval(() => {
-      setMockVisitors((prev) => {
-        const next = prev + Math.floor(Math.random() * 2) + 1;
-        localStorage.setItem("nexnam_visitors", String(next));
-        return next;
-      });
+      setMockVisitors((prev) => prev + Math.floor(Math.random() * 2) + 1);
     }, 10000);
     return () => clearInterval(interval);
   }, [isLoggedIn]);
 
   // Login handler
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
     playClick();
     setLoginError("");
@@ -112,31 +179,64 @@ export default function AdminPanel() {
 
     setIsLoggingIn(true);
 
-    setTimeout(() => {
-      if (loginEmail === "admin@nexnam.com" && loginPassword === "nexnam@123") {
-        setIsLoggedIn(true);
-        sessionStorage.setItem("nexnam_admin_auth", "true");
-        playSuccess();
-      } else {
-        setLoginError("Invalid email or password.");
-      }
+    try {
+      const { error } = await supabase.auth.signInWithPassword({
+        email: loginEmail,
+        password: loginPassword,
+      });
+
+      if (error) throw error;
+      playSuccess();
+    } catch (err) {
+      console.error("Authentication error:", err);
+      setLoginError("Invalid email or password.");
+    } finally {
       setIsLoggingIn(false);
-    }, 1000);
+    }
   };
 
   // Logout handler
-  const handleLogout = () => {
+  const handleLogout = async () => {
     playClick();
-    setIsLoggedIn(false);
-    sessionStorage.removeItem("nexnam_admin_auth");
+    try {
+      const { error } = await supabase.auth.signOut();
+      if (error) throw error;
+    } catch (err) {
+      console.error("Sign out error:", err);
+    }
   };
 
   // Delete Inquiries
-  const handleDeleteInquiry = (id) => {
+  const handleDeleteInquiry = async (id) => {
+    if (!window.confirm("Are you sure you want to delete this message?")) return;
     playClick();
-    const updated = inquiries.filter((inq) => inq.id !== id);
-    setInquiries(updated);
-    localStorage.setItem("nexnam_inquiries", JSON.stringify(updated));
+    try {
+      const { error } = await supabase
+        .from("contact_messages")
+        .delete()
+        .eq("id", id);
+      if (error) throw error;
+      fetchInquiries();
+    } catch (err) {
+      console.error("Error deleting inquiry:", err);
+      alert("Failed to delete message: " + err.message);
+    }
+  };
+
+  // Toggle Read Inquiry status
+  const handleToggleReadInquiry = async (id, currentStatus) => {
+    playClick();
+    try {
+      const { error } = await supabase
+        .from("contact_messages")
+        .update({ is_read: !currentStatus })
+        .eq("id", id);
+      if (error) throw error;
+      fetchInquiries();
+    } catch (err) {
+      console.error("Error toggling inquiry read status:", err);
+      alert("Failed to toggle read status: " + err.message);
+    }
   };
 
   // Delete Services
@@ -148,11 +248,20 @@ export default function AdminPanel() {
   };
 
   // Delete Projects
-  const handleDeleteProject = (id) => {
+  const handleDeleteProject = async (id) => {
+    if (!window.confirm("Are you sure you want to delete this project?")) return;
     playClick();
-    const updated = projects.filter((proj) => proj.id !== id);
-    setProjects(updated);
-    localStorage.setItem("nexnam_projects", JSON.stringify(updated));
+    try {
+      const { error } = await supabase
+        .from("projects")
+        .delete()
+        .eq("id", id);
+      if (error) throw error;
+      fetchProjects();
+    } catch (err) {
+      console.error("Error deleting project:", err);
+      alert("Failed to delete project: " + err.message);
+    }
   };
 
   // Save Service (Create/Update)
@@ -201,7 +310,7 @@ export default function AdminPanel() {
   };
 
   // Save Project (Create/Update)
-  const handleSaveProject = (e) => {
+  const handleSaveProject = async (e) => {
     e.preventDefault();
     playClick();
 
@@ -220,43 +329,39 @@ export default function AdminPanel() {
       .map((item) => item.trim())
       .filter((item) => item.length > 0);
 
-    let updatedProjects = [...projects];
+    const projectData = {
+      title: projectForm.title,
+      category: projectForm.category,
+      description: projectForm.shortDesc,
+      features: featuresArray,
+      tech_stack: techsArray,
+      image_url: projectForm.gradientClass,
+      live_demo: projectForm.demoUrl || "https://nexnam.demo"
+    };
 
-    if (projectModal.mode === "add") {
-      const newProj = {
-        id: projectForm.title.toLowerCase().replace(/[^a-z0-9]/g, "-"),
-        title: projectForm.title,
-        category: projectForm.category,
-        shortDesc: projectForm.shortDesc,
-        longDesc: projectForm.longDesc,
-        technologies: techsArray,
-        features: featuresArray,
-        gradientClass: projectForm.gradientClass,
-        demoUrl: projectForm.demoUrl || "https://nexnam.demo",
-        caseStudyUrl: "#"
-      };
-      updatedProjects.push(newProj);
-    } else {
-      updatedProjects = projects.map((proj) =>
-        proj.id === projectModal.data.id
-          ? {
-              ...proj,
-              title: projectForm.title,
-              category: projectForm.category,
-              shortDesc: projectForm.shortDesc,
-              longDesc: projectForm.longDesc,
-              technologies: techsArray,
-              features: featuresArray,
-              gradientClass: projectForm.gradientClass,
-              demoUrl: projectForm.demoUrl
-            }
-          : proj
-      );
+    try {
+      if (projectModal.mode === "add") {
+        // Generate Slug ID
+        const slugId = projectForm.title.toLowerCase().replace(/[^a-z0-9]/g, "-") + "-" + Math.floor(Math.random() * 1000);
+        const { error } = await supabase
+          .from("projects")
+          .insert([{ id: slugId, ...projectData }]);
+        if (error) throw error;
+      } else {
+        const { error } = await supabase
+          .from("projects")
+          .update(projectData)
+          .eq("id", projectForm.id);
+        if (error) throw error;
+      }
+
+      setProjectModal({ open: false, mode: "add", data: null });
+      fetchProjects();
+      playSuccess();
+    } catch (err) {
+      console.error("Error saving project:", err);
+      alert("Failed to save project. " + err.message);
     }
-
-    setProjects(updatedProjects);
-    localStorage.setItem("nexnam_projects", JSON.stringify(updatedProjects));
-    setProjectModal({ open: false, mode: "add", data: null });
   };
 
   const openAddServiceModal = () => {
@@ -302,16 +407,36 @@ export default function AdminPanel() {
 
   const openEditProjectModal = (proj) => {
     playClick();
+    
+    // Normalize features and technologies to array (if they are string/array)
+    const toArray = (val) => {
+      if (!val) return [];
+      if (Array.isArray(val)) return val;
+      if (typeof val === "string") {
+        if (val.trim().startsWith("[")) {
+          try {
+            const parsed = JSON.parse(val);
+            if (Array.isArray(parsed)) return parsed;
+          } catch (e) {}
+        }
+        return val.split(",").map((s) => s.trim()).filter((s) => s.length > 0);
+      }
+      return [];
+    };
+
+    const techList = toArray(proj.tech_stack || proj.technologies);
+    const featList = toArray(proj.features);
+
     setProjectForm({
       id: proj.id,
       title: proj.title,
       category: proj.category,
-      shortDesc: proj.shortDesc,
-      longDesc: proj.longDesc || "",
-      technologiesString: proj.technologies ? proj.technologies.join(", ") : "",
-      featuresString: proj.features ? proj.features.join(", ") : "",
-      gradientClass: proj.gradientClass || "from-cyan-500 via-blue-600 to-indigo-700",
-      demoUrl: proj.demoUrl || "",
+      shortDesc: proj.description || proj.shortDesc || "",
+      longDesc: proj.description || proj.longDesc || "",
+      technologiesString: techList.join(", "),
+      featuresString: featList.join(", "),
+      gradientClass: proj.image_url && proj.image_url.startsWith("from-") ? proj.image_url : (proj.gradientClass || "from-cyan-500 via-blue-600 to-indigo-700"),
+      demoUrl: proj.live_demo || proj.demoUrl || "",
       caseStudyUrl: "#"
     });
     setProjectModal({ open: true, mode: "edit", data: proj });
@@ -503,9 +628,11 @@ export default function AdminPanel() {
                       </thead>
                       <tbody>
                         {inquiries.slice(0, 5).map((inq) => (
-                          <tr key={inq.id} className="border-b border-white/5 hover:bg-white/5 transition-colors">
-                            <td className="py-3 px-4 text-white/50">{inq.date}</td>
-                            <td className="py-3 px-4 font-bold text-white">{inq.name}</td>
+                          <tr key={inq.id} className={`border-b border-white/5 hover:bg-white/5 transition-colors ${!inq.is_read ? "bg-white/[0.02]" : ""}`}>
+                            <td className="py-3 px-4 text-white/50">{formatDate(inq.created_at)}</td>
+                            <td className="py-3 px-4 font-bold text-white">
+                              {inq.name} {!inq.is_read && <span className="ml-2 w-1.5 h-1.5 inline-block rounded-full bg-brand-cyan" title="New Inquiry" />}
+                            </td>
                             <td className="py-3 px-4 text-brand-cyan">{inq.service}</td>
                             <td className="py-3 px-4 text-brand-purple">{inq.budget}</td>
                           </tr>
@@ -657,8 +784,22 @@ export default function AdminPanel() {
                   {inquiries.map((inq) => (
                     <div
                       key={inq.id}
-                      className="glass-card rounded-2xl p-6 border border-white/5 hover:border-brand-purple/30 transition-all duration-300 relative"
+                      className={`glass-card rounded-2xl p-6 border transition-all duration-300 relative ${
+                        !inq.is_read ? "border-brand-cyan/35 bg-brand-cyan/[0.02]" : "border-white/5 hover:border-brand-purple/30"
+                      }`}
                     >
+                      {/* Read/Unread toggle icon */}
+                      <button
+                        onClick={() => handleToggleReadInquiry(inq.id, inq.is_read)}
+                        className={`absolute top-6 right-16 p-2 rounded hover:bg-white/10 transition-colors cursor-pointer ${
+                          inq.is_read ? "text-emerald-400" : "text-amber-500 animate-pulse"
+                        }`}
+                        title={inq.is_read ? "Mark as Unread" : "Mark as Read"}
+                      >
+                        {inq.is_read ? <Check className="w-4 h-4" /> : <Sparkles className="w-4 h-4" />}
+                      </button>
+
+                      {/* Delete button */}
                       <button
                         onClick={() => handleDeleteInquiry(inq.id)}
                         className="absolute top-6 right-6 p-2 rounded hover:bg-red-500/10 text-white/60 hover:text-red-400 transition-colors cursor-pointer"
@@ -668,7 +809,7 @@ export default function AdminPanel() {
                       </button>
 
                       <div className="flex flex-wrap gap-3 items-center mb-4">
-                        <span className="text-xs font-mono text-white/40">{inq.date}</span>
+                        <span className="text-xs font-mono text-white/40">{formatDate(inq.created_at)}</span>
                         <span className="px-2.5 py-0.5 rounded-full bg-brand-cyan/15 text-brand-cyan text-[10px] font-mono font-bold uppercase">
                           {inq.service}
                         </span>
@@ -677,7 +818,9 @@ export default function AdminPanel() {
                         </span>
                       </div>
 
-                      <h4 className="text-base font-bold text-white mb-1">{inq.name}</h4>
+                      <h4 className="text-base font-bold text-white mb-1">
+                        {inq.name} {!inq.is_read && <span className="ml-2 px-1.5 py-0.5 rounded text-[8px] bg-brand-cyan/20 text-brand-cyan uppercase tracking-wider font-mono">New</span>}
+                      </h4>
                       <p className="text-xs font-mono text-white/40 mb-4">
                         Email: {inq.email} | Phone: {inq.phone}
                       </p>

@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Mail, Phone, MessageSquare, Send, CheckCircle2, Sparkles, AlertCircle } from "lucide-react";
 import { updateSEO } from "../utils/seoHelper";
 import { playHover, playClick, playSuccess } from "../utils/soundManager";
+import { supabase } from "../lib/supabaseClient";
 
 export default function Contact() {
   const location = useLocation();
@@ -52,6 +53,7 @@ export default function Contact() {
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
+  const [whatsAppUrl, setWhatsAppUrl] = useState("");
 
   // Sync selected service if updated via navigation redirects after initial render
   useEffect(() => {
@@ -91,25 +93,43 @@ export default function Contact() {
     return Object.keys(tempErrors).length === 0;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     playClick();
     
     if (!validate()) return;
 
     setIsSubmitting(true);
+    setErrors({});
 
-    // Mock API lag
-    setTimeout(() => {
-      // Save submission in LocalStorage
-      const existingInquiries = JSON.parse(localStorage.getItem("nexnam_inquiries") || "[]");
-      const newInquiry = {
-        id: Date.now().toString(),
-        date: new Date().toLocaleString(),
-        status: "New",
-        ...formData
-      };
-      localStorage.setItem("nexnam_inquiries", JSON.stringify([newInquiry, ...existingInquiries]));
+    try {
+      const { error } = await supabase
+        .from("contact_messages")
+        .insert([
+          {
+            name: formData.name,
+            email: formData.email,
+            phone: formData.phone,
+            service: formData.service,
+            budget: formData.budget,
+            message: formData.message,
+            is_read: false
+          }
+        ]);
+
+      if (error) throw error;
+
+      // Construct WhatsApp message and redirect URL
+      const msg = `Hello Nexnam! I have submitted a project inquiry:
+- *Name:* ${formData.name}
+- *Email:* ${formData.email}
+- *Phone:* ${formData.phone}
+- *Service:* ${formData.service}
+- *Budget:* ${formData.budget}
+- *Message:* ${formData.message}`;
+      const url = `https://wa.me/919770169100?text=${encodeURIComponent(msg)}`;
+      setWhatsAppUrl(url);
+
 
       setIsSubmitting(false);
       setSubmitSuccess(true);
@@ -124,7 +144,11 @@ export default function Contact() {
         budget: "",
         message: ""
       });
-    }, 1200);
+    } catch (err) {
+      console.error("Error inserting inquiry in Supabase:", err);
+      setErrors({ submit: err.message || "Failed to submit inquiry to database. Please check connection and try again." });
+      setIsSubmitting(false);
+    }
   };
 
   const triggerWhatsApp = () => {
@@ -193,12 +217,12 @@ export default function Contact() {
                       Direct Email
                     </h3>
                     <a
-                      href="mailto:hello@nexnam.com"
+                      href="mailto:nexnam49@gmail.com"
                       onMouseEnter={playHover}
                       onClick={playClick}
                       className="text-sm text-white/80 hover:text-brand-cyan transition-colors"
                     >
-                      hello@nexnam.com
+                      nexnam49@gmail.com
                     </a>
                   </div>
                 </div>
@@ -427,6 +451,13 @@ export default function Contact() {
                       )}
                     </div>
 
+                    {errors.submit && (
+                      <div className="p-3 bg-red-950/15 border border-red-500/20 rounded-lg text-xs text-red-400 font-mono flex items-center gap-1.5 animate-pulse">
+                        <AlertCircle className="w-4 h-4 shrink-0" />
+                        <span>{errors.submit}</span>
+                      </div>
+                    )}
+
                     {/* Submit Button */}
                     <button
                       type="submit"
@@ -459,16 +490,28 @@ export default function Contact() {
                     <h2 className="text-2xl font-bold text-white mb-3">
                       Briefing Packet Received!
                     </h2>
-                    <p className="text-sm text-white/50 max-w-md leading-relaxed mb-8">
-                      Your inquiry has been successfully stored in our database records. A technical architect will inspect your parameters and reply within 12 hours.
+                    <p className="text-sm text-white/50 max-w-md leading-relaxed mb-6">
+                      Your inquiry has been successfully stored in our database records. Click the button below to directly forward your brief details to our team on WhatsApp.
                     </p>
+                    {whatsAppUrl && (
+                      <a
+                        href={whatsAppUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        onClick={playClick}
+                        onMouseEnter={playHover}
+                        className="px-8 py-3.5 rounded-lg bg-green-500 hover:bg-green-600 text-brand-black text-xs font-mono font-bold uppercase tracking-wider transition-colors cursor-pointer text-center mb-6 flex items-center justify-center gap-1.5 shadow-[0_0_20px_rgba(34,197,94,0.3)] hover:shadow-[0_0_30px_rgba(34,197,94,0.5)] duration-300"
+                      >
+                        Start WhatsApp Direct Chat
+                      </a>
+                    )}
                     <button
                       onClick={() => {
                         playClick();
                         setSubmitSuccess(false);
                       }}
                       onMouseEnter={playHover}
-                      className="px-6 py-3 rounded-lg border border-white/10 hover:border-brand-cyan/40 bg-white/5 text-xs font-mono uppercase font-bold tracking-wider text-white transition-all cursor-pointer"
+                      className="px-6 py-2.5 rounded-lg border border-white/10 hover:border-brand-cyan/40 bg-white/5 text-xs font-mono uppercase font-bold tracking-wider text-white transition-all cursor-pointer"
                     >
                       Submit Another Inquire
                     </button>

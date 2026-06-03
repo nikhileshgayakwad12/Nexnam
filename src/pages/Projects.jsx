@@ -4,14 +4,67 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Sparkles, X, CheckCircle, ExternalLink, Box } from "lucide-react";
 import { updateSEO } from "../utils/seoHelper";
 import ProjectCard from "../components/ProjectCard";
-import { defaultProjects } from "../data/projectsData";
 import { playClick, playHover } from "../utils/soundManager";
+import { supabase } from "../lib/supabaseClient";
+
+// Helper mapper to normalize Supabase columns to ProjectCard keys
+const mapProject = (p) => {
+  const toArray = (val) => {
+    if (!val) return [];
+    if (Array.isArray(val)) return val;
+    if (typeof val === "string") {
+      if (val.trim().startsWith("[")) {
+        try {
+          const parsed = JSON.parse(val);
+          if (Array.isArray(parsed)) return parsed;
+        } catch (e) {}
+      }
+      return val.split(",").map((s) => s.trim()).filter((s) => s.length > 0);
+    }
+    return [];
+  };
+
+  return {
+    id: p.id,
+    title: p.title,
+    category: p.category,
+    shortDesc: p.description,
+    longDesc: p.description,
+    features: toArray(p.features),
+    technologies: toArray(p.tech_stack),
+    demoUrl: p.live_demo,
+    caseStudyUrl: "#",
+    gradientClass: p.image_url && p.image_url.startsWith("from-") ? p.image_url : "from-cyan-500 via-blue-600 to-indigo-700",
+    imageUrl: p.image_url && !p.image_url.startsWith("from-") ? p.image_url : null,
+    created_at: p.created_at
+  };
+};
 
 export default function Projects() {
   const navigate = useNavigate();
-  const [projects, setProjects] = useState(defaultProjects);
+  const [projects, setProjects] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [activeCaseStudy, setActiveCaseStudy] = useState(null);
+
+  const fetchProjects = async () => {
+    try {
+      const { data, error } = await supabase
+        .from("projects")
+        .select("*")
+        .order("created_at", { ascending: false });
+
+      if (error) throw error;
+      setProjects((data || []).map(mapProject));
+      setError(null);
+    } catch (err) {
+      console.error("Error loading projects from Supabase:", err);
+      setError("Failed to sync project records from database cluster.");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   useEffect(() => {
     updateSEO(
@@ -20,23 +73,23 @@ export default function Projects() {
       "Nexnam projects, case studies, software developer portfolio, MVP showcase"
     );
 
-    // Sync projects from localStorage in case they were modified in the admin panel
-    const storedProjects = localStorage.getItem("nexnam_projects");
-    if (storedProjects) {
-      try {
-        const parsed = JSON.parse(storedProjects);
-        // Self-healing migration: if stored projects contain old mock IDs, reset to the new defaults
-        const hasOld = parsed.some(p => ["localconnect", "unimate", "collection-tracker", "digital-minimalism-app"].includes(p.id));
-        if (hasOld) {
-          localStorage.setItem("nexnam_projects", JSON.stringify(defaultProjects));
-          setProjects(defaultProjects);
-        } else {
-          setProjects(parsed);
+    fetchProjects();
+
+    // Subscribe to realtime database updates
+    const channel = supabase
+      .channel("public-projects")
+      .on(
+        "postgres_changes",
+        { event: "*", schema: "public", table: "projects" },
+        () => {
+          fetchProjects();
         }
-      } catch (e) {
-        console.error("Failed to parse custom projects", e);
-      }
-    }
+      )
+      .subscribe();
+
+    return () => {
+      supabase.removeChannel(channel);
+    };
   }, []);
 
   // Filter Categories list
@@ -113,33 +166,60 @@ export default function Projects() {
           ))}
         </div>
 
+        {/* Loading State */}
+        {loading && (
+          <div className="text-center py-20">
+            <div className="inline-block w-8 h-8 border-4 border-brand-cyan border-t-transparent rounded-full animate-spin mb-4" />
+            <p className="text-white/60 font-mono text-sm">Syncing projects with Supabase...</p>
+          </div>
+        )}
+
+        {/* Error State */}
+        {error && (
+          <div className="text-center py-10 max-w-md mx-auto bg-red-950/15 border border-red-500/20 rounded-2xl p-6 mb-10">
+            <p className="text-red-400 font-mono text-sm mb-4">{error}</p>
+            <button
+              onClick={() => {
+                playClick();
+                setLoading(true);
+                fetchProjects();
+              }}
+              className="px-4 py-2 bg-white/5 border border-white/10 hover:border-white/20 text-white text-xs font-mono rounded-lg transition-all cursor-pointer"
+            >
+              Try Reconnecting
+            </button>
+          </div>
+        )}
+
         {/* Projects Grid */}
-        <motion.div
-          layout
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16"
-        >
-          <AnimatePresence mode="popLayout">
-            {filteredProjects.map((project, idx) => (
-              <motion.div
-                key={project.id}
-                layout
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.9 }}
-                transition={{ duration: 0.4 }}
-              >
-                <ProjectCard
-                  project={project}
-                  index={idx}
-                  onOpenCaseStudy={(proj) => setActiveCaseStudy(proj)}
-                />
-              </motion.div>
-            ))}
-          </AnimatePresence>
-        </motion.div>
+        {!loading && !error && (
+          <motion.div
+            layout
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16"
+          >
+            <AnimatePresence mode="popLayout">
+              {filteredProjects.map((project, idx) => (
+                <motion.div
+                  key={project.id}
+                  layout
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.9 }}
+                  transition={{ duration: 0.4 }}
+                >
+                  <ProjectCard
+                    project={project}
+                    index={idx}
+                    onOpenCaseStudy={(proj) => setActiveCaseStudy(proj)}
+                  />
+                </motion.div>
+              ))}
+            </AnimatePresence>
+          </motion.div>
+        )}
 
         {/* Empty state */}
-        {filteredProjects.length === 0 && (
+        {!loading && !error && filteredProjects.length === 0 && (
           <div className="text-center py-20 glass-card rounded-2xl border border-white/5">
             <p className="text-white/40 text-sm font-mono uppercase tracking-wider">
               No matching case studies found.
