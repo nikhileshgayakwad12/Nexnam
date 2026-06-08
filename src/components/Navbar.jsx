@@ -36,16 +36,13 @@ export default function Navbar() {
             to="/"
             onClick={handleNavClick}
             onMouseEnter={playHover}
-            className="flex items-center gap-2 group"
+            className="flex items-center group"
           >
-            <div className="relative flex items-center justify-center w-9 h-9 rounded-lg bg-gradient-to-tr from-brand-cyan to-brand-purple p-[1px] group-hover:shadow-[0_0_15px_rgba(0,245,255,0.4)] transition-all duration-300">
-              <div className="flex items-center justify-center w-full h-full rounded-[7px] bg-brand-black font-extrabold text-brand-cyan text-sm tracking-wider font-mono">
-                N
-              </div>
-            </div>
-            <span className="text-xl font-extrabold tracking-wider bg-gradient-to-r from-white via-white to-white/70 bg-clip-text text-transparent group-hover:from-brand-cyan group-hover:to-brand-purple transition-all duration-300">
-              Nexnam
-            </span>
+            <img
+              src="/logo.jpg"
+              alt="Nexnam Logo"
+              className="h-8 w-auto rounded object-contain group-hover:opacity-90 transition-opacity"
+            />
           </Link>
 
           {/* Desktop Navigation */}

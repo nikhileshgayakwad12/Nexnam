@@ -55,16 +55,13 @@ export default function Footer() {
               to="/"
               onClick={() => handleLinkClick("/")}
               onMouseEnter={playHover}
-              className="flex items-center gap-2 group self-start"
+              className="flex items-center group self-start"
             >
-              <div className="relative flex items-center justify-center w-8 h-8 rounded-lg bg-gradient-to-tr from-brand-cyan to-brand-purple p-[1px]">
-                <div className="flex items-center justify-center w-full h-full rounded-[7px] bg-brand-black font-extrabold text-brand-cyan text-xs font-mono">
-                  N
-                </div>
-              </div>
-              <span className="text-lg font-extrabold tracking-wider text-white">
-                Nexnam
-              </span>
+              <img
+                src="/logo.jpg"
+                alt="Nexnam Logo"
+                className="h-7 w-auto rounded object-contain group-hover:opacity-90 transition-opacity"
+              />
             </Link>
             <p className="text-sm text-white/50 leading-relaxed max-w-xs">
               Designing and developing modern websites, landing pages, apps, and digital solutions that help startups, creators, and businesses grow online.
