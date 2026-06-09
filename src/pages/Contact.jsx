@@ -142,7 +142,6 @@ export default function Contact() {
 
   const triggerWhatsApp = () => {
     playClick();
-    // Default greeting matching brand identity
     const text = encodeURIComponent("Hello Nexnam! I'd like to inquire about starting a project with you.");
     window.open(`https://wa.me/919770169100?text=${text}`, "_blank");
   };

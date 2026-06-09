@@ -5,7 +5,7 @@ import { playHover, playClick } from "../utils/soundManager";
 export default function WhatsAppWidget() {
   const handleClick = () => {
     playClick();
-    const message = encodeURIComponent("Hi Nexnam, I want to discuss a project.");
+    const message = encodeURIComponent("Hello Nexnam! I'd like to inquire about starting a project with you.");
     const url = `https://wa.me/919770169100?text=${message}`;
     window.open(url, "_blank");
   };
