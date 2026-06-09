@@ -1,6 +1,6 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Mail, Globe, MapPin, ArrowUpRight } from "lucide-react";
+import { Mail, Globe, MapPin, ArrowUpRight, Phone } from "lucide-react";
 import { playHover, playClick } from "../utils/soundManager";
 
 const TwitterIcon = (props) => (
@@ -155,6 +155,22 @@ export default function Footer() {
                     className="text-sm text-white/70 hover:text-brand-cyan transition-colors"
                   >
                     nexnam49@gmail.com
+                  </a>
+                </div>
+              </li>
+              <li className="flex items-start gap-3">
+                <Phone className="w-4 h-4 text-green-450 mt-0.5 shrink-0" />
+                <div className="flex flex-col">
+                  <span className="text-xs text-white/40 font-mono">WHATSAPP</span>
+                  <a
+                    href="https://wa.me/919770169100?text=Hello%20Nexnam%21%20I%27d%20like%20to%20inquire%20about%20starting%20a%20project%20with%20you."
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onMouseEnter={playHover}
+                    onClick={playClick}
+                    className="text-sm text-white/70 hover:text-brand-cyan transition-colors"
+                  >
+                    +91 97701 69100
                   </a>
                 </div>
               </li>

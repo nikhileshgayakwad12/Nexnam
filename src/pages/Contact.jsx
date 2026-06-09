@@ -140,11 +140,7 @@ export default function Contact() {
     }
   };
 
-  const triggerWhatsApp = () => {
-    playClick();
-    const text = encodeURIComponent("Hello Nexnam! I'd like to inquire about starting a project with you.");
-    window.open(`https://wa.me/919770169100?text=${text}`, "_blank");
-  };
+
 
   return (
     <div className="flex-grow z-10 w-full pt-32 pb-20 px-6 sm:px-8">
@@ -246,13 +242,16 @@ export default function Contact() {
               <p className="text-xs text-white/60 leading-relaxed">
                 Skip the brief form entirely and connect with our technical architect instantly via WhatsApp to chat about your project specs.
               </p>
-              <button
-                onClick={triggerWhatsApp}
+              <a
+                href="https://wa.me/919770169100?text=Hello%20Nexnam%21%20I%27d%20like%20to%20inquire%20about%20starting%20a%20project%20with%20you."
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={playClick}
                 onMouseEnter={playHover}
-                className="w-full py-3.5 rounded-lg bg-green-500 hover:bg-green-600 text-brand-black text-xs font-mono font-bold uppercase tracking-wider transition-colors cursor-pointer text-center"
+                className="w-full py-3.5 rounded-lg bg-green-500 hover:bg-green-600 text-brand-black text-xs font-mono font-bold uppercase tracking-wider transition-colors cursor-pointer text-center block"
               >
                 Launch Chat In WhatsApp //
-              </button>
+              </a>
             </motion.div>
           </div>
 

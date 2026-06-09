@@ -3,16 +3,14 @@ import { motion } from "framer-motion";
 import { playHover, playClick } from "../utils/soundManager";
 
 export default function WhatsAppWidget() {
-  const handleClick = () => {
-    playClick();
-    const message = encodeURIComponent("Hello Nexnam! I'd like to inquire about starting a project with you.");
-    const url = `https://wa.me/919770169100?text=${message}`;
-    window.open(url, "_blank");
-  };
+  const url = "https://wa.me/919770169100?text=Hello%20Nexnam%21%20I%27d%20like%20to%20inquire%20about%20starting%20a%20project%20with%20you.";
 
   return (
-    <motion.button
-      onClick={handleClick}
+    <motion.a
+      href={url}
+      target="_blank"
+      rel="noopener noreferrer"
+      onClick={playClick}
       onMouseEnter={playHover}
       initial={{ opacity: 0, scale: 0.8 }}
       animate={{ opacity: 1, scale: 1 }}
@@ -30,6 +28,6 @@ export default function WhatsAppWidget() {
       <span className="max-w-0 overflow-hidden group-hover:max-w-xs transition-all duration-500 ease-in-out whitespace-nowrap text-xs pl-0 group-hover:pl-2 font-mono font-bold">
         WHATSAPP
       </span>
-    </motion.button>
+    </motion.a>
   );
 }
