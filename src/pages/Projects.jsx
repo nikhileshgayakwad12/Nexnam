@@ -141,7 +141,7 @@ export default function Projects() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="text-base sm:text-lg text-white/60 leading-relaxed"
           >
-            Explore some of our digital product concepts and web solutions designed for learning, business, productivity, and smart user experiences.
+            Explore digital product concepts and web solutions designed for learning, business, productivity, and smart user experiences.
           </motion.p>
         </div>
 

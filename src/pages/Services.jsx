@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { motion as m } from "framer-motion";
 import { Sparkles, Grid } from "lucide-react";
 import { updateSEO } from "../utils/seoHelper";
 import ServiceCard from "../components/ServiceCard";
 import { defaultServices } from "../data/servicesData";
+import { playClick } from "../utils/soundManager";
 
 export default function Services() {
   const [services, setServices] = useState(defaultServices);
@@ -75,16 +77,17 @@ export default function Services() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="w-full text-center p-8 rounded-2xl glass-card border border-white/5 bg-gradient-to-r from-brand-black via-brand-dark to-brand-black"
+          className="w-full text-center p-8 rounded-2xl glass-card border border-white/5 bg-gradient-to-br from-indigo-950/10 to-slate-900/10 hover:border-brand-cyan/20 transition-all duration-300"
         >
-          <p className="text-sm text-white/50">
-            Need a custom digital service not listed here?{" "}
-            <a
-              href="/contact"
-              className="text-brand-cyan font-bold hover:underline font-mono ml-1"
+          <p className="text-sm sm:text-base text-white/60">
+            Not sure what you need?{" "}
+            <Link
+              to="/contact"
+              onClick={playClick}
+              className="text-brand-cyan font-extrabold hover:underline font-mono ml-1"
             >
-              Request Custom Build //
-            </a>
+              Contact Nexnam and we’ll guide you.
+            </Link>
           </p>
         </m.div>
       </div>

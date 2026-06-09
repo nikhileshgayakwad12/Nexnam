@@ -10,6 +10,7 @@ import Contact from "./pages/Contact";
 import AdminPanel from "./pages/AdminPanel";
 import TechBackground3D from "./components/TechBackground3D";
 import SoundToggle from "./components/SoundToggle";
+import WhatsAppWidget from "./components/WhatsAppWidget";
 import { playTransition } from "./utils/soundManager";
 
 // Scroll To Top on route change helper
@@ -50,6 +51,7 @@ function AppContent() {
 
       {/* Hide footer on hidden admin panel */}
       {!isAdminPath && <Footer />}
+      {!isAdminPath && <WhatsAppWidget />}
 
       <SoundToggle />
     </>
@@ -63,3 +65,4 @@ export default function App() {
     </BrowserRouter>
   );
 }
+

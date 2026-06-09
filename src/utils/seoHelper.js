@@ -6,6 +6,16 @@ export const updateSEO = (title = DEFAULT_TITLE, description = DEFAULT_DESC, key
   // Update document title
   document.title = title;
 
+  // Update Canonical URL
+  let canonicalLink = document.querySelector('link[rel="canonical"]');
+  if (!canonicalLink) {
+    canonicalLink = document.createElement('link');
+    canonicalLink.setAttribute('rel', 'canonical');
+    document.head.appendChild(canonicalLink);
+  }
+  const currentPath = window.location.pathname === '/' ? '' : window.location.pathname;
+  canonicalLink.setAttribute('href', `https://www.nexnam.in${currentPath}`);
+
   // Update Meta Description
   let metaDesc = document.querySelector('meta[name="description"]');
   if (!metaDesc) {

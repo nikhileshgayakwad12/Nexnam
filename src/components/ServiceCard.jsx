@@ -46,7 +46,7 @@ export default function ServiceCard({ service, index }) {
         {/* Features List */}
         <ul className="space-y-2.5 mb-8">
           {service.features &&
-            service.features.map((feature, i) => (
+            service.features.slice(0, 3).map((feature, i) => (
               <li key={i} className="flex items-start gap-2.5 text-xs text-white/50">
                 <Icons.CheckCircle2 className="w-4 h-4 text-brand-cyan shrink-0 mt-0.5" />
                 <span className="leading-normal">{feature}</span>

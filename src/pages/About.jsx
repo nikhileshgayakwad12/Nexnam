@@ -71,7 +71,7 @@ export default function About() {
           >
             <h2 className="text-2xl font-bold text-white mb-4">About Nexnam</h2>
             <p className="text-sm sm:text-base text-white/70 leading-relaxed mb-6">
-              Nexnam is a modern tech startup focused on building creative, scalable, and affordable digital solutions. We help startups, small businesses, students, creators, shops, and local businesses build their digital presence through websites, apps, automation, and custom software.
+              Nexnam is a modern tech startup focused on building creative, scalable, affordable, and impactful digital solutions for startups, creators, students, small businesses, shops, and local businesses.
             </p>
             <p className="text-sm sm:text-base text-white/70 leading-relaxed">
               We believe that premium digital engineering shouldn't be gated behind enterprise pricing. By applying modern automation pipelines and agile sprint schedules, we deliver high-end, responsive products that set a new benchmark for startup velocity.
@@ -116,6 +116,41 @@ export default function About() {
               </div>
             </motion.div>
           </div>
+        </div>
+
+        {/* Why Nexnam Exists & Why Choose Nexnam Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-24">
+          {/* Why Nexnam Exists */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="glass-card rounded-2xl p-8 border border-white/5 bg-gradient-to-br from-purple-950/10 to-slate-900/10 hover:border-brand-purple/20 transition-all duration-300"
+          >
+            <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
+              <span className="w-1.5 h-6 rounded bg-brand-purple" />
+              Why Nexnam Exists
+            </h3>
+            <p className="text-xs sm:text-sm text-white/60 leading-relaxed">
+              We observed a massive gap in the tech ecosystem: startups, local businesses, and creators were forced to choose between overpriced enterprise agencies or low-quality template builders. Nexnam was born to bridge this gap. We leverage custom automations, rapid development sprints, and top-tier custom designs to deliver production-grade websites and apps that are both elite and accessible.
+            </p>
+          </motion.div>
+
+          {/* Why Choose Nexnam */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="glass-card rounded-2xl p-8 border border-white/5 bg-gradient-to-br from-cyan-950/10 to-slate-900/10 hover:border-brand-cyan/20 transition-all duration-300"
+          >
+            <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
+              <span className="w-1.5 h-6 rounded bg-brand-cyan" />
+              Why Choose Nexnam
+            </h3>
+            <p className="text-xs sm:text-sm text-white/60 leading-relaxed">
+              We operate with a client-first mindset, focusing strictly on business growth and conversion design. By combining high-performance frameworks, modern responsive designs, technical SEO optimization, rapid delivery cycles, and dedicated post-launch support, we serve as your trusted technology partner helping you scale in the digital world.
+            </p>
+          </motion.div>
         </div>
 
         {/* Our Values */}

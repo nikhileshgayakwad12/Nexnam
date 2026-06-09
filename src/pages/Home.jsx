@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
-import { ArrowRight, Sparkles, ShieldCheck, Flame, Compass, HeartHandshake } from "lucide-react";
+import { ArrowRight, Sparkles, ShieldCheck, Flame, Compass, HeartHandshake, DollarSign, Laptop, TrendingUp, Zap, HelpCircle, Sliders } from "lucide-react";
 import { updateSEO } from "../utils/seoHelper";
 import { playHover, playClick } from "../utils/soundManager";
 import Hero3D from "../components/Hero3D";
@@ -75,10 +75,10 @@ export default function Home() {
   }, []);
 
   const stats = [
-    { value: "20+", label: "Projects Delivered" },
+    { value: "20+", label: "Projects & Concepts Built" },
     { value: "10+", label: "Digital Services" },
-    { value: "5+", label: "Business Categories" },
-    { value: "24/7", label: "Support Mindset" }
+    { value: "Fast", label: "Delivery Approach" },
+    { value: "24/7", label: "Client-Focused Support" }
   ];
 
   // Show top 3 services on home page
@@ -108,10 +108,10 @@ export default function Home() {
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.5 }}
-              className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-brand-cyan/10 border border-brand-cyan/20 text-xs text-brand-cyan font-semibold tracking-wider uppercase font-mono mb-6"
+              className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-brand-cyan/10 border border-brand-cyan/20 text-xs text-brand-cyan font-bold tracking-wider uppercase font-mono mb-6"
             >
-              <Sparkles className="w-3.5 h-3.5" />
-              Empowering Startups & Businesses
+              <Sparkles className="w-3.5 h-3.5 animate-pulse" />
+              Website • Apps • Automation • SEO
             </motion.div>
 
             {/* Main Title */}
@@ -123,9 +123,9 @@ export default function Home() {
             >
               Nexnam — Building{" "}
               <span className="bg-gradient-to-r from-brand-cyan via-brand-blue to-brand-purple bg-clip-text text-transparent">
-                Digital Experiences
+                Digital Solutions
               </span>{" "}
-              for the Future
+              for Modern Businesses
             </motion.h1>
 
             {/* Subtitle */}
@@ -135,7 +135,7 @@ export default function Home() {
               transition={{ duration: 0.8, delay: 0.2 }}
               className="text-base sm:text-lg text-white/60 leading-relaxed mb-8 max-w-xl"
             >
-              We design and develop modern websites, landing pages, apps, and digital solutions that help startups, creators, students, and businesses grow online.
+              We create websites, landing pages, apps, dashboards, and digital systems that help startups, creators, and businesses grow online.
             </motion.p>
 
             {/* Buttons */}
@@ -154,20 +154,20 @@ export default function Home() {
                 onMouseEnter={playHover}
                 className="w-full sm:w-auto relative inline-flex items-center justify-center px-8 py-4 text-xs font-bold tracking-wider uppercase text-brand-black rounded-lg bg-gradient-to-r from-brand-cyan to-brand-blue hover:shadow-[0_0_25px_rgba(0,245,255,0.4)] transition-all duration-300 active:scale-95 cursor-pointer font-mono group"
               >
-                Start a Project
+                Start Your Project
                 <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
               </button>
 
               <button
                 onClick={() => {
                   playClick();
-                  navigate("/services");
+                  navigate("/projects");
                   window.scrollTo({ top: 0, behavior: "smooth" });
                 }}
                 onMouseEnter={playHover}
                 className="w-full sm:w-auto px-8 py-4 text-xs font-bold tracking-wider uppercase rounded-lg border border-white/10 hover:border-brand-cyan/40 bg-white/5 hover:bg-brand-cyan/5 text-white transition-all duration-300 active:scale-95 cursor-pointer font-mono"
               >
-                Explore Services
+                View Our Work
               </button>
             </motion.div>
           </div>
@@ -260,12 +260,14 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {[
-              { icon: ShieldCheck, title: "Futuristic Excellence", desc: "Stunning modern UI/UX design that captures attention instantly.", color: "text-brand-cyan bg-brand-cyan/10 border-brand-cyan/20" },
-              { icon: Flame, title: "Startup Velocity", desc: "Fast-tracked MVP cycles that deliver your core products in record time.", color: "text-red-400 bg-red-400/10 border-red-400/20" },
-              { icon: Compass, title: "Clean Engineering", desc: "Production-ready code architecture built for scalability and performance.", color: "text-brand-blue bg-brand-blue/10 border-brand-blue/20" },
-              { icon: HeartHandshake, title: "Long-term Support", desc: "A trustworthy support mindset assisting you even post-deployment.", color: "text-brand-purple bg-brand-purple/10 border-brand-purple/20" }
+              { icon: DollarSign, title: "Affordable Digital Solutions", desc: "Premium custom development scaled to fit startups and local businesses without enterprise overhead.", color: "text-emerald-400 bg-emerald-400/10 border-emerald-400/20" },
+              { icon: Laptop, title: "Modern Responsive Design", desc: "Stunning, fluid visual architectures engineered to look pixel-perfect on mobile, tablet, and desktop screens.", color: "text-brand-cyan bg-brand-cyan/10 border-brand-cyan/20" },
+              { icon: TrendingUp, title: "SEO-Friendly Development", desc: "Technical optimizations, clean schemas, and rapid speeds built-in to rank your brand at the top of Google.", color: "text-brand-blue bg-brand-blue/10 border-brand-blue/20" },
+              { icon: Zap, title: "Fast Delivery Approach", desc: "Agile, rapid MVP building pipelines designed to take your idea to market at breakneck startup velocity.", color: "text-amber-400 bg-amber-400/10 border-amber-400/20" },
+              { icon: HelpCircle, title: "Support After Launch", desc: "We don't leave after deployment. Receive constant system audits, bug fixes, and optimization help.", color: "text-brand-purple bg-brand-purple/10 border-brand-purple/20" },
+              { icon: Sliders, title: "Custom Solutions for Each Client", desc: "No cookie-cutter templates. Every line of code is tailored to your business operations and conversions.", color: "text-pink-400 bg-pink-400/10 border-pink-400/20" }
             ].map((item, idx) => (
               <motion.div
                 key={idx}

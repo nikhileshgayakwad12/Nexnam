@@ -25,10 +25,11 @@ export default function Contact() {
     "Landing Page",
     "Web App",
     "Mobile App",
-    "UI/UX Design",
     "Portfolio Website",
-    "Startup MVP",
+    "UI/UX Design",
+    "SEO",
     "Business Automation",
+    "Startup MVP",
     "Other"
   ];
 
@@ -118,18 +119,6 @@ export default function Contact() {
         ]);
 
       if (error) throw error;
-
-      // Construct WhatsApp message and redirect URL
-      const msg = `Hello Nexnam! I have submitted a project inquiry:
-- *Name:* ${formData.name}
-- *Email:* ${formData.email}
-- *Phone:* ${formData.phone}
-- *Service:* ${formData.service}
-- *Budget:* ${formData.budget}
-- *Message:* ${formData.message}`;
-      const url = `https://wa.me/919770169100?text=${encodeURIComponent(msg)}`;
-      setWhatsAppUrl(url);
-
 
       setIsSubmitting(false);
       setSubmitSuccess(true);
@@ -466,10 +455,10 @@ export default function Contact() {
                       className="w-full mt-2 py-4 rounded-lg bg-gradient-to-r from-brand-cyan via-brand-blue to-brand-purple hover:shadow-[0_0_20px_rgba(0,245,255,0.35)] text-brand-black text-xs font-bold uppercase tracking-wider font-mono transition-all duration-300 disabled:opacity-50 cursor-pointer flex items-center justify-center gap-2"
                     >
                       {isSubmitting ? (
-                        <>Sending Briefing Packet...</>
+                        <>Sending Project Inquiry...</>
                       ) : (
                         <>
-                          Send Message Packet
+                          Send Project Inquiry
                           <Send className="w-3.5 h-3.5" />
                         </>
                       )}
@@ -484,27 +473,15 @@ export default function Contact() {
                     exit={{ opacity: 0, scale: 0.95 }}
                     className="flex flex-col items-center text-center py-12"
                   >
-                    <div className="w-16 h-16 rounded-full bg-brand-cyan/10 border border-brand-cyan/35 flex items-center justify-center text-brand-cyan mb-6">
+                    <div className="w-16 h-16 rounded-full bg-brand-cyan/10 border border-brand-cyan/35 flex items-center justify-center text-brand-cyan mb-6 animate-bounce">
                       <CheckCircle2 className="w-8 h-8" />
                     </div>
                     <h2 className="text-2xl font-bold text-white mb-3">
-                      Briefing Packet Received!
+                      Thank you!
                     </h2>
-                    <p className="text-sm text-white/50 max-w-md leading-relaxed mb-6">
-                      Your inquiry has been successfully stored in our database records. Click the button below to directly forward your brief details to our team on WhatsApp.
+                    <p className="text-sm text-white/50 max-w-md leading-relaxed mb-8">
+                      Nexnam team will contact you soon.
                     </p>
-                    {whatsAppUrl && (
-                      <a
-                        href={whatsAppUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        onClick={playClick}
-                        onMouseEnter={playHover}
-                        className="px-8 py-3.5 rounded-lg bg-green-500 hover:bg-green-600 text-brand-black text-xs font-mono font-bold uppercase tracking-wider transition-colors cursor-pointer text-center mb-6 flex items-center justify-center gap-1.5 shadow-[0_0_20px_rgba(34,197,94,0.3)] hover:shadow-[0_0_30px_rgba(34,197,94,0.5)] duration-300"
-                      >
-                        Start WhatsApp Direct Chat
-                      </a>
-                    )}
                     <button
                       onClick={() => {
                         playClick();
@@ -513,7 +490,7 @@ export default function Contact() {
                       onMouseEnter={playHover}
                       className="px-6 py-2.5 rounded-lg border border-white/10 hover:border-brand-cyan/40 bg-white/5 text-xs font-mono uppercase font-bold tracking-wider text-white transition-all cursor-pointer"
                     >
-                      Submit Another Inquire
+                      Submit Another Inquiry
                     </button>
                   </motion.div>
                 )}

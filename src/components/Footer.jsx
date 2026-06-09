@@ -195,7 +195,7 @@ export default function Footer() {
               onClick={() => handleLinkClick("/admin-nexnam-panel")}
               className="hover:text-brand-cyan transition-colors"
             >
-              Admin Portal
+              Admin Panel
             </Link>
             <a
               href="https://www.termsfeed.com/live/45ff7155-602a-4865-b44a-348da4945cd8"
