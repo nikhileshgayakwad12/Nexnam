@@ -1,16 +1,15 @@
 import React, { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Sparkles, Compass, Rocket, ShieldCheck, HeartHandshake, Eye, Award } from "lucide-react";
-import { updateSEO } from "../utils/seoHelper";
+import SEO from "../components/SEO";
 import { playHover, playClick } from "../utils/soundManager";
 
 export default function About() {
+  const navigate = useNavigate();
+
   useEffect(() => {
-    updateSEO(
-      "About Us | Nexnam",
-      "Nexnam is a modern tech startup focused on building creative, scalable, and affordable digital solutions. Learn about our mission, vision, values, and development process.",
-      "Nexnam company, tech startup, digital solutions team, app developers"
-    );
+    // Scroll to top
   }, []);
 
   const values = [
@@ -33,6 +32,10 @@ export default function About() {
 
   return (
     <div className="flex-grow z-10 w-full pt-32 pb-20 px-6 sm:px-8">
+      <SEO
+        title="About Nexnam | Tech Startup"
+        description="Learn about Nexnam, a modern tech startup building creative digital solutions for businesses and creators."
+      />
       <div className="mx-auto max-w-5xl">
         {/* Page Header */}
         <div className="text-center max-w-3xl mx-auto mb-20">
@@ -52,11 +55,10 @@ export default function About() {
             transition={{ duration: 0.6, delay: 0.1 }}
             className="text-4xl sm:text-5xl font-black tracking-tight text-white mb-6"
           >
-            Empowering the{" "}
+            About{" "}
             <span className="bg-gradient-to-r from-brand-cyan via-brand-blue to-brand-purple bg-clip-text text-transparent">
-              Next Generation
-            </span>{" "}
-            of Creators
+              Nexnam
+            </span>
           </motion.h1>
         </div>
 
@@ -69,7 +71,7 @@ export default function About() {
             viewport={{ once: true }}
             className="glass-card rounded-3xl p-8 md:p-12 border border-white/5 bg-gradient-to-br from-indigo-950/10 to-slate-900/10"
           >
-            <h2 className="text-2xl font-bold text-white mb-4">About Nexnam</h2>
+            <h2 className="text-2xl font-bold text-white mb-4">Who We Are</h2>
             <p className="text-sm sm:text-base text-white/70 leading-relaxed mb-6">
               Nexnam is a modern tech startup focused on building creative, scalable, affordable, and impactful digital solutions for startups, creators, students, small businesses, shops, and local businesses.
             </p>
@@ -91,7 +93,7 @@ export default function About() {
                 <div className="w-10 h-10 rounded-lg bg-brand-cyan/10 border border-brand-cyan/20 flex items-center justify-center mb-6">
                   <Rocket className="w-5 h-5 text-brand-cyan" />
                 </div>
-                <h3 className="text-xl font-bold text-white mb-3">Our Mission</h3>
+                <h2 className="text-xl font-bold text-white mb-3">Our Mission</h2>
                 <p className="text-sm text-white/60 leading-relaxed font-medium italic">
                   “To make high-quality digital solutions accessible, affordable, and impactful for businesses, creators, and startups.”
                 </p>
@@ -109,7 +111,7 @@ export default function About() {
                 <div className="w-10 h-10 rounded-lg bg-brand-purple/10 border border-brand-purple/20 flex items-center justify-center mb-6">
                   <Eye className="w-5 h-5 text-brand-purple" />
                 </div>
-                <h3 className="text-xl font-bold text-white mb-3">Our Vision</h3>
+                <h2 className="text-xl font-bold text-white mb-3">Our Vision</h2>
                 <p className="text-sm text-white/60 leading-relaxed font-medium italic">
                   “To become a trusted technology partner for businesses looking to grow in the digital world.”
                 </p>
@@ -159,7 +161,7 @@ export default function About() {
             <span className="text-xs font-mono font-bold tracking-widest text-brand-cyan uppercase mb-3 block">
               Our Compass
             </span>
-            <h2 className="text-3xl font-extrabold text-white">Values We Live By</h2>
+            <h2 className="text-3xl font-extrabold text-white">Our Values</h2>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -189,7 +191,7 @@ export default function About() {
             <span className="text-xs font-mono font-bold tracking-widest text-brand-purple uppercase mb-3 block">
               Development Lifecycle
             </span>
-            <h2 className="text-3xl font-extrabold text-white">Step-by-Step Delivery Process</h2>
+            <h2 className="text-3xl font-extrabold text-white">Our Process</h2>
           </div>
 
           <div className="relative border-l border-white/5 ml-4 md:ml-32 space-y-12">
@@ -222,6 +224,49 @@ export default function About() {
                 </div>
               </motion.div>
             ))}
+          </div>
+        </div>
+
+        {/* Bottom CTA Section with Internal Links */}
+        <div className="mt-24 text-center p-8 md:p-10 rounded-3xl glass-card border border-white/5 bg-gradient-to-br from-indigo-950/10 to-slate-900/10">
+          <h3 className="text-xl font-bold text-white mb-3 font-mono">Ready to Collaborate with Nexnam?</h3>
+          <p className="text-xs text-white/50 mb-8 max-w-md mx-auto">
+            Explore our comprehensive list of digital solutions or view some of our recent product launches.
+          </p>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <button
+              onClick={() => {
+                playClick();
+                navigate("/services");
+                window.scrollTo({ top: 0, behavior: "smooth" });
+              }}
+              onMouseEnter={playHover}
+              className="w-full sm:w-auto px-6 py-3 rounded-lg border border-white/10 hover:border-brand-cyan/40 bg-white/5 hover:bg-brand-cyan/5 text-xs font-bold text-white tracking-wider uppercase font-mono transition-all duration-300 cursor-pointer"
+            >
+              Our Services
+            </button>
+            <button
+              onClick={() => {
+                playClick();
+                navigate("/projects");
+                window.scrollTo({ top: 0, behavior: "smooth" });
+              }}
+              onMouseEnter={playHover}
+              className="w-full sm:w-auto px-6 py-3 rounded-lg border border-white/10 hover:border-brand-purple/40 bg-white/5 hover:bg-brand-purple/5 text-xs font-bold text-white tracking-wider uppercase font-mono transition-all duration-300 cursor-pointer"
+            >
+              Our Work
+            </button>
+            <button
+              onClick={() => {
+                playClick();
+                navigate("/contact");
+                window.scrollTo({ top: 0, behavior: "smooth" });
+              }}
+              onMouseEnter={playHover}
+              className="w-full sm:w-auto relative inline-flex items-center justify-center px-6 py-3 rounded-lg bg-gradient-to-r from-brand-cyan to-brand-blue hover:shadow-[0_0_15px_rgba(0,245,255,0.25)] text-xs font-bold text-brand-black tracking-wider uppercase font-mono transition-all duration-300 cursor-pointer animate-pulse"
+            >
+              Contact Us
+            </button>
           </div>
         </div>
       </div>

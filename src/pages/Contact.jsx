@@ -1,23 +1,55 @@
 import React, { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { Mail, Phone, MessageSquare, Send, CheckCircle2, Sparkles, AlertCircle } from "lucide-react";
-import { updateSEO } from "../utils/seoHelper";
+import SEO from "../components/SEO";
 import { playHover, playClick, playSuccess } from "../utils/soundManager";
 import { supabase } from "../lib/supabaseClient";
 
+// Reusable FAQ Item Sub-component for Accessibility & Clean Code
+function FAQItem({ question, answer }) {
+  const [isOpen, setIsOpen] = useState(false);
+  
+  return (
+    <div className="rounded-2xl glass-card border border-white/5 overflow-hidden transition-all duration-300">
+      <button
+        type="button"
+        onClick={() => {
+          playClick();
+          setIsOpen(!isOpen);
+        }}
+        onMouseEnter={playHover}
+        className="w-full px-6 py-4 flex items-center justify-between text-left text-white hover:text-brand-cyan transition-colors font-mono font-semibold text-sm cursor-pointer"
+        aria-expanded={isOpen}
+      >
+        <span>{question}</span>
+        <span className="text-xs transition-transform duration-300 ml-4 shrink-0">
+          {isOpen ? "▲" : "▼"}
+        </span>
+      </button>
+      <motion.div
+        initial={false}
+        animate={{ height: isOpen ? "auto" : 0 }}
+        transition={{ duration: 0.3, ease: "easeInOut" }}
+        className="overflow-hidden"
+      >
+        <p className="px-6 pb-5 pt-1 text-xs text-white/50 leading-relaxed border-t border-white/5">
+          {answer}
+        </p>
+      </motion.div>
+    </div>
+  );
+}
+
 export default function Contact() {
   const location = useLocation();
+  const navigate = useNavigate();
   
   // Pre-selected service state from navigation redirects
   const preselectedService = location.state?.selectedService || "";
 
   useEffect(() => {
-    updateSEO(
-      "Contact Us | Nexnam",
-      "Get in touch with Nexnam for custom website development, mobile apps, startup MVPs, designs, and business automation. Get a free consultation and project quote.",
-      "Nexnam contact, hire web developer, startup consultant, request project quote"
-    );
+    // Scroll to top or other setups
   }, []);
 
   const serviceOptions = [
@@ -144,6 +176,10 @@ export default function Contact() {
 
   return (
     <div className="flex-grow z-10 w-full pt-32 pb-20 px-6 sm:px-8">
+      <SEO
+        title="Start Your Project with Nexnam | Contact"
+        description="Contact Nexnam to build your website, app, landing page, dashboard or digital solution."
+      />
       <div className="mx-auto max-w-6xl">
         {/* Page Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
@@ -163,9 +199,9 @@ export default function Contact() {
             transition={{ duration: 0.6, delay: 0.1 }}
             className="text-4xl sm:text-5xl font-black tracking-tight text-white mb-6"
           >
-            Start Your{" "}
+            Start Your Project{" "}
             <span className="bg-gradient-to-r from-brand-cyan via-brand-blue to-brand-purple bg-clip-text text-transparent">
-              Project Brief
+              with Nexnam
             </span>
           </motion.h1>
 
@@ -189,7 +225,7 @@ export default function Contact() {
               transition={{ duration: 0.6, delay: 0.1 }}
               className="glass-card rounded-2xl p-6 md:p-8 border border-white/5 bg-gradient-to-br from-indigo-950/10 to-slate-900/10"
             >
-              <h2 className="text-xl font-bold text-white mb-6">Let's Connect</h2>
+              <h2 className="text-xl font-bold text-white mb-6">Contact Nexnam</h2>
               <div className="flex flex-col gap-6">
                 {/* Email Direct link */}
                 <div className="flex items-start gap-4">
@@ -263,6 +299,7 @@ export default function Contact() {
             className="lg:col-span-7"
           >
             <div className="glass-card rounded-3xl p-8 border border-white/5 relative overflow-hidden">
+              <h2 className="text-xl font-bold text-white mb-6">Tell Us About Your Project</h2>
               <AnimatePresence mode="wait">
                 {!submitSuccess ? (
                   <motion.form
@@ -496,6 +533,86 @@ export default function Contact() {
             </div>
           </motion.div>
         </div>
+
+        {/* FAQ Accordion Section */}
+        <section className="mt-20 py-16 border-t border-white/5">
+          <div className="text-center max-w-2xl mx-auto mb-12">
+            <span className="text-xs font-mono font-bold tracking-widest text-brand-purple uppercase mb-3 block animate-pulse">
+              Common Questions
+            </span>
+            <h2 className="text-3xl font-extrabold text-white mb-4">
+              Frequently Asked Questions
+            </h2>
+            <p className="text-sm text-white/60">
+              Clear answers regarding our technology stacks, project delivery cycles, and startup support setup.
+            </p>
+          </div>
+
+          <div className="max-w-3xl mx-auto space-y-4 mb-16">
+            <FAQItem
+              question="What type of websites does Nexnam build?"
+              answer="Nexnam builds custom marketing websites, high-converting landing pages, portfolio sites, and interactive web applications tailored to your business needs."
+            />
+            <FAQItem
+              question="How long does it take to build a website?"
+              answer="Simple landing pages and portfolios take 1-2 weeks. More complex web applications or custom platforms are delivered within 4-6 weeks in structured sprints."
+            />
+            <FAQItem
+              question="Can Nexnam build landing pages for local businesses?"
+              answer="Yes, we create local business landing pages designed to drive calls, leads, and customer inquiries directly to your team."
+            />
+            <FAQItem
+              question="Do you provide WhatsApp and contact form integration?"
+              answer="Absolutely. All our sites come pre-integrated with WhatsApp widgets, custom inquiry forms, and email triggers to keep you connected with your visitors."
+            />
+            <FAQItem
+              question="Can you help with SEO-friendly website structure?"
+              answer="Yes, SEO is built in from day one. We implement clean HTML5 semantics, meta titles/descriptions, fast load times, and structured schemas to help your site rank."
+            />
+          </div>
+
+          {/* Navigation links for Contact page */}
+          <div className="text-center">
+            <p className="text-xs text-white/40 mb-4 font-mono">
+              Want to check our capabilities first?
+            </p>
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+              <button
+                onClick={() => {
+                  playClick();
+                  navigate("/pricing");
+                  window.scrollTo({ top: 0, behavior: "smooth" });
+                }}
+                onMouseEnter={playHover}
+                className="w-full sm:w-auto px-6 py-3 rounded-lg bg-gradient-to-r from-brand-cyan to-brand-blue text-brand-black text-xs font-bold tracking-wider uppercase font-mono transition-all duration-300 cursor-pointer animate-pulse"
+              >
+                View Pricing Packages
+              </button>
+              <button
+                onClick={() => {
+                  playClick();
+                  navigate("/services");
+                  window.scrollTo({ top: 0, behavior: "smooth" });
+                }}
+                onMouseEnter={playHover}
+                className="w-full sm:w-auto px-6 py-3 rounded-lg border border-white/10 hover:border-brand-cyan/40 bg-white/5 hover:bg-brand-cyan/5 text-xs font-bold text-white tracking-wider uppercase font-mono transition-all duration-300 cursor-pointer"
+              >
+                Explore Services
+              </button>
+              <button
+                onClick={() => {
+                  playClick();
+                  navigate("/projects");
+                  window.scrollTo({ top: 0, behavior: "smooth" });
+                }}
+                onMouseEnter={playHover}
+                className="w-full sm:w-auto px-6 py-3 rounded-lg border border-white/10 hover:border-brand-purple/40 bg-white/5 hover:bg-brand-purple/5 text-xs font-bold text-white tracking-wider uppercase font-mono transition-all duration-300 cursor-pointer"
+              >
+                View Projects Gallery
+              </button>
+            </div>
+          </div>
+        </section>
       </div>
     </div>
   );

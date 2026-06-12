@@ -34,9 +34,9 @@ export default function ServiceCard({ service, index }) {
         </div>
 
         {/* Title */}
-        <h3 className="text-xl font-bold tracking-tight text-white mb-3 group-hover:text-brand-cyan transition-colors duration-300">
+        <h2 className="text-xl font-bold tracking-tight text-white mb-3 group-hover:text-brand-cyan transition-colors duration-300">
           {service.title}
-        </h3>
+        </h2>
 
         {/* Description */}
         <p className="text-sm text-white/60 leading-relaxed mb-6">

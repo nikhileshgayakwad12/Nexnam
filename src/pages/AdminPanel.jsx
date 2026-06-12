@@ -4,7 +4,7 @@ import {
   Lock, Mail, KeyRound, LayoutDashboard, Briefcase, Settings, 
   MessageSquare, Users, Database, LogOut, Plus, Trash2, Edit, X, Sparkles, Check
 } from "lucide-react";
-import { updateSEO } from "../utils/seoHelper";
+import SEO from "../components/SEO";
 import { playHover, playClick, playSuccess } from "../utils/soundManager";
 import { defaultServices } from "../data/servicesData";
 import { defaultProjects } from "../data/projectsData";
@@ -71,8 +71,6 @@ export default function AdminPanel() {
 
   // Initial Sync and Auth setups
   useEffect(() => {
-    updateSEO("Secure Admin Console | Nexnam", "Secure administrative platform for managing Nexnam's startup records.");
-
     if (!localStorage.getItem("nexnam_services")) {
       localStorage.setItem("nexnam_services", JSON.stringify(defaultServices));
     }
@@ -451,6 +449,10 @@ export default function AdminPanel() {
 
   return (
     <div className="flex-grow z-10 w-full min-h-screen text-white bg-[#030303]">
+      <SEO
+        title="Secure Admin Console | Nexnam"
+        description="Secure administrative platform for managing Nexnam's startup records."
+      />
       {!isLoggedIn ? (
         /* Secure-Looking Login Screen */
         <div className="flex items-center justify-center min-h-[90vh] px-6">

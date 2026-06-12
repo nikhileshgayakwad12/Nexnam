@@ -2,9 +2,9 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ArrowRight, Sparkles, ShieldCheck, Flame, Compass, HeartHandshake, DollarSign, Laptop, TrendingUp, Zap, HelpCircle, Sliders } from "lucide-react";
-import { updateSEO } from "../utils/seoHelper";
 import { playHover, playClick } from "../utils/soundManager";
 import Hero3D from "../components/Hero3D";
+import SEO from "../components/SEO";
 import ServiceCard from "../components/ServiceCard";
 import ProjectCard from "../components/ProjectCard";
 import CTASection from "../components/CTASection";
@@ -50,12 +50,6 @@ export default function Home() {
   const [projects, setProjects] = useState([]);
 
   useEffect(() => {
-    updateSEO(
-      "Nexnam — Building Digital Experiences for the Future",
-      "We design and develop modern websites, landing pages, apps, and digital solutions that help startups, creators, students, and businesses grow online.",
-      "Nexnam, website development, app development, landing page design, tech startup, digital solutions"
-    );
-
     const fetchFeaturedProjects = async () => {
       try {
         const { data, error } = await supabase
@@ -98,6 +92,10 @@ export default function Home() {
 
   return (
     <div className="flex-grow z-10 w-full overflow-hidden">
+      <SEO
+        title="Nexnam — Website, App & Digital Solutions Startup"
+        description="Nexnam builds modern websites, apps, landing pages and digital solutions for startups, creators and businesses."
+      />
       {/* Hero Section */}
       <section className="relative min-h-[90vh] flex items-center justify-center pt-24 pb-12 px-6 sm:px-8">
         <div className="mx-auto max-w-7xl w-full grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
@@ -121,11 +119,11 @@ export default function Home() {
               transition={{ duration: 0.8, delay: 0.1 }}
               className="text-4xl sm:text-5xl md:text-6xl font-black tracking-tight text-white leading-[1.1] mb-6"
             >
-              Nexnam — Building{" "}
+              Nexnam —{" "}
               <span className="bg-gradient-to-r from-brand-cyan via-brand-blue to-brand-purple bg-clip-text text-transparent">
-                Digital Solutions
+                Website, App & Digital Solutions
               </span>{" "}
-              for Modern Businesses
+              Startup
             </motion.h1>
 
             {/* Subtitle */}
@@ -217,7 +215,7 @@ export default function Home() {
               Core Capabilities
             </span>
             <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-white mb-4">
-              Premium Digital Services We Offer
+              Our Digital Services
             </h2>
             <p className="text-sm sm:text-base text-white/60 leading-relaxed">
               We engineer custom applications, stunning visual experiences, and robust automations designed to help modern business operations grow.
@@ -253,7 +251,7 @@ export default function Home() {
               The Nexnam Advantage
             </span>
             <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-white mb-4">
-              Why Startups & Businesses Choose Us
+              Why Choose Nexnam
             </h2>
             <p className="text-sm sm:text-base text-white/60 leading-relaxed">
               We combine design aesthetics with clean engineering practices to build solutions that scale.
@@ -296,7 +294,7 @@ export default function Home() {
               Case Studies
             </span>
             <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-white mb-4">
-              Featured Client Success Projects
+              Featured Projects
             </h2>
             <p className="text-sm sm:text-base text-white/60 leading-relaxed">
               Explore dynamic web applications and digital interfaces built for maximum usability.
@@ -340,7 +338,7 @@ export default function Home() {
               How We Work
             </span>
             <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-white mb-4">
-              Our Streamlined Launch Pipeline
+              Our Process
             </h2>
             <p className="text-sm sm:text-base text-white/60 leading-relaxed">
               We break down custom software development into reliable milestones.

@@ -266,6 +266,7 @@ export default function HelpingChatbot() {
                         }}
                         onMouseLeave={() => setHoverRating(0)}
                         className="p-1 transition-transform hover:scale-125 cursor-pointer text-white/20"
+                        aria-label={`Rate ${star} star${star > 1 ? "s" : ""}`}
                       >
                         <Star
                           className={`w-7 h-7 transition-colors ${
@@ -280,9 +281,10 @@ export default function HelpingChatbot() {
 
                   {/* Name Input */}
                   <div className="flex flex-col gap-1.5">
-                    <label className="text-[10px] font-mono font-bold text-white/50 uppercase tracking-wider">Your Name (Optional)</label>
+                    <label htmlFor="feedbackName" className="text-[10px] font-mono font-bold text-white/50 uppercase tracking-wider">Your Name (Optional)</label>
                     <input
                       type="text"
+                      id="feedbackName"
                       value={feedbackName}
                       onChange={(e) => setFeedbackName(e.target.value)}
                       placeholder="e.g. Naman Sable"
@@ -292,9 +294,10 @@ export default function HelpingChatbot() {
 
                   {/* Comment Input */}
                   <div className="flex flex-col gap-1.5">
-                    <label className="text-[10px] font-mono font-bold text-white/50 uppercase tracking-wider">Comments *</label>
+                    <label htmlFor="feedbackComment" className="text-[10px] font-mono font-bold text-white/50 uppercase tracking-wider">Comments *</label>
                     <textarea
                       required
+                      id="feedbackComment"
                       value={feedbackComment}
                       onChange={(e) => setFeedbackComment(e.target.value)}
                       rows={3}
@@ -391,6 +394,7 @@ export default function HelpingChatbot() {
                     value={inputVal}
                     onChange={(e) => setInputVal(e.target.value)}
                     placeholder="Ask a question..."
+                    aria-label="Ask a question"
                     className="flex-grow px-3.5 py-2.5 rounded-xl bg-white/5 border border-white/10 text-xs text-white placeholder-white/30 focus:outline-none focus:border-brand-cyan transition-colors"
                   />
                   <button

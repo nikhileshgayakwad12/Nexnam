@@ -121,6 +121,7 @@ export default function Footer() {
                 { name: "Home", path: "/" },
                 { name: "Services", path: "/services" },
                 { name: "Projects", path: "/projects" },
+                { name: "Pricing", path: "/pricing" },
                 { name: "About Us", path: "/about" },
                 { name: "Contact Us", path: "/contact" }
               ].map((item, index) => (

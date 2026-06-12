@@ -40,11 +40,10 @@ export default function CTASection() {
 
             {/* Title */}
             <h2 className="text-3xl md:text-5xl font-black tracking-tight text-white mb-6 max-w-2xl leading-tight">
-              Ready to Build the{" "}
+              Ready to Build Your{" "}
               <span className="bg-gradient-to-r from-brand-cyan via-brand-blue to-brand-purple bg-clip-text text-transparent">
-                Future
-              </span>{" "}
-              of Your Business?
+                Digital Presence?
+              </span>
             </h2>
 
             {/* Description */}

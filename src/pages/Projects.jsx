@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { Sparkles, X, CheckCircle, ExternalLink, Box } from "lucide-react";
-import { updateSEO } from "../utils/seoHelper";
+import SEO from "../components/SEO";
 import ProjectCard from "../components/ProjectCard";
 import { playClick, playHover } from "../utils/soundManager";
 import { supabase } from "../lib/supabaseClient";
@@ -67,12 +67,6 @@ export default function Projects() {
   };
 
   useEffect(() => {
-    updateSEO(
-      "Our Projects Showcase | Nexnam",
-      "Discover the custom applications, platforms, systems, and MVPs built by Nexnam. Read client case studies and explore live digital builds.",
-      "Nexnam projects, case studies, software developer portfolio, MVP showcase"
-    );
-
     fetchProjects();
 
     // Subscribe to realtime database updates
@@ -108,8 +102,28 @@ export default function Projects() {
     return cat.includes(selectedCategory.toLowerCase());
   });
 
+  const featuredProducts = filteredProjects.filter(p => 
+    p.category.toLowerCase().includes("property") || 
+    p.category.toLowerCase().includes("ai") ||
+    p.category.toLowerCase().includes("management") ||
+    p.id === "kirayapro" ||
+    p.id === "leftover-chef-ai"
+  );
+  
+  const websiteConcepts = filteredProjects.filter(p => 
+    !p.category.toLowerCase().includes("property") && 
+    !p.category.toLowerCase().includes("ai") &&
+    !p.category.toLowerCase().includes("management") &&
+    p.id !== "kirayapro" &&
+    p.id !== "leftover-chef-ai"
+  );
+
   return (
     <div className="flex-grow z-10 w-full pt-32 pb-20 px-6 sm:px-8">
+      <SEO
+        title="Projects Built with Nexnam Vision | Nexnam"
+        description="View Nexnam projects, website concepts, apps and digital solutions built for businesses, learning and productivity."
+      />
       <div className="mx-auto max-w-7xl">
         {/* Page Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
@@ -193,29 +207,95 @@ export default function Projects() {
 
         {/* Projects Grid */}
         {!loading && !error && (
-          <motion.div
-            layout
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16"
-          >
-            <AnimatePresence mode="popLayout">
-              {filteredProjects.map((project, idx) => (
+          selectedCategory === "All" ? (
+            <div className="space-y-16">
+              {/* Featured Digital Products Section */}
+              <div>
+                <h2 className="text-xl sm:text-2xl font-bold font-mono tracking-wider text-brand-cyan mb-6 flex items-center gap-2">
+                  <span className="w-2 h-2 rounded-full bg-brand-cyan animate-pulse" />
+                  Featured Digital Products
+                </h2>
                 <motion.div
-                  key={project.id}
                   layout
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.9 }}
-                  transition={{ duration: 0.4 }}
+                  className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16"
                 >
-                  <ProjectCard
-                    project={project}
-                    index={idx}
-                    onOpenCaseStudy={(proj) => setActiveCaseStudy(proj)}
-                  />
+                  <AnimatePresence mode="popLayout">
+                    {featuredProducts.map((project, idx) => (
+                      <motion.div
+                        key={project.id}
+                        layout
+                        initial={{ opacity: 0, scale: 0.9 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        exit={{ opacity: 0, scale: 0.9 }}
+                        transition={{ duration: 0.4 }}
+                      >
+                        <ProjectCard
+                          project={project}
+                          index={idx}
+                          onOpenCaseStudy={(proj) => setActiveCaseStudy(proj)}
+                        />
+                      </motion.div>
+                    ))}
+                  </AnimatePresence>
                 </motion.div>
-              ))}
-            </AnimatePresence>
-          </motion.div>
+              </div>
+
+              {/* Client-Ready Website Concepts Section */}
+              <div>
+                <h2 className="text-xl sm:text-2xl font-bold font-mono tracking-wider text-brand-purple mb-6 flex items-center gap-2">
+                  <span className="w-2 h-2 rounded-full bg-brand-purple animate-pulse" />
+                  Client-Ready Website Concepts
+                </h2>
+                <motion.div
+                  layout
+                  className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16"
+                >
+                  <AnimatePresence mode="popLayout">
+                    {websiteConcepts.map((project, idx) => (
+                      <motion.div
+                        key={project.id}
+                        layout
+                        initial={{ opacity: 0, scale: 0.9 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        exit={{ opacity: 0, scale: 0.9 }}
+                        transition={{ duration: 0.4 }}
+                      >
+                        <ProjectCard
+                          project={project}
+                          index={idx}
+                          onOpenCaseStudy={(proj) => setActiveCaseStudy(proj)}
+                        />
+                      </motion.div>
+                    ))}
+                  </AnimatePresence>
+                </motion.div>
+              </div>
+            </div>
+          ) : (
+            <motion.div
+              layout
+              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16"
+            >
+              <AnimatePresence mode="popLayout">
+                {filteredProjects.map((project, idx) => (
+                  <motion.div
+                    key={project.id}
+                    layout
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.9 }}
+                    transition={{ duration: 0.4 }}
+                  >
+                    <ProjectCard
+                      project={project}
+                      index={idx}
+                      onOpenCaseStudy={(proj) => setActiveCaseStudy(proj)}
+                    />
+                  </motion.div>
+                ))}
+              </AnimatePresence>
+            </motion.div>
+          )
         )}
 
         {/* Empty state */}
@@ -354,22 +434,35 @@ export default function Projects() {
           <div className="absolute bottom-[-30%] right-[-30%] w-64 h-64 bg-brand-purple/5 rounded-full blur-[80px] pointer-events-none" />
           
           <h2 className="text-2xl md:text-4xl font-extrabold text-white mb-4">
-            Have an idea like this?
+            Have an Idea Like This?
           </h2>
           <p className="text-sm text-white/60 leading-relaxed mb-8 max-w-xl mx-auto">
             Nexnam can help you turn your idea into a modern website, app, dashboard, or digital product.
           </p>
-          <button
-            onClick={() => {
-              playClick();
-              navigate("/contact");
-              window.scrollTo({ top: 0, behavior: "smooth" });
-            }}
-            onMouseEnter={playHover}
-            className="relative inline-flex items-center justify-center px-8 py-3.5 text-xs font-bold tracking-wider uppercase text-brand-black rounded-lg bg-gradient-to-r from-brand-cyan to-brand-blue hover:shadow-[0_0_20px_rgba(0,245,255,0.3)] transition-all duration-300 font-mono cursor-pointer"
-          >
-            Start Your Project
-          </button>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <button
+              onClick={() => {
+                playClick();
+                navigate("/contact");
+                window.scrollTo({ top: 0, behavior: "smooth" });
+              }}
+              onMouseEnter={playHover}
+              className="w-full sm:w-auto relative inline-flex items-center justify-center px-8 py-3.5 text-xs font-bold tracking-wider uppercase text-brand-black rounded-lg bg-gradient-to-r from-brand-cyan to-brand-blue hover:shadow-[0_0_20px_rgba(0,245,255,0.3)] transition-all duration-300 font-mono cursor-pointer animate-pulse"
+            >
+              Start Your Project
+            </button>
+            <button
+              onClick={() => {
+                playClick();
+                navigate("/services");
+                window.scrollTo({ top: 0, behavior: "smooth" });
+              }}
+              onMouseEnter={playHover}
+              className="w-full sm:w-auto px-8 py-3.5 rounded-lg border border-white/10 hover:border-brand-cyan/40 bg-white/5 hover:bg-brand-cyan/5 text-xs font-bold text-white tracking-wider uppercase font-mono transition-all duration-300 cursor-pointer"
+            >
+              Explore Our Services
+            </button>
+          </div>
         </motion.div>
       </div>
     </div>
