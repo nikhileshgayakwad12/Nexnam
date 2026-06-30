@@ -279,7 +279,7 @@ export default function Contact() {
                 Skip the brief form entirely and connect with our technical architect instantly via WhatsApp to chat about your project specs.
               </p>
               <a
-                href="https://wa.me/919770169100?text=Hello%20Nexnam%21%20I%27d%20like%20to%20inquire%20about%20starting%20a%20project%20with%20you."
+                href="https://wa.me/919329584097?text=Hello%20Nexnam%21%20I%27d%20like%20to%20inquire%20about%20starting%20a%20project%20with%20you."
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={playClick}

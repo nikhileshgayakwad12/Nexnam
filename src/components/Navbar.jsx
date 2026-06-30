@@ -40,7 +40,7 @@ export default function Navbar() {
             className="flex items-center group"
           >
             <img
-              src="/logo.jpg"
+              src="/logo.png"
               alt="Nexnam Logo"
               className="h-8 w-auto rounded object-contain group-hover:opacity-90 transition-opacity"
             />

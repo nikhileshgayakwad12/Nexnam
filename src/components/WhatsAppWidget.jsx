@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { playHover, playClick } from "../utils/soundManager";
 
 export default function WhatsAppWidget() {
-  const url = "https://wa.me/919770169100?text=Hello%20Nexnam%21%20I%27d%20like%20to%20inquire%20about%20starting%20a%20project%20with%20you.";
+  const url = "https://wa.me/919329584097?text=Hello%20Nexnam%21%20I%27d%20like%20to%20inquire%20about%20starting%20a%20project%20with%20you.";
 
   return (
     <motion.a

@@ -58,7 +58,7 @@ export default function Footer() {
               className="flex items-center group self-start"
             >
               <img
-                src="/logo.jpg"
+                src="/logo.png"
                 alt="Nexnam Logo"
                 className="h-7 w-auto rounded object-contain group-hover:opacity-90 transition-opacity"
               />
@@ -164,14 +164,14 @@ export default function Footer() {
                 <div className="flex flex-col">
                   <span className="text-xs text-white/40 font-mono">WHATSAPP</span>
                   <a
-                    href="https://wa.me/919770169100?text=Hello%20Nexnam%21%20I%27d%20like%20to%20inquire%20about%20starting%20a%20project%20with%20you."
+                    href="https://wa.me/919329584097?text=Hello%20Nexnam%21%20I%27d%20like%20to%20inquire%20about%20starting%20a%20project%20with%20you."
                     target="_blank"
                     rel="noopener noreferrer"
                     onMouseEnter={playHover}
                     onClick={playClick}
                     className="text-sm text-white/70 hover:text-brand-cyan transition-colors"
                   >
-                    +91 97701 69100
+                    +91 93295 84097
                   </a>
                 </div>
               </li>

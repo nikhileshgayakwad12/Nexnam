@@ -198,7 +198,7 @@ export default function AIAssistant() {
     playClick();
     if (action.action === "whatsapp") {
       // Open WhatsApp in new tab
-      const whatsappUrl = "https://wa.me/919770169100?text=Hello%20Nexnam%21%20I%27d%20like%20to%20inquire%20about%20starting%20a%20project%20with%20you.";
+      const whatsappUrl = "https://wa.me/919329584097?text=Hello%20Nexnam%21%20I%27d%20like%20to%20inquire%20about%20starting%20a%20project%20with%20you.";
       
       // Append user click message
       const userMsg = {
