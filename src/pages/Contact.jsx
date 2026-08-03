@@ -5,6 +5,7 @@ import { Mail, Phone, MessageSquare, Send, CheckCircle2, Sparkles, AlertCircle }
 import SEO from "../components/SEO";
 import { playHover, playClick, playSuccess } from "../utils/soundManager";
 import { supabase } from "../lib/supabaseClient";
+import emailjs from "@emailjs/browser";
 
 // Reusable FAQ Item Sub-component for Accessibility & Clean Code
 function FAQItem({ question, answer }) {
@@ -151,6 +152,26 @@ export default function Contact() {
         ]);
 
       if (error) throw error;
+
+      // Send auto-reply thank-you email via EmailJS (non-blocking)
+      try {
+        await emailjs.send(
+          import.meta.env.VITE_EMAILJS_SERVICE_ID,
+          import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
+          {
+            to_email: formData.email,
+            to_name: formData.name,
+            from_name: "Nexnam",
+            service: formData.service,
+            budget: formData.budget,
+            message: formData.message,
+          },
+          import.meta.env.VITE_EMAILJS_PUBLIC_KEY
+        );
+        console.log("Auto-reply email sent to:", formData.email);
+      } catch (emailErr) {
+        console.warn("Auto-reply email failed (non-blocking):", emailErr);
+      }
 
       setIsSubmitting(false);
       setSubmitSuccess(true);

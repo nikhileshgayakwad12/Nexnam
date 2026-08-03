@@ -1,5 +1,6 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+import { AnimatePresence } from "framer-motion";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import Home from "./pages/Home";
@@ -13,6 +14,7 @@ import TechBackground3D from "./components/TechBackground3D";
 import SoundToggle from "./components/SoundToggle";
 import WhatsAppWidget from "./components/WhatsAppWidget";
 import AIAssistant from "./components/AIAssistant";
+import SkeletonLoader from "./components/SkeletonLoader";
 import { playTransition } from "./utils/soundManager";
 
 // Scroll To Top on route change helper
@@ -31,9 +33,22 @@ function ScrollToTop() {
 function AppContent() {
   const location = useLocation();
   const isAdminPath = location.pathname === "/admin-nexnam-panel";
+  const [initialLoading, setInitialLoading] = useState(true);
+
+  useEffect(() => {
+    // Premium loading transition timer to allow 3D canvas and components to settle
+    const timer = setTimeout(() => {
+      setInitialLoading(false);
+    }, 1200);
+    return () => clearTimeout(timer);
+  }, []);
 
   return (
     <>
+      <AnimatePresence mode="wait">
+        {initialLoading && <SkeletonLoader key="initial-loader" />}
+      </AnimatePresence>
+
       <ScrollToTop />
       <TechBackground3D />
       

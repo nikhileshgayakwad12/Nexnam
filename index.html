@@ -28,7 +28,494 @@
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet" />
   </head>
   <body class="bg-brand-black text-gray-100">
-    <div id="root"></div>
+    <div id="root">
+      <!-- STATIC LOADING SKELETON (renders before JS bundle downloads) -->
+      <style>
+        .skeleton-wrapper {
+          position: fixed;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background-color: #030303;
+          z-index: 9999;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: flex-start;
+          overflow-y: auto;
+          font-family: system-ui, -apple-system, sans-serif;
+          user-select: none;
+          box-sizing: border-box;
+        }
+        .skeleton-grid {
+          position: absolute;
+          inset: 0;
+          pointer-events: none;
+          background-size: 50px 50px;
+          background-image: 
+            linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+            linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+          opacity: 0.4;
+        }
+        .skeleton-glow-1 {
+          position: absolute;
+          top: -10%;
+          left: -10%;
+          width: 50%;
+          height: 50%;
+          background: radial-gradient(circle, rgba(0, 245, 255, 0.05) 0%, transparent 80%);
+          border-radius: 50%;
+          filter: blur(80px);
+          pointer-events: none;
+        }
+        .skeleton-glow-2 {
+          position: absolute;
+          bottom: -10%;
+          right: -10%;
+          width: 50%;
+          height: 50%;
+          background: radial-gradient(circle, rgba(184, 0, 255, 0.05) 0%, transparent 80%);
+          border-radius: 50%;
+          filter: blur(80px);
+          pointer-events: none;
+        }
+        .skeleton-header {
+          width: 100%;
+          height: 80px;
+          border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+          background-color: rgba(3, 3, 3, 0.4);
+          backdrop-filter: blur(12px);
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          padding: 0 24px;
+          box-sizing: border-box;
+          z-index: 10;
+        }
+        .skeleton-logo {
+          height: 32px;
+          width: auto;
+          opacity: 0.4;
+        }
+        .skeleton-nav-links {
+          display: none;
+          gap: 32px;
+        }
+        @media (min-width: 768px) {
+          .skeleton-nav-links {
+            display: flex;
+          }
+        }
+        .skeleton-nav-link {
+          width: 56px;
+          height: 12px;
+          background: rgba(255, 255, 255, 0.04);
+          border-radius: 4px;
+        }
+        .skeleton-header-btn {
+          display: none;
+          width: 112px;
+          height: 40px;
+          background: linear-gradient(90deg, rgba(0,245,255,0.1) 0%, rgba(0,210,255,0.1) 100%);
+          border: 1px solid rgba(0,245,255,0.2);
+          border-radius: 8px;
+        }
+        @media (min-width: 768px) {
+          .skeleton-header-btn {
+            display: block;
+          }
+        }
+        .skeleton-menu-btn {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          gap: 4px;
+          width: 40px;
+          height: 40px;
+          background: rgba(255,255,255,0.02);
+          border: 1px solid rgba(255,255,255,0.05);
+          border-radius: 8px;
+        }
+        @media (min-width: 768px) {
+          .skeleton-menu-btn {
+            display: none;
+          }
+        }
+        .skeleton-menu-line {
+          width: 16px;
+          height: 2px;
+          background: rgba(255, 255, 255, 0.1);
+          border-radius: 2px;
+        }
+        
+        /* Hero Section styles */
+        .skeleton-hero {
+          width: 100%;
+          max-width: 1280px;
+          margin: 0 auto;
+          padding: 64px 24px 0;
+          box-sizing: border-box;
+          z-index: 10;
+          display: flex;
+          flex-direction: column;
+        }
+        @media (min-width: 1024px) {
+          .skeleton-hero {
+            flex-direction: row;
+            align-items: center;
+            padding-top: 96px;
+          }
+        }
+        .skeleton-hero-left {
+          flex: 1;
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
+        }
+        @media (min-width: 1024px) {
+          .skeleton-hero-left {
+            flex: 0 0 58.33%;
+          }
+        }
+        .skeleton-hero-right {
+          flex: 1;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          position: relative;
+          width: 100%;
+          height: 320px;
+          margin-top: 48px;
+        }
+        @media (min-width: 1024px) {
+          .skeleton-hero-right {
+            flex: 0 0 41.66%;
+            height: 400px;
+            margin-top: 0;
+          }
+        }
+        .skeleton-tag {
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+          padding: 8px 16px;
+          border-radius: 9999px;
+          background: rgba(0, 245, 255, 0.05);
+          border: 1px solid rgba(0, 245, 255, 0.15);
+          margin-bottom: 24px;
+          box-sizing: border-box;
+        }
+        .skeleton-tag-dot {
+          width: 12px;
+          height: 12px;
+          border-radius: 50%;
+          background: rgba(0, 245, 255, 0.2);
+        }
+        .skeleton-tag-text {
+          width: 144px;
+          height: 8px;
+          background: rgba(0, 245, 255, 0.2);
+          border-radius: 4px;
+        }
+        .skeleton-title-1 {
+          width: 85%;
+          height: 48px;
+          background: rgba(255, 255, 255, 0.03);
+          border-radius: 8px;
+          margin-bottom: 12px;
+          position: relative;
+          overflow: hidden;
+        }
+        .skeleton-title-2 {
+          width: 60%;
+          height: 48px;
+          background: rgba(255, 255, 255, 0.03);
+          border-radius: 8px;
+          margin-bottom: 24px;
+          position: relative;
+          overflow: hidden;
+        }
+        .skeleton-subtitle-line {
+          width: 100%;
+          height: 14px;
+          background: rgba(255, 255, 255, 0.02);
+          border-radius: 4px;
+          margin-bottom: 10px;
+          position: relative;
+          overflow: hidden;
+        }
+        .skeleton-subtitle-line-2 { width: 91%; }
+        .skeleton-subtitle-line-3 { width: 75%; margin-bottom: 32px; }
+        
+        .skeleton-btn-group {
+          display: flex;
+          flex-direction: column;
+          gap: 16px;
+          width: 100%;
+        }
+        @media (min-width: 640px) {
+          .skeleton-btn-group {
+            flex-direction: row;
+            width: auto;
+          }
+        }
+        .skeleton-btn-primary {
+          width: 100%;
+          height: 48px;
+          background: linear-gradient(90deg, rgba(0,245,255,0.2) 0%, rgba(0,210,255,0.2) 100%);
+          border: 1px solid rgba(0, 245, 255, 0.25);
+          border-radius: 8px;
+          position: relative;
+          overflow: hidden;
+        }
+        @media (min-width: 640px) {
+          .skeleton-btn-primary {
+            width: 176px;
+          }
+        }
+        .skeleton-btn-secondary {
+          width: 100%;
+          height: 48px;
+          background: rgba(255, 255, 255, 0.03);
+          border: 1px solid rgba(255, 255, 255, 0.05);
+          border-radius: 8px;
+          position: relative;
+          overflow: hidden;
+        }
+        @media (min-width: 640px) {
+          .skeleton-btn-secondary {
+            width: 144px;
+          }
+        }
+        
+        /* 3D Orb skeleton */
+        .skeleton-orb-outer {
+          width: 256px;
+          height: 256px;
+          border-radius: 50%;
+          border: 2px dashed rgba(255, 255, 255, 0.05);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          background: rgba(255, 255, 255, 0.005);
+          animation: skeleton-spin 30s linear infinite;
+        }
+        @media (min-width: 640px) {
+          .skeleton-orb-outer {
+            width: 288px;
+            height: 288px;
+          }
+        }
+        .skeleton-orb-mid {
+          width: 192px;
+          height: 192px;
+          border-radius: 50%;
+          border: 1px solid rgba(255, 255, 255, 0.05);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+        .skeleton-orb-inner {
+          width: 128px;
+          height: 128px;
+          border-radius: 50%;
+          border: 1px dashed rgba(0, 245, 255, 0.1);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          animation: skeleton-spin-reverse 15s linear infinite;
+        }
+        .skeleton-orb-core {
+          width: 80px;
+          height: 80px;
+          border-radius: 50%;
+          background: rgba(0, 245, 255, 0.05);
+          border: 1px solid rgba(0, 245, 255, 0.2);
+        }
+        .skeleton-orb-float-1 {
+          position: absolute;
+          top: 40px;
+          left: 40px;
+          width: 64px;
+          height: 24px;
+          border-radius: 9999px;
+          border: 1px solid rgba(255, 255, 255, 0.05);
+          background: rgba(255, 255, 255, 0.02);
+          animation: skeleton-bounce-1 3s ease-in-out infinite;
+        }
+        .skeleton-orb-float-2 {
+          position: absolute;
+          bottom: 40px;
+          right: 40px;
+          width: 80px;
+          height: 24px;
+          border-radius: 9999px;
+          border: 1px solid rgba(184, 0, 255, 0.1);
+          background: rgba(255, 255, 255, 0.02);
+          animation: skeleton-bounce-2 4s ease-in-out infinite;
+        }
+
+        /* Stats Bar styles */
+        .skeleton-stats-bar {
+          width: 100%;
+          border-top: 1px solid rgba(255, 255, 255, 0.05);
+          background: rgba(3, 3, 3, 0.25);
+          padding: 48px 24px;
+          box-sizing: border-box;
+          margin-top: 64px;
+          z-index: 10;
+        }
+        .skeleton-stats-grid {
+          max-width: 1280px;
+          margin: 0 auto;
+          display: grid;
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+          gap: 32px;
+        }
+        @media (min-width: 768px) {
+          .skeleton-stats-grid {
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+          }
+        }
+        .skeleton-stat-col {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+        }
+        .skeleton-stat-val {
+          width: 80px;
+          height: 36px;
+          background: linear-gradient(90deg, rgba(0,245,255,0.15) 0%, rgba(0,210,255,0.15) 100%);
+          border-radius: 8px;
+          margin-bottom: 12px;
+        }
+        .skeleton-stat-lbl {
+          width: 112px;
+          height: 12px;
+          background: rgba(255, 255, 255, 0.02);
+          border-radius: 4px;
+        }
+
+        /* Animations */
+        @keyframes skeleton-shimmer {
+          100% { transform: translateX(100%); }
+        }
+        @keyframes skeleton-pulse {
+          0%, 100% { opacity: 0.4; }
+          50% { opacity: 0.8; }
+        }
+        @keyframes skeleton-spin {
+          100% { transform: rotate(360deg); }
+        }
+        @keyframes skeleton-spin-reverse {
+          100% { transform: rotate(-360deg); }
+        }
+        @keyframes skeleton-bounce-1 {
+          0%, 100% { transform: translateY(0); }
+          50% { transform: translateY(-10px); }
+        }
+        @keyframes skeleton-bounce-2 {
+          0%, 100% { transform: translateY(0); }
+          50% { transform: translateY(-8px); }
+        }
+        .shimmer::after {
+          position: absolute;
+          top: 0; right: 0; bottom: 0; left: 0;
+          transform: translateX(-100%);
+          background-image: linear-gradient(
+            90deg,
+            rgba(255, 255, 255, 0) 0%,
+            rgba(255, 255, 255, 0.04) 20%,
+            rgba(255, 255, 255, 0.06) 60%,
+            rgba(255, 255, 255, 0) 100%
+          );
+          animation: skeleton-shimmer 1.5s infinite;
+          content: '';
+        }
+        .pulse {
+          animation: skeleton-pulse 2s infinite ease-in-out;
+        }
+      </style>
+      <div class="skeleton-wrapper">
+        <div class="skeleton-glow-1"></div>
+        <div class="skeleton-glow-2"></div>
+        <div class="skeleton-grid"></div>
+        
+        <!-- Header / Navbar mock -->
+        <div class="skeleton-header">
+          <img src="/logo.png" alt="Nexnam Logo" class="skeleton-logo pulse" />
+          <div class="skeleton-nav-links">
+            <div class="skeleton-nav-link pulse"></div>
+            <div class="skeleton-nav-link pulse"></div>
+            <div class="skeleton-nav-link pulse"></div>
+            <div class="skeleton-nav-link pulse"></div>
+            <div class="skeleton-nav-link pulse"></div>
+            <div class="skeleton-nav-link pulse"></div>
+          </div>
+          <div class="skeleton-header-btn pulse"></div>
+          <div class="skeleton-menu-btn">
+            <div class="skeleton-menu-line"></div>
+            <div class="skeleton-menu-line"></div>
+          </div>
+        </div>
+
+        <!-- Hero Section mock -->
+        <div class="skeleton-hero">
+          <div class="skeleton-hero-left">
+            <div class="skeleton-tag pulse">
+              <div class="skeleton-tag-dot"></div>
+              <div class="skeleton-tag-text"></div>
+            </div>
+            <div class="skeleton-title-1 shimmer"></div>
+            <div class="skeleton-title-2 shimmer"></div>
+            <div class="skeleton-subtitle-line shimmer"></div>
+            <div class="skeleton-subtitle-line skeleton-subtitle-line-2 shimmer"></div>
+            <div class="skeleton-subtitle-line skeleton-subtitle-line-3 shimmer"></div>
+            <div class="skeleton-btn-group">
+              <div class="skeleton-btn-primary shimmer"></div>
+              <div class="skeleton-btn-secondary shimmer"></div>
+            </div>
+          </div>
+          <div class="skeleton-hero-right">
+            <div class="skeleton-orb-outer">
+              <div class="skeleton-orb-mid">
+                <div class="skeleton-orb-inner">
+                  <div class="skeleton-orb-core pulse"></div>
+                </div>
+              </div>
+            </div>
+            <div class="skeleton-orb-float-1"></div>
+            <div class="skeleton-orb-float-2"></div>
+          </div>
+        </div>
+
+        <!-- Stats Bar mock -->
+        <div class="skeleton-stats-bar">
+          <div class="skeleton-stats-grid">
+            <div class="skeleton-stat-col">
+              <div class="skeleton-stat-val pulse"></div>
+              <div class="skeleton-stat-lbl pulse"></div>
+            </div>
+            <div class="skeleton-stat-col">
+              <div class="skeleton-stat-val pulse"></div>
+              <div class="skeleton-stat-lbl pulse"></div>
+            </div>
+            <div class="skeleton-stat-col">
+              <div class="skeleton-stat-val pulse"></div>
+              <div class="skeleton-stat-lbl pulse"></div>
+            </div>
+            <div class="skeleton-stat-col">
+              <div class="skeleton-stat-val pulse"></div>
+              <div class="skeleton-stat-lbl pulse"></div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>
