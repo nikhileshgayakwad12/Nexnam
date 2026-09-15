@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { Sparkles, X, CheckCircle, ExternalLink, Box } from "lucide-react";
+import { Sparkles, X, CheckCircle, ExternalLink, Globe } from "lucide-react";
 import SEO from "../components/SEO";
 import ProjectCard from "../components/ProjectCard";
 import { playClick, playHover } from "../utils/soundManager";
@@ -34,7 +34,7 @@ const mapProject = (p) => {
     technologies: toArray(p.tech_stack),
     demoUrl: p.live_demo,
     caseStudyUrl: "#",
-    gradientClass: p.image_url && p.image_url.startsWith("from-") ? p.image_url : "from-cyan-500 via-blue-600 to-indigo-700",
+    gradientClass: p.image_url && p.image_url.startsWith("from-") ? p.image_url : "from-slate-900 via-indigo-950 to-slate-900",
     imageUrl: p.image_url && !p.image_url.startsWith("from-") ? p.image_url : null,
     created_at: p.created_at
   };
@@ -119,32 +119,32 @@ export default function Projects() {
   );
 
   return (
-    <div className="flex-grow z-10 w-full pt-32 pb-20 px-6 sm:px-8">
+    <div className="flex-grow z-10 w-full pt-24 sm:pt-28 pb-16 sm:pb-20 px-4 sm:px-8 bg-[#FAFAFA]">
       <SEO
         title="Projects Built with Nexnam Vision | Nexnam"
         description="View Nexnam projects, website concepts, apps and digital solutions built for businesses, learning and productivity."
       />
       <div className="mx-auto max-w-7xl">
         {/* Page Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
+        <div className="text-center max-w-3xl mx-auto mb-14">
           <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5 }}
-            className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-brand-purple/10 border border-brand-purple/20 text-xs text-brand-purple font-semibold tracking-wider uppercase font-mono mb-6"
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+            className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-100 border border-slate-200 text-xs text-[#0B0D12] font-semibold mb-6 shadow-2xs"
           >
-            <Sparkles className="w-3.5 h-3.5" />
+            <Sparkles className="w-3.5 h-3.5 text-[#5B5CF6]" />
             Launch Gallery
           </motion.div>
 
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            className="text-4xl sm:text-5xl font-black tracking-tight text-white mb-6"
+            transition={{ duration: 0.6, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
+            className="text-4xl sm:text-5xl font-extrabold tracking-tight text-[#0B0D12] mb-6"
           >
             Projects Built with{" "}
-            <span className="bg-gradient-to-r from-brand-cyan via-brand-blue to-brand-purple bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-[#0B0D12] via-[#5B5CF6] to-[#7C3AED] bg-clip-text text-transparent">
               Nexnam Vision
             </span>
           </motion.h1>
@@ -152,15 +152,15 @@ export default function Projects() {
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-base sm:text-lg text-white/60 leading-relaxed"
+            transition={{ duration: 0.6, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+            className="text-base sm:text-lg text-[#5F6470] leading-relaxed"
           >
             Explore digital product concepts and web solutions designed for learning, business, productivity, and smart user experiences.
           </motion.p>
         </div>
 
         {/* Filter Categories Tabs */}
-        <div className="flex flex-wrap items-center justify-center gap-3 mb-16">
+        <div className="flex flex-wrap items-center justify-center gap-2.5 mb-14">
           {categories.map((cat) => (
             <button
               key={cat}
@@ -169,10 +169,10 @@ export default function Projects() {
                 setSelectedCategory(cat);
               }}
               onMouseEnter={playHover}
-              className={`px-5 py-2.5 rounded-lg border text-xs font-mono font-bold tracking-wider uppercase transition-all duration-300 cursor-pointer ${
+              className={`px-5 py-2 rounded-xl border text-xs font-semibold tracking-wide transition-all duration-200 cursor-pointer ${
                 selectedCategory === cat
-                  ? "bg-brand-cyan border-brand-cyan text-brand-black shadow-[0_0_15px_rgba(0,245,255,0.25)]"
-                  : "bg-white/5 border-white/5 text-white/70 hover:border-white/20 hover:text-white"
+                  ? "bg-[#111318] border-[#111318] text-white shadow-sm"
+                  : "bg-white border-slate-900/[0.08] text-[#5F6470] hover:border-slate-400 hover:text-[#0B0D12] shadow-2xs"
               }`}
             >
               {cat}
@@ -183,22 +183,22 @@ export default function Projects() {
         {/* Loading State */}
         {loading && (
           <div className="text-center py-20">
-            <div className="inline-block w-8 h-8 border-4 border-brand-cyan border-t-transparent rounded-full animate-spin mb-4" />
-            <p className="text-white/60 font-mono text-sm">Syncing projects with Supabase...</p>
+            <div className="inline-block w-8 h-8 border-4 border-[#5B5CF6] border-t-transparent rounded-full animate-spin mb-4" />
+            <p className="text-[#5F6470] font-mono text-sm">Syncing projects with Supabase...</p>
           </div>
         )}
 
         {/* Error State */}
         {error && (
-          <div className="text-center py-10 max-w-md mx-auto bg-red-950/15 border border-red-500/20 rounded-2xl p-6 mb-10">
-            <p className="text-red-400 font-mono text-sm mb-4">{error}</p>
+          <div className="text-center py-10 max-w-md mx-auto bg-red-50 border border-red-200 rounded-2xl p-6 mb-10 shadow-2xs">
+            <p className="text-red-600 font-mono text-sm mb-4">{error}</p>
             <button
               onClick={() => {
                 playClick();
                 setLoading(true);
                 fetchProjects();
               }}
-              className="px-4 py-2 bg-white/5 border border-white/10 hover:border-white/20 text-white text-xs font-mono rounded-lg transition-all cursor-pointer"
+              className="px-4 py-2 bg-white border border-slate-200 hover:border-slate-300 text-[#0B0D12] text-xs font-mono rounded-lg transition-all cursor-pointer shadow-2xs"
             >
               Try Reconnecting
             </button>
@@ -211,8 +211,8 @@ export default function Projects() {
             <div className="space-y-16">
               {/* Featured Digital Products Section */}
               <div>
-                <h2 className="text-xl sm:text-2xl font-bold font-mono tracking-wider text-brand-cyan mb-6 flex items-center gap-2">
-                  <span className="w-2 h-2 rounded-full bg-brand-cyan animate-pulse" />
+                <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-[#0B0D12] mb-6 flex items-center gap-2">
+                  <span className="w-2 h-2 rounded-full bg-[#5B5CF6]" />
                   Featured Digital Products
                 </h2>
                 <motion.div
@@ -224,10 +224,10 @@ export default function Projects() {
                       <motion.div
                         key={project.id}
                         layout
-                        initial={{ opacity: 0, scale: 0.9 }}
+                        initial={{ opacity: 0, scale: 0.96 }}
                         animate={{ opacity: 1, scale: 1 }}
-                        exit={{ opacity: 0, scale: 0.9 }}
-                        transition={{ duration: 0.4 }}
+                        exit={{ opacity: 0, scale: 0.96 }}
+                        transition={{ duration: 0.3 }}
                       >
                         <ProjectCard
                           project={project}
@@ -242,8 +242,8 @@ export default function Projects() {
 
               {/* Client-Ready Website Concepts Section */}
               <div>
-                <h2 className="text-xl sm:text-2xl font-bold font-mono tracking-wider text-brand-purple mb-6 flex items-center gap-2">
-                  <span className="w-2 h-2 rounded-full bg-brand-purple animate-pulse" />
+                <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-[#0B0D12] mb-6 flex items-center gap-2">
+                  <span className="w-2 h-2 rounded-full bg-[#7C3AED]" />
                   Client-Ready Website Concepts
                 </h2>
                 <motion.div
@@ -255,10 +255,10 @@ export default function Projects() {
                       <motion.div
                         key={project.id}
                         layout
-                        initial={{ opacity: 0, scale: 0.9 }}
+                        initial={{ opacity: 0, scale: 0.96 }}
                         animate={{ opacity: 1, scale: 1 }}
-                        exit={{ opacity: 0, scale: 0.9 }}
-                        transition={{ duration: 0.4 }}
+                        exit={{ opacity: 0, scale: 0.96 }}
+                        transition={{ duration: 0.3 }}
                       >
                         <ProjectCard
                           project={project}
@@ -281,10 +281,10 @@ export default function Projects() {
                   <motion.div
                     key={project.id}
                     layout
-                    initial={{ opacity: 0, scale: 0.9 }}
+                    initial={{ opacity: 0, scale: 0.96 }}
                     animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0, scale: 0.9 }}
-                    transition={{ duration: 0.4 }}
+                    exit={{ opacity: 0, scale: 0.96 }}
+                    transition={{ duration: 0.3 }}
                   >
                     <ProjectCard
                       project={project}
@@ -300,8 +300,8 @@ export default function Projects() {
 
         {/* Empty state */}
         {!loading && !error && filteredProjects.length === 0 && (
-          <div className="text-center py-20 glass-card rounded-2xl border border-white/5">
-            <p className="text-white/40 text-sm font-mono uppercase tracking-wider">
+          <div className="text-center py-20 bg-white rounded-2xl border border-slate-200 shadow-2xs">
+            <p className="text-[#8A8F98] text-sm font-medium">
               No matching case studies found.
             </p>
           </div>
@@ -310,8 +310,7 @@ export default function Projects() {
         {/* Case Study Detailed Modal */}
         <AnimatePresence>
           {activeCaseStudy && (
-            <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-brand-black/80 backdrop-blur-md">
-              {/* Dismiss Area */}
+            <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#0B0D12]/70 backdrop-blur-md">
               <div
                 className="absolute inset-0 cursor-default"
                 onClick={() => {
@@ -320,13 +319,12 @@ export default function Projects() {
                 }}
               />
 
-              {/* Modal Container */}
               <motion.div
-                initial={{ opacity: 0, scale: 0.95, y: 20 }}
+                initial={{ opacity: 0, scale: 0.96, y: 15 }}
                 animate={{ opacity: 1, scale: 1, y: 0 }}
-                exit={{ opacity: 0, scale: 0.95, y: 20 }}
-                transition={{ duration: 0.4, cubicBezier: [0.16, 1, 0.3, 1] }}
-                className="relative w-full max-w-3xl max-h-[90vh] overflow-y-auto glass-card rounded-3xl border border-white/15 p-6 md:p-10 z-10 shadow-[0_0_50px_rgba(0,0,0,0.8)]"
+                exit={{ opacity: 0, scale: 0.96, y: 15 }}
+                transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+                className="relative w-full max-w-3xl max-h-[90vh] overflow-y-auto bg-white rounded-3xl border border-slate-200 p-6 md:p-10 z-10 shadow-2xl"
               >
                 {/* Close Button */}
                 <button
@@ -335,72 +333,81 @@ export default function Projects() {
                     setActiveCaseStudy(null);
                   }}
                   onMouseEnter={playHover}
-                  className="absolute top-6 right-6 p-2 rounded-lg border border-white/10 hover:border-brand-cyan/40 bg-white/5 text-white/70 hover:text-white transition-all cursor-pointer"
+                  className="absolute top-6 right-6 p-2 rounded-xl border border-slate-200 hover:border-slate-400 bg-slate-50 text-[#0B0D12] transition-all cursor-pointer shadow-2xs"
                   aria-label="Close modal"
                 >
                   <X className="w-4 h-4" />
                 </button>
 
-                {/* Banner Gradient Mock */}
-                <div className={`w-full h-36 rounded-2xl bg-gradient-to-r ${activeCaseStudy.gradientClass || "from-cyan-500 to-blue-600"} opacity-70 mb-8 flex items-center justify-center relative overflow-hidden`}>
-                  <div className="absolute inset-0 bg-grid-pattern opacity-40 mix-blend-overlay" />
-                  <Box className="w-10 h-10 text-white animate-bounce" />
+                {/* Banner Browser Mockup */}
+                <div className="w-full aspect-[16/7] rounded-2xl bg-slate-950 mb-8 flex flex-col overflow-hidden border border-slate-800">
+                  <div className="h-7 w-full bg-slate-900 px-3 flex items-center justify-between shrink-0 select-none border-b border-slate-800">
+                    <div className="flex items-center gap-1.5">
+                      <div className="w-2.5 h-2.5 rounded-full bg-red-500/80" />
+                      <div className="w-2.5 h-2.5 rounded-full bg-amber-500/80" />
+                      <div className="w-2.5 h-2.5 rounded-full bg-emerald-500/80" />
+                    </div>
+                    <span className="text-[10px] font-mono text-slate-400">nexnam.app/{activeCaseStudy.id}</span>
+                    <div className="w-4" />
+                  </div>
+                  <div className="flex-grow flex items-center justify-center p-6 bg-gradient-to-br from-slate-900 via-indigo-950 to-slate-900 text-center">
+                    <h4 className="text-2xl font-bold text-white tracking-tight">{activeCaseStudy.title}</h4>
+                  </div>
                 </div>
 
                 {/* Category & Title */}
                 <div className="flex items-center gap-2 mb-2">
-                  <span className="w-2 h-2 rounded-full bg-brand-cyan" />
-                  <span className="text-xs font-mono font-bold tracking-wider text-brand-cyan uppercase">
+                  <span className="w-2 h-2 rounded-full bg-[#5B5CF6]" />
+                  <span className="text-xs font-semibold text-[#5B5CF6] uppercase">
                     {activeCaseStudy.category}
                   </span>
                 </div>
-                <h2 className="text-3xl font-black text-white mb-4">
+                <h2 className="text-3xl font-extrabold text-[#0B0D12] mb-4">
                   {activeCaseStudy.title}
                 </h2>
 
-                {/* Long detailed description */}
-                <p className="text-sm text-white/70 leading-relaxed mb-6">
+                <p className="text-sm text-[#5F6470] leading-relaxed mb-8">
                   {activeCaseStudy.longDesc || activeCaseStudy.shortDesc}
                 </p>
 
                 {/* Features List */}
-                <h3 className="text-sm font-bold font-mono text-brand-cyan uppercase tracking-wider mb-3">
-                  Core Engineering Milestones //
+                <h3 className="text-xs font-bold text-[#0B0D12] uppercase tracking-wider mb-4 font-mono">
+                  Core Engineering Milestones
                 </h3>
                 <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-8">
                   {activeCaseStudy.features &&
                     activeCaseStudy.features.map((feat, i) => (
-                      <li key={i} className="flex items-start gap-2 text-xs text-white/60">
-                        <CheckCircle className="w-4 h-4 text-brand-cyan mt-0.5 shrink-0" />
+                      <li key={i} className="flex items-start gap-2.5 text-xs text-[#5F6470]">
+                        <CheckCircle className="w-4 h-4 text-[#5B5CF6] mt-0.5 shrink-0" />
                         <span>{feat}</span>
                       </li>
                     ))}
                 </ul>
 
-                {/* Tech Stacks */}
-                <h3 className="text-sm font-bold font-mono text-brand-purple uppercase tracking-wider mb-3">
-                  System Architecture Stack //
+                {/* Tech Stack */}
+                <h3 className="text-xs font-bold text-[#0B0D12] uppercase tracking-wider mb-4 font-mono">
+                  System Architecture Stack
                 </h3>
                 <div className="flex flex-wrap gap-2 mb-8">
                   {activeCaseStudy.technologies &&
                     activeCaseStudy.technologies.map((tech) => (
                       <span
                         key={tech}
-                        className="px-3 py-1.5 rounded-lg text-xs font-mono font-medium bg-white/5 border border-white/5 text-white/80"
+                        className="px-3 py-1 rounded-lg text-xs font-medium bg-slate-100 border border-slate-200 text-[#0B0D12]"
                       >
                         {tech}
                       </span>
                     ))}
                 </div>
 
-                {/* CTAs */}
-                <div className="flex flex-col sm:flex-row items-center gap-4">
+                {/* Modal CTAs */}
+                <div className="flex flex-col sm:flex-row items-center gap-4 pt-2 border-t border-slate-100">
                   <a
                     href={activeCaseStudy.demoUrl}
                     target="_blank"
                     rel="noopener noreferrer"
                     onClick={playClick}
-                    className="w-full sm:w-auto relative inline-flex items-center justify-center px-6 py-3.5 text-xs font-bold tracking-wider uppercase text-brand-black rounded-lg bg-gradient-to-r from-brand-cyan to-brand-blue hover:shadow-[0_0_20px_rgba(0,245,255,0.4)] transition-all duration-300 font-mono cursor-pointer"
+                    className="w-full sm:w-auto relative inline-flex items-center justify-center px-6 py-3.5 text-xs font-semibold text-white rounded-xl bg-[#5B5CF6] hover:bg-[#4F50E2] transition-all duration-200 cursor-pointer shadow-sm"
                   >
                     Open Live Deployment
                     <ExternalLink className="ml-2 w-3.5 h-3.5" />
@@ -410,9 +417,10 @@ export default function Projects() {
                     onClick={() => {
                       playClick();
                       setActiveCaseStudy(null);
-                      window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
+                      navigate("/contact");
+                      window.scrollTo({ top: 0, behavior: "smooth" });
                     }}
-                    className="w-full sm:w-auto px-6 py-3.5 rounded-lg border border-white/10 hover:border-brand-purple/40 bg-white/5 text-xs font-bold font-mono uppercase tracking-wider text-white transition-all cursor-pointer"
+                    className="w-full sm:w-auto px-6 py-3.5 rounded-xl border border-slate-200 hover:border-[#0B0D12] bg-white text-xs font-semibold text-[#0B0D12] transition-all duration-200 cursor-pointer shadow-2xs"
                   >
                     Discuss Similar Build
                   </button>
@@ -424,19 +432,16 @@ export default function Projects() {
 
         {/* Call to Action Section */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 25 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="mt-20 p-8 md:p-12 glass-card rounded-3xl border border-white/5 bg-gradient-to-br from-indigo-950/10 to-slate-900/10 text-center max-w-4xl mx-auto relative overflow-hidden group hover:border-brand-purple/20 transition-all duration-300"
+          transition={{ duration: 0.5 }}
+          className="mt-20 p-8 md:p-12 bg-[#111318] text-white rounded-3xl border border-slate-800 text-center max-w-4xl mx-auto relative overflow-hidden shadow-xl"
         >
-          <div className="absolute top-[-30%] left-[-30%] w-64 h-64 bg-brand-cyan/5 rounded-full blur-[80px] pointer-events-none" />
-          <div className="absolute bottom-[-30%] right-[-30%] w-64 h-64 bg-brand-purple/5 rounded-full blur-[80px] pointer-events-none" />
-          
           <h2 className="text-2xl md:text-4xl font-extrabold text-white mb-4">
             Have an Idea Like This?
           </h2>
-          <p className="text-sm text-white/60 leading-relaxed mb-8 max-w-xl mx-auto">
+          <p className="text-sm text-slate-400 leading-relaxed mb-8 max-w-xl mx-auto">
             Nexnam can help you turn your idea into a modern website, app, dashboard, or digital product.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -447,7 +452,7 @@ export default function Projects() {
                 window.scrollTo({ top: 0, behavior: "smooth" });
               }}
               onMouseEnter={playHover}
-              className="w-full sm:w-auto relative inline-flex items-center justify-center px-8 py-3.5 text-xs font-bold tracking-wider uppercase text-brand-black rounded-lg bg-gradient-to-r from-brand-cyan to-brand-blue hover:shadow-[0_0_20px_rgba(0,245,255,0.3)] transition-all duration-300 font-mono cursor-pointer animate-pulse"
+              className="w-full sm:w-auto px-8 py-3.5 text-xs font-semibold text-[#0B0D12] rounded-xl bg-white hover:bg-slate-100 transition-all duration-200 cursor-pointer shadow-md"
             >
               Start Your Project
             </button>
@@ -458,7 +463,7 @@ export default function Projects() {
                 window.scrollTo({ top: 0, behavior: "smooth" });
               }}
               onMouseEnter={playHover}
-              className="w-full sm:w-auto px-8 py-3.5 rounded-lg border border-white/10 hover:border-brand-cyan/40 bg-white/5 hover:bg-brand-cyan/5 text-xs font-bold text-white tracking-wider uppercase font-mono transition-all duration-300 cursor-pointer"
+              className="w-full sm:w-auto px-8 py-3.5 rounded-xl border border-slate-700 hover:border-slate-500 bg-slate-900 text-white text-xs font-semibold transition-all duration-200 cursor-pointer shadow-2xs"
             >
               Explore Our Services
             </button>
@@ -468,3 +473,4 @@ export default function Projects() {
     </div>
   );
 }
+

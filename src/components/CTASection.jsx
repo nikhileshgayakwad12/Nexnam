@@ -14,52 +14,48 @@ export default function CTASection() {
   };
 
   return (
-    <section className="relative py-20 px-6 sm:px-8 overflow-hidden z-10 w-full">
+    <section className="relative py-24 px-6 sm:px-8 overflow-hidden z-10 w-full">
       <div className="mx-auto max-w-5xl">
-        {/* Glow border wrap */}
         <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
-          whileInView={{ opacity: 1, scale: 1 }}
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-          className="relative rounded-3xl p-8 md:p-14 glass-card border border-white/5 bg-gradient-to-br from-indigo-950/20 to-slate-900/30 overflow-hidden group hover:border-brand-cyan/20 transition-colors duration-500"
+          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+          className="relative rounded-3xl p-10 md:p-16 bg-[#111318] border border-slate-800 shadow-[0_20px_60px_rgba(0,0,0,0.3)] overflow-hidden text-center"
         >
-          {/* Neon gradient background blobs */}
-          <div className="absolute top-[-50%] left-[-20%] w-[350px] h-[350px] rounded-full bg-brand-cyan/10 blur-[100px] pointer-events-none group-hover:bg-brand-cyan/15 transition-colors duration-500" />
-          <div className="absolute bottom-[-50%] right-[-20%] w-[350px] h-[350px] rounded-full bg-brand-purple/10 blur-[100px] pointer-events-none group-hover:bg-brand-purple/15 transition-colors duration-500" />
-          
-          {/* Grid pattern */}
-          <div className="absolute inset-0 bg-grid-pattern opacity-30 mix-blend-overlay pointer-events-none" />
+          {/* Subtle Ambient Radial Glow */}
+          <div className="absolute -top-24 -left-24 w-80 h-80 rounded-full bg-[#5B5CF6]/15 blur-[100px] pointer-events-none" />
+          <div className="absolute -bottom-24 -right-24 w-80 h-80 rounded-full bg-[#7C3AED]/15 blur-[100px] pointer-events-none" />
 
-          <div className="relative z-10 flex flex-col items-center text-center">
-            {/* Small banner */}
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-brand-cyan/10 border border-brand-cyan/20 text-xs text-brand-cyan font-semibold tracking-wider uppercase font-mono mb-6">
-              <Sparkles className="w-3.5 h-3.5" />
+          <div className="relative z-10 flex flex-col items-center">
+            {/* Tag pill */}
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-800/80 border border-slate-700 text-xs text-slate-300 font-medium tracking-wide mb-6">
+              <Sparkles className="w-3.5 h-3.5 text-[#5B5CF6]" />
               Let's Collaborate
             </div>
 
             {/* Title */}
-            <h2 className="text-3xl md:text-5xl font-black tracking-tight text-white mb-6 max-w-2xl leading-tight">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-white mb-6 max-w-2xl leading-[1.08]">
               Ready to Build Your{" "}
-              <span className="bg-gradient-to-r from-brand-cyan via-brand-blue to-brand-purple bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-white via-slate-200 to-[#5B5CF6] bg-clip-text text-transparent">
                 Digital Presence?
               </span>
             </h2>
 
             {/* Description */}
-            <p className="text-base text-white/60 mb-8 max-w-xl leading-relaxed">
+            <p className="text-base text-slate-400 mb-9 max-w-xl leading-relaxed">
               Whether you need a custom web application, automated operations, or an MVP to secure your next funding round, Nexnam is ready to build it.
             </p>
 
             {/* Buttons */}
-            <div className="flex flex-col sm:flex-row items-center gap-4">
+            <div className="flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto">
               <button
                 onClick={handleCTA}
                 onMouseEnter={playHover}
-                className="relative inline-flex items-center justify-center px-8 py-4 text-sm font-bold tracking-wider uppercase text-brand-black rounded-lg bg-gradient-to-r from-brand-cyan via-brand-blue to-brand-purple hover:shadow-[0_0_30px_rgba(0,245,255,0.4)] transition-all duration-300 active:scale-95 cursor-pointer font-mono group"
+                className="w-full sm:w-auto inline-flex items-center justify-center px-8 py-4 text-xs font-semibold tracking-wide text-[#0B0D12] rounded-xl bg-white hover:bg-slate-100 shadow-lg hover:-translate-y-0.5 transition-all duration-200 active:scale-[0.98] cursor-pointer group"
               >
                 Start Your Project
-                <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform text-[#0B0D12]" />
               </button>
 
               <button
@@ -69,7 +65,7 @@ export default function CTASection() {
                   window.scrollTo({ top: 0, behavior: "smooth" });
                 }}
                 onMouseEnter={playHover}
-                className="px-8 py-4 text-sm font-bold tracking-wider uppercase rounded-lg border border-white/10 hover:border-brand-cyan/40 bg-white/5 hover:bg-brand-cyan/5 text-white transition-all duration-300 active:scale-95 cursor-pointer font-mono"
+                className="w-full sm:w-auto px-8 py-4 text-xs font-semibold tracking-wide rounded-xl border border-slate-700 hover:border-slate-500 bg-slate-900/80 text-white transition-all duration-200 active:scale-[0.98] cursor-pointer"
               >
                 Explore Services
               </button>
@@ -80,3 +76,4 @@ export default function CTASection() {
     </section>
   );
 }
+

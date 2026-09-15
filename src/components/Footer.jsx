@@ -46,27 +46,26 @@ export default function Footer() {
   ];
 
   return (
-    <footer className="w-full border-t border-white/5 bg-brand-black/90 backdrop-blur-md pt-16 pb-8 px-6 sm:px-8 mt-auto z-10 relative">
+    <footer className="w-full border-t border-slate-800 bg-[#0B0D12] text-slate-300 pt-12 sm:pt-16 pb-8 px-4 sm:px-8 mt-auto z-10 relative">
       <div className="mx-auto max-w-7xl">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-10 mb-10 sm:mb-12">
           {/* Brand Column */}
           <div className="flex flex-col gap-4">
             <Link
               to="/"
               onClick={() => handleLinkClick("/")}
               onMouseEnter={playHover}
-              className="flex items-center group self-start"
+              className="flex items-center group self-start py-1"
+              aria-label="Nexnam Home"
             >
-              <img
-                src="/logo.png"
-                alt="Nexnam Logo"
-                className="h-7 w-auto rounded object-contain group-hover:opacity-90 transition-opacity"
-              />
+              <span className="text-[20px] sm:text-[22px] font-[750] tracking-[-0.04em] text-white group-hover:opacity-90 transition-opacity font-sans leading-none">
+                Nexnam<span className="text-[#5B5CF6]">.</span>
+              </span>
             </Link>
-            <p className="text-sm text-white/50 leading-relaxed max-w-xs">
+            <p className="text-xs text-slate-400 leading-relaxed max-w-xs">
               Designing and developing modern websites, landing pages, apps, and digital solutions that help startups, creators, and businesses grow online.
             </p>
-            <div className="flex items-center gap-3 mt-2">
+            <div className="flex items-center gap-2.5 mt-2">
               {socialLinks.map((s) => (
                 <a
                   key={s.name}
@@ -75,7 +74,7 @@ export default function Footer() {
                   rel="noopener noreferrer"
                   onMouseEnter={playHover}
                   onClick={playClick}
-                  className="p-2 rounded-lg border border-white/5 hover:border-brand-cyan/20 bg-white/5 hover:bg-brand-cyan/5 text-white/60 hover:text-brand-cyan transition-all duration-300"
+                  className="p-2 rounded-lg border border-slate-800 bg-slate-900 text-slate-400 hover:text-white hover:border-slate-700 transition-all duration-200"
                   aria-label={s.name}
                 >
                   <s.icon className="w-4 h-4" />
@@ -86,7 +85,7 @@ export default function Footer() {
 
           {/* Services Column */}
           <div>
-            <h3 className="text-sm font-bold tracking-wider text-white uppercase mb-4 font-mono">
+            <h3 className="text-xs font-semibold tracking-wider text-white uppercase mb-4 font-mono">
               Services
             </h3>
             <ul className="flex flex-col gap-2.5">
@@ -102,7 +101,7 @@ export default function Footer() {
                     to={item.path}
                     onClick={() => handleLinkClick(item.path)}
                     onMouseEnter={playHover}
-                    className="text-sm text-white/50 hover:text-brand-cyan hover:pl-1 transition-all duration-300 flex items-center"
+                    className="text-xs text-slate-400 hover:text-white hover:pl-1 transition-all duration-200 flex items-center font-medium"
                   >
                     {item.name}
                   </Link>
@@ -113,7 +112,7 @@ export default function Footer() {
 
           {/* Quick Links Column */}
           <div>
-            <h3 className="text-sm font-bold tracking-wider text-white uppercase mb-4 font-mono">
+            <h3 className="text-xs font-semibold tracking-wider text-white uppercase mb-4 font-mono">
               Company
             </h3>
             <ul className="flex flex-col gap-2.5">
@@ -130,7 +129,7 @@ export default function Footer() {
                     to={item.path}
                     onClick={() => handleLinkClick(item.path)}
                     onMouseEnter={playHover}
-                    className="text-sm text-white/50 hover:text-brand-cyan hover:pl-1 transition-all duration-300"
+                    className="text-xs text-slate-400 hover:text-white hover:pl-1 transition-all duration-200 font-medium"
                   >
                     {item.name}
                   </Link>
@@ -141,54 +140,54 @@ export default function Footer() {
 
           {/* Contacts Column */}
           <div>
-            <h3 className="text-sm font-bold tracking-wider text-white uppercase mb-4 font-mono">
+            <h3 className="text-xs font-semibold tracking-wider text-white uppercase mb-4 font-mono">
               Contact Info
             </h3>
-            <ul className="flex flex-col gap-4">
+            <ul className="flex flex-col gap-3.5">
               <li className="flex items-start gap-3">
-                <Mail className="w-4 h-4 text-brand-cyan mt-0.5 shrink-0" />
+                <Mail className="w-4 h-4 text-[#5B5CF6] mt-0.5 shrink-0" />
                 <div className="flex flex-col">
-                  <span className="text-xs text-white/40 font-mono">EMAIL</span>
+                  <span className="text-[9px] text-slate-500 font-mono font-semibold tracking-wider">EMAIL</span>
                   <a
                     href="mailto:nexnam49@gmail.com"
                     onMouseEnter={playHover}
                     onClick={playClick}
-                    className="text-sm text-white/70 hover:text-brand-cyan transition-colors"
+                    className="text-xs text-slate-300 hover:text-white transition-colors font-medium"
                   >
                     nexnam49@gmail.com
                   </a>
                 </div>
               </li>
               <li className="flex items-start gap-3">
-                <Phone className="w-4 h-4 text-green-450 mt-0.5 shrink-0" />
+                <Phone className="w-4 h-4 text-emerald-500 mt-0.5 shrink-0" />
                 <div className="flex flex-col">
-                  <span className="text-xs text-white/40 font-mono">WHATSAPP</span>
+                  <span className="text-[9px] text-slate-500 font-mono font-semibold tracking-wider">WHATSAPP</span>
                   <a
                     href="https://wa.me/919329584097?text=Hello%20Nexnam%21%20I%27d%20like%20to%20inquire%20about%20starting%20a%20project%20with%20you."
                     target="_blank"
                     rel="noopener noreferrer"
                     onMouseEnter={playHover}
                     onClick={playClick}
-                    className="text-sm text-white/70 hover:text-brand-cyan transition-colors"
+                    className="text-xs text-slate-300 hover:text-white transition-colors font-medium"
                   >
                     +91 93295 84097
                   </a>
                 </div>
               </li>
               <li className="flex items-start gap-3">
-                <MapPin className="w-4 h-4 text-brand-blue mt-0.5 shrink-0" />
+                <MapPin className="w-4 h-4 text-sky-400 mt-0.5 shrink-0" />
                 <div className="flex flex-col">
-                  <span className="text-xs text-white/40 font-mono">ADDRESS</span>
-                  <span className="text-sm text-white/70">
+                  <span className="text-[9px] text-slate-500 font-mono font-semibold tracking-wider">ADDRESS</span>
+                  <span className="text-xs text-slate-300 font-medium">
                     Indore, Madhya Pradesh
                   </span>
                 </div>
               </li>
               <li className="flex items-start gap-3">
-                <Globe className="w-4 h-4 text-brand-purple mt-0.5 shrink-0" />
+                <Globe className="w-4 h-4 text-violet-400 mt-0.5 shrink-0" />
                 <div className="flex flex-col">
-                  <span className="text-xs text-white/40 font-mono">RESPONSE TIME</span>
-                  <span className="text-sm text-white/70 font-mono">
+                  <span className="text-[9px] text-slate-500 font-mono font-semibold tracking-wider">RESPONSE TIME</span>
+                  <span className="text-xs text-slate-300 font-medium">
                     Within 12 Hours
                   </span>
                 </div>
@@ -198,19 +197,19 @@ export default function Footer() {
         </div>
 
         {/* Divider */}
-        <div className="w-full h-[1px] bg-white/5 mb-8" />
+        <div className="w-full h-[1px] bg-slate-800 mb-8" />
 
         {/* Footer Bottom */}
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-xs text-white/45">
+          <p className="text-xs text-slate-500 font-medium">
             &copy; 2026 Nexnam. All rights reserved.
           </p>
-          <div className="flex items-center gap-6 text-xs text-white/40">
+          <div className="flex items-center gap-6 text-xs text-slate-500">
             <Link
               to="/admin-nexnam-panel"
               onMouseEnter={playHover}
               onClick={() => handleLinkClick("/admin-nexnam-panel")}
-              className="hover:text-brand-cyan transition-colors"
+              className="hover:text-slate-300 transition-colors font-medium"
             >
               Admin Panel
             </Link>
@@ -220,7 +219,7 @@ export default function Footer() {
               rel="noopener noreferrer"
               onMouseEnter={playHover}
               onClick={playClick}
-              className="hover:text-brand-cyan transition-colors"
+              className="hover:text-slate-300 transition-colors font-medium"
             >
               Privacy Policy
             </a>
@@ -230,7 +229,7 @@ export default function Footer() {
               rel="noopener noreferrer"
               onMouseEnter={playHover}
               onClick={playClick}
-              className="hover:text-brand-cyan transition-colors"
+              className="hover:text-slate-300 transition-colors font-medium"
             >
               Terms of Service
             </a>
@@ -240,3 +239,4 @@ export default function Footer() {
     </footer>
   );
 }
+

@@ -448,7 +448,7 @@ export default function AdminPanel() {
   };
 
   return (
-    <div className="flex-grow z-10 w-full min-h-screen text-white bg-[#030303]">
+    <div className="flex-grow z-10 w-full min-h-screen text-slate-900 bg-transparent">
       <SEO
         title="Secure Admin Console | Nexnam"
         description="Secure administrative platform for managing Nexnam's startup records."
@@ -460,63 +460,61 @@ export default function AdminPanel() {
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.5 }}
-            className="w-full max-w-md p-8 rounded-3xl glass-card border border-white/5 relative overflow-hidden"
+            className="w-full max-w-md p-8 rounded-3xl bg-white/90 border border-slate-200/80 shadow-xl backdrop-blur-md relative overflow-hidden"
           >
             {/* Ambient gradients */}
-            <div className="absolute top-[-30%] left-[-30%] w-64 h-64 bg-brand-cyan/10 rounded-full blur-[80px]" />
-            <div className="absolute bottom-[-30%] right-[-30%] w-64 h-64 bg-brand-purple/10 rounded-full blur-[80px]" />
+            <div className="absolute top-[-30%] left-[-30%] w-64 h-64 bg-indigo-500/10 rounded-full blur-[80px]" />
+            <div className="absolute bottom-[-30%] right-[-30%] w-64 h-64 bg-violet-500/10 rounded-full blur-[80px]" />
 
             <div className="flex flex-col items-center mb-8 relative z-10">
-              <div className="w-12 h-12 rounded-xl bg-gradient-to-tr from-brand-cyan to-brand-purple p-[1px] mb-4">
-                <div className="w-full h-full rounded-[11px] bg-brand-black flex items-center justify-center">
-                  <Lock className="w-5 h-5 text-brand-cyan" />
-                </div>
+              <div className="w-12 h-12 rounded-xl bg-indigo-50 border border-indigo-100 flex items-center justify-center mb-4 shadow-xs">
+                <Lock className="w-5 h-5 text-indigo-600" />
               </div>
-              <h1 className="text-xl font-bold tracking-tight">Nexnam Admin Vault</h1>
-              <p className="text-xs text-white/40 mt-1.5 font-mono uppercase tracking-wider">
+              <h1 className="text-xl font-bold tracking-tight text-slate-900">Nexnam Admin Vault</h1>
+              <p className="text-xs text-slate-500 mt-1.5 font-mono uppercase tracking-wider">
                 Authorized Credentials Required
               </p>
             </div>
 
             <form onSubmit={handleLogin} className="space-y-5 relative z-10">
               {loginError && (
-                <div className="p-3.5 rounded-lg border border-red-500/20 bg-red-500/10 text-xs text-red-400 font-mono text-center">
+                <div className="p-3.5 rounded-xl border border-red-200 bg-red-50 text-xs text-red-600 font-mono text-center">
                   {loginError}
                 </div>
               )}
 
               {/* Email */}
               <div className="flex flex-col gap-2">
-                <label className="text-xs font-mono font-bold text-white/60 tracking-wider">
+                <label className="text-xs font-mono font-bold text-slate-700 tracking-wider">
                   Admin Email
                 </label>
                 <div className="relative">
-                  <Mail className="absolute left-3.5 top-3.5 w-4 h-4 text-white/30" />
+                  <Mail className="absolute left-3.5 top-3.5 w-4 h-4 text-slate-400" />
                   <input
                     type="email"
                     placeholder="admin@nexnam.com"
                     value={loginEmail}
                     onChange={(e) => setLoginEmail(e.target.value)}
                     onMouseEnter={playHover}
-                    className="w-full pl-10 pr-4 py-3 rounded-lg bg-white/5 border border-white/10 text-sm focus:outline-none focus:border-brand-cyan transition-colors text-white"
+                    className="w-full pl-10 pr-4 py-3 rounded-xl bg-slate-50 border border-slate-200 text-sm text-slate-900 placeholder-slate-400 focus:bg-white focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/10 transition-colors"
                   />
                 </div>
               </div>
 
               {/* Password */}
               <div className="flex flex-col gap-2">
-                <label className="text-xs font-mono font-bold text-white/60 tracking-wider">
+                <label className="text-xs font-mono font-bold text-slate-700 tracking-wider">
                   Vault Key
                 </label>
                 <div className="relative">
-                  <KeyRound className="absolute left-3.5 top-3.5 w-4 h-4 text-white/30" />
+                  <KeyRound className="absolute left-3.5 top-3.5 w-4 h-4 text-slate-400" />
                   <input
                     type="password"
                     placeholder="••••••••••••"
                     value={loginPassword}
                     onChange={(e) => setLoginPassword(e.target.value)}
                     onMouseEnter={playHover}
-                    className="w-full pl-10 pr-4 py-3 rounded-lg bg-white/5 border border-white/10 text-sm focus:outline-none focus:border-brand-cyan transition-colors text-white"
+                    className="w-full pl-10 pr-4 py-3 rounded-xl bg-slate-50 border border-slate-200 text-sm text-slate-900 placeholder-slate-400 focus:bg-white focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/10 transition-colors"
                   />
                 </div>
               </div>
@@ -526,7 +524,7 @@ export default function AdminPanel() {
                 type="submit"
                 disabled={isLoggingIn}
                 onMouseEnter={playHover}
-                className="w-full py-3.5 rounded-lg bg-gradient-to-r from-brand-cyan to-brand-blue hover:shadow-[0_0_20px_rgba(0,245,255,0.3)] text-brand-black text-xs font-mono font-bold uppercase tracking-wider transition-all cursor-pointer flex items-center justify-center"
+                className="w-full py-3.5 rounded-xl bg-gradient-to-r from-indigo-600 to-violet-600 text-white text-xs font-mono font-bold uppercase tracking-wider shadow-sm hover:shadow-lg hover:shadow-indigo-500/20 transition-all cursor-pointer flex items-center justify-center"
               >
                 {isLoggingIn ? "Authenticating Core..." : "Open Admin Portal //"}
               </button>
@@ -540,12 +538,12 @@ export default function AdminPanel() {
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             animate={{ opacity: 1, x: 0 }}
-            className="lg:col-span-3 glass-card rounded-2xl p-4 border border-white/5"
+            className="lg:col-span-3 glass-card rounded-2xl p-4 border border-slate-200/80 bg-white/80 shadow-md backdrop-blur-md"
           >
             {/* Logo block */}
-            <div className="flex items-center gap-2 px-3 py-4 border-b border-white/5 mb-4">
-              <span className="w-2.5 h-2.5 rounded-full bg-brand-cyan" />
-              <span className="font-mono font-bold text-xs tracking-widest text-brand-cyan uppercase">
+            <div className="flex items-center gap-2 px-3 py-4 border-b border-slate-100 mb-4">
+              <span className="w-2.5 h-2.5 rounded-full bg-indigo-600" />
+              <span className="font-mono font-bold text-xs tracking-widest text-indigo-600 uppercase">
                 Core Console
               </span>
             </div>
@@ -564,10 +562,10 @@ export default function AdminPanel() {
                     setActiveTab(tab.id);
                   }}
                   onMouseEnter={playHover}
-                  className={`w-full px-4 py-3 rounded-lg text-xs font-mono font-bold tracking-wider uppercase transition-all flex items-center gap-3 cursor-pointer ${
+                  className={`w-full px-4 py-3 rounded-xl text-xs font-mono font-bold tracking-wider uppercase transition-all flex items-center gap-3 cursor-pointer ${
                     activeTab === tab.id
-                      ? "bg-brand-cyan/15 border border-brand-cyan/20 text-brand-cyan shadow-[0_0_15px_rgba(0,245,255,0.05)]"
-                      : "text-white/60 hover:text-white hover:bg-white/5 border border-transparent"
+                      ? "bg-indigo-50 border border-indigo-200/80 text-indigo-600 shadow-xs"
+                      : "text-slate-600 hover:text-slate-900 hover:bg-slate-50 border border-transparent"
                   }`}
                 >
                   <tab.icon className="w-4 h-4 shrink-0" />
@@ -575,12 +573,12 @@ export default function AdminPanel() {
                 </button>
               ))}
 
-              <div className="h-[1px] bg-white/5 my-4" />
+              <div className="h-[1px] bg-slate-100 my-4" />
 
               <button
                 onClick={handleLogout}
                 onMouseEnter={playHover}
-                className="w-full px-4 py-3 rounded-lg text-xs font-mono font-bold tracking-wider uppercase transition-colors hover:bg-red-500/10 text-red-400 flex items-center gap-3 cursor-pointer"
+                className="w-full px-4 py-3 rounded-xl text-xs font-mono font-bold tracking-wider uppercase transition-colors hover:bg-red-50 text-red-600 flex items-center gap-3 cursor-pointer"
               >
                 <LogOut className="w-4 h-4 shrink-0" />
                 Sign Out
@@ -600,19 +598,19 @@ export default function AdminPanel() {
                 {/* Stats panel cards */}
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                   {[
-                    { title: "Mock Visitors", value: mockVisitors, icon: Users, color: "text-brand-cyan bg-brand-cyan/10" },
-                    { title: "Client Briefs", value: inquiries.length, icon: MessageSquare, color: "text-brand-purple bg-brand-purple/10" },
-                    { title: "Catalog Services", value: services.length, icon: Settings, color: "text-brand-blue bg-brand-blue/10" },
-                    { title: "Portfolio Builds", value: projects.length, icon: Briefcase, color: "text-yellow-400 bg-yellow-400/10" }
+                    { title: "Mock Visitors", value: mockVisitors, icon: Users, color: "text-indigo-600 bg-indigo-50 border-indigo-100" },
+                    { title: "Client Briefs", value: inquiries.length, icon: MessageSquare, color: "text-violet-600 bg-violet-50 border-violet-100" },
+                    { title: "Catalog Services", value: services.length, icon: Settings, color: "text-blue-600 bg-blue-50 border-blue-100" },
+                    { title: "Portfolio Builds", value: projects.length, icon: Briefcase, color: "text-amber-600 bg-amber-50 border-amber-100" }
                   ].map((stat, idx) => (
-                    <div key={idx} className="glass-card rounded-xl p-5 border border-white/5 flex items-center justify-between">
+                    <div key={idx} className="bg-white/80 rounded-xl p-5 border border-slate-200/80 shadow-xs flex items-center justify-between">
                       <div>
-                        <span className="text-2xl font-black font-mono block text-white">{stat.value}</span>
-                        <span className="text-[10px] text-white/40 font-mono tracking-wider uppercase mt-1 block">
+                        <span className="text-2xl font-black font-mono block text-slate-900">{stat.value}</span>
+                        <span className="text-[10px] text-slate-500 font-mono tracking-wider uppercase mt-1 block">
                           {stat.title}
                         </span>
                       </div>
-                      <div className={`p-2 rounded-lg ${stat.color}`}>
+                      <div className={`p-2.5 rounded-xl border ${stat.color}`}>
                         <stat.icon className="w-5 h-5" />
                       </div>
                     </div>
@@ -620,15 +618,15 @@ export default function AdminPanel() {
                 </div>
 
                 {/* Recent Inquiries Quick Table */}
-                <div className="glass-card rounded-2xl border border-white/5 p-6">
-                  <h3 className="text-sm font-bold font-mono text-brand-cyan tracking-wider uppercase mb-4 flex items-center gap-2">
+                <div className="bg-white/80 rounded-2xl border border-slate-200/80 p-6 shadow-xs">
+                  <h3 className="text-sm font-bold font-mono text-indigo-600 tracking-wider uppercase mb-4 flex items-center gap-2">
                     <Database className="w-4 h-4" />
                     Incoming Client Inquiry Logs //
                   </h3>
                   <div className="overflow-x-auto">
                     <table className="w-full text-left text-xs font-mono">
                       <thead>
-                        <tr className="border-b border-white/5 text-white/40 uppercase">
+                        <tr className="border-b border-slate-200 text-slate-400 uppercase">
                           <th className="py-3 px-4">Date</th>
                           <th className="py-3 px-4">Client</th>
                           <th className="py-3 px-4">Service</th>
@@ -637,18 +635,18 @@ export default function AdminPanel() {
                       </thead>
                       <tbody>
                         {inquiries.slice(0, 5).map((inq) => (
-                          <tr key={inq.id} className={`border-b border-white/5 hover:bg-white/5 transition-colors ${!inq.is_read ? "bg-white/[0.02]" : ""}`}>
-                            <td className="py-3 px-4 text-white/50">{formatDate(inq.created_at)}</td>
-                            <td className="py-3 px-4 font-bold text-white">
-                              {inq.name} {!inq.is_read && <span className="ml-2 w-1.5 h-1.5 inline-block rounded-full bg-brand-cyan" title="New Inquiry" />}
+                          <tr key={inq.id} className={`border-b border-slate-100 hover:bg-slate-50/80 transition-colors ${!inq.is_read ? "bg-indigo-50/20" : ""}`}>
+                            <td className="py-3 px-4 text-slate-500">{formatDate(inq.created_at)}</td>
+                            <td className="py-3 px-4 font-bold text-slate-900">
+                              {inq.name} {!inq.is_read && <span className="ml-2 w-1.5 h-1.5 inline-block rounded-full bg-indigo-600" title="New Inquiry" />}
                             </td>
-                            <td className="py-3 px-4 text-brand-cyan">{inq.service}</td>
-                            <td className="py-3 px-4 text-brand-purple">{inq.budget}</td>
+                            <td className="py-3 px-4 text-indigo-600">{inq.service}</td>
+                            <td className="py-3 px-4 text-violet-600">{inq.budget}</td>
                           </tr>
                         ))}
                         {inquiries.length === 0 && (
                           <tr>
-                            <td colSpan={4} className="py-8 text-center text-white/30 uppercase tracking-widest text-[10px]">
+                            <td colSpan={4} className="py-8 text-center text-slate-400 uppercase tracking-widest text-[10px]">
                               Zero client submissions available
                             </td>
                           </tr>
@@ -663,14 +661,14 @@ export default function AdminPanel() {
             {activeTab === "services" && (
               /* Services CRUD Management */
               <div className="flex flex-col gap-6">
-                <div className="flex items-center justify-between border-b border-white/5 pb-4">
-                  <h2 className="text-lg font-mono font-bold text-brand-cyan uppercase tracking-wider">
+                <div className="flex items-center justify-between border-b border-slate-200 pb-4">
+                  <h2 className="text-lg font-mono font-bold text-indigo-600 uppercase tracking-wider">
                     Service Catalog Matrix
                   </h2>
                   <button
                     onClick={openAddServiceModal}
                     onMouseEnter={playHover}
-                    className="px-4 py-2 rounded-lg bg-brand-cyan hover:bg-brand-cyan/95 text-brand-black font-mono font-bold text-xs uppercase tracking-wider cursor-pointer flex items-center gap-1.5"
+                    className="px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-mono font-bold text-xs uppercase tracking-wider shadow-xs cursor-pointer flex items-center gap-1.5"
                   >
                     <Plus className="w-4 h-4" /> Add Service
                   </button>
@@ -680,34 +678,34 @@ export default function AdminPanel() {
                   {services.map((srv) => (
                     <div
                       key={srv.id}
-                      className="glass-card rounded-xl p-5 border border-white/5 flex flex-col justify-between hover:border-brand-cyan/30 transition-all duration-300"
+                      className="bg-white/80 rounded-xl p-5 border border-slate-200/80 shadow-xs flex flex-col justify-between hover:border-indigo-200 hover:shadow-md transition-all duration-300"
                     >
                       <div>
                         <div className="flex items-center justify-between mb-3">
-                          <span className="px-2 py-0.5 rounded bg-brand-cyan/10 border border-brand-cyan/20 text-[10px] font-mono text-brand-cyan">
+                          <span className="px-2 py-0.5 rounded-lg bg-indigo-50 border border-indigo-100 text-[10px] font-mono font-semibold text-indigo-600">
                             {srv.iconName}
                           </span>
                           <div className="flex items-center gap-2">
                             <button
                               onClick={() => openEditServiceModal(srv)}
-                              className="p-1.5 rounded hover:bg-white/5 text-white/60 hover:text-white transition-colors cursor-pointer"
+                              className="p-1.5 rounded-lg hover:bg-slate-100 text-slate-500 hover:text-slate-900 transition-colors cursor-pointer"
                             >
                               <Edit className="w-3.5 h-3.5" />
                             </button>
                             <button
                               onClick={() => handleDeleteService(srv.id)}
-                              className="p-1.5 rounded hover:bg-red-500/10 text-white/60 hover:text-red-400 transition-colors cursor-pointer"
+                              className="p-1.5 rounded-lg hover:bg-red-50 text-slate-500 hover:text-red-600 transition-colors cursor-pointer"
                             >
                               <Trash2 className="w-3.5 h-3.5" />
                             </button>
                           </div>
                         </div>
-                        <h4 className="text-base font-bold text-white mb-2">{srv.title}</h4>
-                        <p className="text-xs text-white/50 leading-relaxed mb-4">{srv.shortDesc}</p>
+                        <h4 className="text-base font-bold text-slate-900 mb-2">{srv.title}</h4>
+                        <p className="text-xs text-slate-600 leading-relaxed mb-4">{srv.shortDesc}</p>
                       </div>
 
                       {/* Small badge count */}
-                      <span className="text-[10px] text-white/35 font-mono uppercase">
+                      <span className="text-[10px] text-slate-400 font-mono uppercase">
                         {srv.features ? srv.features.length : 0} feature bullet(s)
                       </span>
                     </div>
@@ -719,14 +717,14 @@ export default function AdminPanel() {
             {activeTab === "projects" && (
               /* Projects CRUD Management */
               <div className="flex flex-col gap-6">
-                <div className="flex items-center justify-between border-b border-white/5 pb-4">
-                  <h2 className="text-lg font-mono font-bold text-brand-cyan uppercase tracking-wider">
+                <div className="flex items-center justify-between border-b border-slate-200 pb-4">
+                  <h2 className="text-lg font-mono font-bold text-indigo-600 uppercase tracking-wider">
                     Portfolio Projects Catalog
                   </h2>
                   <button
                     onClick={openAddProjectModal}
                     onMouseEnter={playHover}
-                    className="px-4 py-2 rounded-lg bg-brand-cyan hover:bg-brand-cyan/95 text-brand-black font-mono font-bold text-xs uppercase tracking-wider cursor-pointer flex items-center gap-1.5"
+                    className="px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-mono font-bold text-xs uppercase tracking-wider shadow-xs cursor-pointer flex items-center gap-1.5"
                   >
                     <Plus className="w-4 h-4" /> Add Project
                   </button>
@@ -736,42 +734,42 @@ export default function AdminPanel() {
                   {projects.map((proj) => (
                     <div
                       key={proj.id}
-                      className="glass-card rounded-xl p-5 border border-white/5 flex flex-col justify-between hover:border-brand-cyan/30 transition-all duration-300"
+                      className="bg-white/80 rounded-xl p-5 border border-slate-200/80 shadow-xs flex flex-col justify-between hover:border-indigo-200 hover:shadow-md transition-all duration-300"
                     >
                       <div>
                         <div className="flex items-center justify-between mb-3">
-                          <span className="px-2 py-0.5 rounded bg-brand-purple/10 border border-brand-purple/20 text-[10px] font-mono text-brand-purple">
+                          <span className="px-2 py-0.5 rounded-lg bg-violet-50 border border-violet-100 text-[10px] font-mono font-semibold text-violet-600">
                             {proj.category}
                           </span>
                           <div className="flex items-center gap-2">
                             <button
                               onClick={() => openEditProjectModal(proj)}
-                              className="p-1.5 rounded hover:bg-white/5 text-white/60 hover:text-white transition-colors cursor-pointer"
+                              className="p-1.5 rounded-lg hover:bg-slate-100 text-slate-500 hover:text-slate-900 transition-colors cursor-pointer"
                             >
                               <Edit className="w-3.5 h-3.5" />
                             </button>
                             <button
                               onClick={() => handleDeleteProject(proj.id)}
-                              className="p-1.5 rounded hover:bg-red-500/10 text-white/60 hover:text-red-400 transition-colors cursor-pointer"
+                              className="p-1.5 rounded-lg hover:bg-red-50 text-slate-500 hover:text-red-600 transition-colors cursor-pointer"
                             >
                               <Trash2 className="w-3.5 h-3.5" />
                             </button>
                           </div>
                         </div>
-                        <h4 className="text-base font-bold text-white mb-2">{proj.title}</h4>
-                        <p className="text-xs text-white/50 leading-relaxed mb-4">{proj.shortDesc}</p>
+                        <h4 className="text-base font-bold text-slate-900 mb-2">{proj.title}</h4>
+                        <p className="text-xs text-slate-600 leading-relaxed mb-4">{proj.shortDesc}</p>
                       </div>
 
                       {/* Tech badges preview */}
                       <div className="flex flex-wrap gap-1 mb-2">
                         {proj.technologies &&
                           proj.technologies.slice(0, 3).map((t) => (
-                            <span key={t} className="px-1.5 py-0.5 bg-white/5 text-[9px] font-mono text-white/60">
+                            <span key={t} className="px-2 py-0.5 rounded-md bg-slate-100 border border-slate-200/60 text-[9px] font-mono text-slate-600">
                               {t}
                             </span>
                           ))}
                         {proj.technologies && proj.technologies.length > 3 && (
-                          <span className="text-[9px] font-mono text-white/40">+{proj.technologies.length - 3} more</span>
+                          <span className="text-[9px] font-mono text-slate-400">+{proj.technologies.length - 3} more</span>
                         )}
                       </div>
                     </div>
@@ -783,8 +781,8 @@ export default function AdminPanel() {
             {activeTab === "inquiries" && (
               /* Client Inquiries Console */
               <div className="flex flex-col gap-6">
-                <div className="border-b border-white/5 pb-4">
-                  <h2 className="text-lg font-mono font-bold text-brand-cyan uppercase tracking-wider">
+                <div className="border-b border-slate-200 pb-4">
+                  <h2 className="text-lg font-mono font-bold text-indigo-600 uppercase tracking-wider">
                     Client Inquiries List
                   </h2>
                 </div>
@@ -793,15 +791,15 @@ export default function AdminPanel() {
                   {inquiries.map((inq) => (
                     <div
                       key={inq.id}
-                      className={`glass-card rounded-2xl p-6 border transition-all duration-300 relative ${
-                        !inq.is_read ? "border-brand-cyan/35 bg-brand-cyan/[0.02]" : "border-white/5 hover:border-brand-purple/30"
+                      className={`rounded-2xl p-6 border transition-all duration-300 relative ${
+                        !inq.is_read ? "border-indigo-300 bg-indigo-50/30 shadow-xs" : "border-slate-200/80 bg-white/80 hover:border-slate-300"
                       }`}
                     >
                       {/* Read/Unread toggle icon */}
                       <button
                         onClick={() => handleToggleReadInquiry(inq.id, inq.is_read)}
-                        className={`absolute top-6 right-16 p-2 rounded hover:bg-white/10 transition-colors cursor-pointer ${
-                          inq.is_read ? "text-emerald-400" : "text-amber-500 animate-pulse"
+                        className={`absolute top-6 right-16 p-2 rounded-lg hover:bg-slate-100 transition-colors cursor-pointer ${
+                          inq.is_read ? "text-emerald-600" : "text-amber-500 animate-pulse"
                         }`}
                         title={inq.is_read ? "Mark as Unread" : "Mark as Read"}
                       >
@@ -811,38 +809,38 @@ export default function AdminPanel() {
                       {/* Delete button */}
                       <button
                         onClick={() => handleDeleteInquiry(inq.id)}
-                        className="absolute top-6 right-6 p-2 rounded hover:bg-red-500/10 text-white/60 hover:text-red-400 transition-colors cursor-pointer"
+                        className="absolute top-6 right-6 p-2 rounded-lg hover:bg-red-50 text-slate-400 hover:text-red-600 transition-colors cursor-pointer"
                         title="Delete Inquiry"
                       >
                         <Trash2 className="w-4 h-4" />
                       </button>
 
                       <div className="flex flex-wrap gap-3 items-center mb-4">
-                        <span className="text-xs font-mono text-white/40">{formatDate(inq.created_at)}</span>
-                        <span className="px-2.5 py-0.5 rounded-full bg-brand-cyan/15 text-brand-cyan text-[10px] font-mono font-bold uppercase">
+                        <span className="text-xs font-mono text-slate-400">{formatDate(inq.created_at)}</span>
+                        <span className="px-2.5 py-0.5 rounded-full bg-indigo-50 border border-indigo-100 text-indigo-600 text-[10px] font-mono font-bold uppercase">
                           {inq.service}
                         </span>
-                        <span className="px-2.5 py-0.5 rounded-full bg-brand-purple/15 text-brand-purple text-[10px] font-mono font-bold uppercase">
+                        <span className="px-2.5 py-0.5 rounded-full bg-violet-50 border border-violet-100 text-violet-600 text-[10px] font-mono font-bold uppercase">
                           {inq.budget}
                         </span>
                       </div>
 
-                      <h4 className="text-base font-bold text-white mb-1">
-                        {inq.name} {!inq.is_read && <span className="ml-2 px-1.5 py-0.5 rounded text-[8px] bg-brand-cyan/20 text-brand-cyan uppercase tracking-wider font-mono">New</span>}
+                      <h4 className="text-base font-bold text-slate-900 mb-1">
+                        {inq.name} {!inq.is_read && <span className="ml-2 px-1.5 py-0.5 rounded text-[8px] bg-indigo-100 text-indigo-700 font-bold uppercase tracking-wider font-mono">New</span>}
                       </h4>
-                      <p className="text-xs font-mono text-white/40 mb-4">
+                      <p className="text-xs font-mono text-slate-500 mb-4">
                         Email: {inq.email} | Phone: {inq.phone}
                       </p>
 
                       {/* Message packet */}
-                      <div className="p-4 rounded-xl bg-white/5 border border-white/5 text-xs text-white/70 leading-relaxed font-mono">
+                      <div className="p-4 rounded-xl bg-slate-50 border border-slate-200/80 text-xs text-slate-700 leading-relaxed font-mono">
                         {inq.message}
                       </div>
                     </div>
                   ))}
 
                   {inquiries.length === 0 && (
-                    <div className="text-center py-20 glass-card rounded-xl border border-white/5 uppercase tracking-widest text-xs text-white/30">
+                    <div className="text-center py-20 bg-white/80 rounded-xl border border-slate-200/80 uppercase tracking-widest text-xs text-slate-400">
                       No customer briefings submitted yet.
                     </div>
                   )}
@@ -856,48 +854,48 @@ export default function AdminPanel() {
       {/* Services Modal Dialog (CRUD) */}
       <AnimatePresence>
         {serviceModal.open && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-brand-black/80 backdrop-blur-md">
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/40 backdrop-blur-md">
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.95 }}
-              className="relative w-full max-w-lg p-6 rounded-2xl glass-card border border-white/10 z-10"
+              className="relative w-full max-w-lg p-6 rounded-2xl bg-white border border-slate-200 shadow-2xl z-10"
             >
               {/* Dismiss Button */}
               <button
                 onClick={() => setServiceModal({ open: false, mode: "add", data: null })}
-                className="absolute top-4 right-4 p-1.5 rounded hover:bg-white/5 text-white/60 hover:text-white cursor-pointer"
+                className="absolute top-4 right-4 p-1.5 rounded-lg hover:bg-slate-100 text-slate-400 hover:text-slate-700 cursor-pointer"
               >
                 <X className="w-4 h-4" />
               </button>
 
-              <h3 className="text-lg font-mono font-bold text-brand-cyan uppercase tracking-wider mb-6">
+              <h3 className="text-lg font-mono font-bold text-indigo-600 uppercase tracking-wider mb-6">
                 {serviceModal.mode === "add" ? "Add Service Entry" : "Modify Service Entry"}
               </h3>
 
               <form onSubmit={handleSaveService} className="space-y-4">
                 <div className="flex flex-col gap-1.5">
-                  <label className="text-xs font-mono text-white/50">Service Title</label>
+                  <label className="text-xs font-mono text-slate-700">Service Title</label>
                   <input
                     type="text"
                     value={serviceForm.title}
                     onChange={(e) => setServiceForm({ ...serviceForm, title: e.target.value })}
-                    className="w-full px-3.5 py-2.5 rounded-lg bg-white/5 border border-white/10 text-sm focus:outline-none focus:border-brand-cyan text-white"
+                    className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-sm text-slate-900 focus:bg-white focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/10"
                     placeholder="e.g. Smart Automation"
                   />
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div className="flex flex-col gap-1.5">
-                    <label className="text-xs font-mono text-white/50">Icon Component</label>
+                    <label className="text-xs font-mono text-slate-700">Icon Component</label>
                     <select
                       value={serviceForm.iconName}
                       onChange={(e) => setServiceForm({ ...serviceForm, iconName: e.target.value })}
-                      className="w-full px-3.5 py-2.5 rounded-lg bg-brand-dark border border-white/10 text-sm focus:outline-none focus:border-brand-cyan text-white appearance-none cursor-pointer"
+                      className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-sm text-slate-900 focus:bg-white focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/10 appearance-none cursor-pointer"
                     >
                       {["Globe", "Layout", "Cpu", "Smartphone", "Figma", "User", "Rocket", "Zap", "Code2", "TrendingUp"].map(
                         (ic) => (
-                          <option key={ic} value={ic}>
+                          <option key={ic} value={ic} className="bg-white text-slate-900">
                             {ic}
                           </option>
                         )
@@ -907,33 +905,33 @@ export default function AdminPanel() {
                 </div>
 
                 <div className="flex flex-col gap-1.5">
-                  <label className="text-xs font-mono text-white/50">Short Description</label>
+                  <label className="text-xs font-mono text-slate-700">Short Description</label>
                   <textarea
                     value={serviceForm.shortDesc}
                     onChange={(e) => setServiceForm({ ...serviceForm, shortDesc: e.target.value })}
                     rows={3}
-                    className="w-full px-3.5 py-2.5 rounded-lg bg-white/5 border border-white/10 text-sm focus:outline-none focus:border-brand-cyan text-white resize-none"
+                    className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-sm text-slate-900 focus:bg-white focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/10 resize-none"
                     placeholder="Provide customer-focused benefit description..."
                   />
                 </div>
 
                 <div className="flex flex-col gap-1.5">
-                  <label className="text-xs font-mono text-white/50">Features List (Comma-separated)</label>
+                  <label className="text-xs font-mono text-slate-700">Features List (Comma-separated)</label>
                   <input
                     type="text"
                     value={serviceForm.featuresString}
                     onChange={(e) => setServiceForm({ ...serviceForm, featuresString: e.target.value })}
-                    className="w-full px-3.5 py-2.5 rounded-lg bg-white/5 border border-white/10 text-sm focus:outline-none focus:border-brand-cyan text-white"
+                    className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-sm text-slate-900 focus:bg-white focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/10"
                     placeholder="Feature 1, Feature 2, Feature 3"
                   />
-                  <span className="text-[10px] text-white/30 font-mono">
+                  <span className="text-[10px] text-slate-400 font-mono">
                     Separate each item with a comma.
                   </span>
                 </div>
 
                 <button
                   type="submit"
-                  className="w-full py-3 rounded-lg bg-brand-cyan hover:bg-brand-cyan/95 text-brand-black text-xs font-mono font-bold uppercase tracking-wider transition-colors cursor-pointer"
+                  className="w-full py-3 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-mono font-bold uppercase tracking-wider shadow-sm transition-colors cursor-pointer"
                 >
                   Save Service Record
                 </button>
@@ -946,91 +944,91 @@ export default function AdminPanel() {
       {/* Projects Modal Dialog (CRUD) */}
       <AnimatePresence>
         {projectModal.open && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-brand-black/80 backdrop-blur-md">
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/40 backdrop-blur-md">
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.95 }}
-              className="relative w-full max-w-xl p-6 rounded-2xl glass-card border border-white/10 z-10 max-h-[90vh] overflow-y-auto"
+              className="relative w-full max-w-xl p-6 rounded-2xl bg-white border border-slate-200 shadow-2xl z-10 max-h-[90vh] overflow-y-auto"
             >
               {/* Dismiss Button */}
               <button
                 onClick={() => setProjectModal({ open: false, mode: "add", data: null })}
-                className="absolute top-4 right-4 p-1.5 rounded hover:bg-white/5 text-white/60 hover:text-white cursor-pointer"
+                className="absolute top-4 right-4 p-1.5 rounded-lg hover:bg-slate-100 text-slate-400 hover:text-slate-700 cursor-pointer"
               >
                 <X className="w-4 h-4" />
               </button>
 
-              <h3 className="text-lg font-mono font-bold text-brand-purple uppercase tracking-wider mb-6">
+              <h3 className="text-lg font-mono font-bold text-violet-600 uppercase tracking-wider mb-6">
                 {projectModal.mode === "add" ? "Add Project Record" : "Modify Project Record"}
               </h3>
 
               <form onSubmit={handleSaveProject} className="space-y-4">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div className="flex flex-col gap-1.5">
-                    <label className="text-xs font-mono text-white/50">Project Title</label>
+                    <label className="text-xs font-mono text-slate-700">Project Title</label>
                     <input
                       type="text"
                       value={projectForm.title}
                       onChange={(e) => setProjectForm({ ...projectForm, title: e.target.value })}
-                      className="w-full px-3.5 py-2.5 rounded-lg bg-white/5 border border-white/10 text-sm focus:outline-none focus:border-brand-cyan text-white"
+                      className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-sm text-slate-900 focus:bg-white focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/10"
                       placeholder="e.g. LocalConnect"
                     />
                   </div>
 
                   <div className="flex flex-col gap-1.5">
-                    <label className="text-xs font-mono text-white/50">Category</label>
+                    <label className="text-xs font-mono text-slate-700">Category</label>
                     <input
                       type="text"
                       value={projectForm.category}
                       onChange={(e) => setProjectForm({ ...projectForm, category: e.target.value })}
-                      className="w-full px-3.5 py-2.5 rounded-lg bg-white/5 border border-white/10 text-sm focus:outline-none focus:border-brand-cyan text-white"
+                      className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-sm text-slate-900 focus:bg-white focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/10"
                       placeholder="e.g. Social Commerce Platform"
                     />
                   </div>
                 </div>
 
                 <div className="flex flex-col gap-1.5">
-                  <label className="text-xs font-mono text-white/50">Short Description</label>
+                  <label className="text-xs font-mono text-slate-700">Short Description</label>
                   <input
                     type="text"
                     value={projectForm.shortDesc}
                     onChange={(e) => setProjectForm({ ...projectForm, shortDesc: e.target.value })}
-                    className="w-full px-3.5 py-2.5 rounded-lg bg-white/5 border border-white/10 text-sm focus:outline-none focus:border-brand-cyan text-white"
+                    className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-sm text-slate-900 focus:bg-white focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/10"
                     placeholder="Enter short snippet..."
                   />
                 </div>
 
                 <div className="flex flex-col gap-1.5">
-                  <label className="text-xs font-mono text-white/50">Long Case Study Description</label>
+                  <label className="text-xs font-mono text-slate-700">Long Case Study Description</label>
                   <textarea
                     value={projectForm.longDesc}
                     onChange={(e) => setProjectForm({ ...projectForm, longDesc: e.target.value })}
                     rows={3}
-                    className="w-full px-3.5 py-2.5 rounded-lg bg-white/5 border border-white/10 text-sm focus:outline-none focus:border-brand-cyan text-white resize-none"
+                    className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-sm text-slate-900 focus:bg-white focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/10 resize-none"
                     placeholder="Enter complete historical details..."
                   />
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div className="flex flex-col gap-1.5">
-                    <label className="text-xs font-mono text-white/50">Technologies (Comma-separated)</label>
+                    <label className="text-xs font-mono text-slate-700">Technologies (Comma-separated)</label>
                     <input
                       type="text"
                       value={projectForm.technologiesString}
                       onChange={(e) => setProjectForm({ ...projectForm, technologiesString: e.target.value })}
-                      className="w-full px-3.5 py-2.5 rounded-lg bg-white/5 border border-white/10 text-sm focus:outline-none focus:border-brand-cyan text-white"
+                      className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-sm text-slate-900 focus:bg-white focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/10"
                       placeholder="React.js, Tailwind, MongoDB"
                     />
                   </div>
 
                   <div className="flex flex-col gap-1.5">
-                    <label className="text-xs font-mono text-white/50">Features (Comma-separated)</label>
+                    <label className="text-xs font-mono text-slate-700">Features (Comma-separated)</label>
                     <input
                       type="text"
                       value={projectForm.featuresString}
                       onChange={(e) => setProjectForm({ ...projectForm, featuresString: e.target.value })}
-                      className="w-full px-3.5 py-2.5 rounded-lg bg-white/5 border border-white/10 text-sm focus:outline-none focus:border-brand-cyan text-white"
+                      className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-sm text-slate-900 focus:bg-white focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/10"
                       placeholder="Radius Search, Geolocation, Socket.io"
                     />
                   </div>
@@ -1038,27 +1036,27 @@ export default function AdminPanel() {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div className="flex flex-col gap-1.5">
-                    <label className="text-xs font-mono text-white/50">Gradient Accent Layout</label>
+                    <label className="text-xs font-mono text-slate-700">Gradient Accent Layout</label>
                     <select
                       value={projectForm.gradientClass}
                       onChange={(e) => setProjectForm({ ...projectForm, gradientClass: e.target.value })}
-                      className="w-full px-3.5 py-2.5 rounded-lg bg-brand-dark border border-white/10 text-sm focus:outline-none focus:border-brand-cyan text-white appearance-none cursor-pointer"
+                      className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-sm text-slate-900 focus:bg-white focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/10 appearance-none cursor-pointer"
                     >
-                      <option value="from-cyan-500 via-blue-600 to-indigo-700">Space Cyan (Blue-to-Indigo)</option>
-                      <option value="from-purple-500 via-pink-600 to-red-500">Neon Sunset (Purple-to-Red)</option>
-                      <option value="from-indigo-600 via-purple-600 to-pink-500">Nebula (Indigo-to-Pink)</option>
-                      <option value="from-emerald-500 via-teal-600 to-cyan-500">Cyber Forest (Green-to-Cyan)</option>
-                      <option value="from-blue-600 via-indigo-600 to-violet-700">Blue Vector (Indigo-to-Violet)</option>
+                      <option value="from-cyan-500 via-blue-600 to-indigo-700" className="bg-white text-slate-900">Space Cyan (Blue-to-Indigo)</option>
+                      <option value="from-purple-500 via-pink-600 to-red-500" className="bg-white text-slate-900">Neon Sunset (Purple-to-Red)</option>
+                      <option value="from-indigo-600 via-purple-600 to-pink-500" className="bg-white text-slate-900">Nebula (Indigo-to-Pink)</option>
+                      <option value="from-emerald-500 via-teal-600 to-cyan-500" className="bg-white text-slate-900">Cyber Forest (Green-to-Cyan)</option>
+                      <option value="from-blue-600 via-indigo-600 to-violet-700" className="bg-white text-slate-900">Blue Vector (Indigo-to-Violet)</option>
                     </select>
                   </div>
 
                   <div className="flex flex-col gap-1.5">
-                    <label className="text-xs font-mono text-white/50">Demo Deployment URL</label>
+                    <label className="text-xs font-mono text-slate-700">Demo Deployment URL</label>
                     <input
                       type="text"
                       value={projectForm.demoUrl}
                       onChange={(e) => setProjectForm({ ...projectForm, demoUrl: e.target.value })}
-                      className="w-full px-3.5 py-2.5 rounded-lg bg-white/5 border border-white/10 text-sm focus:outline-none focus:border-brand-cyan text-white"
+                      className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-sm text-slate-900 focus:bg-white focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/10"
                       placeholder="e.g. https://localconnect.nexnam.demo"
                     />
                   </div>
@@ -1066,7 +1064,7 @@ export default function AdminPanel() {
 
                 <button
                   type="submit"
-                  className="w-full py-3 rounded-lg bg-brand-purple hover:bg-brand-purple/95 text-white text-xs font-mono font-bold uppercase tracking-wider transition-colors cursor-pointer"
+                  className="w-full py-3 rounded-xl bg-violet-600 hover:bg-violet-700 text-white text-xs font-mono font-bold uppercase tracking-wider shadow-sm transition-colors cursor-pointer"
                 >
                   Save Project Record
                 </button>
@@ -1078,3 +1076,4 @@ export default function AdminPanel() {
     </div>
   );
 }
+

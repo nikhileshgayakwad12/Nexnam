@@ -11,8 +11,6 @@ import About from "./pages/About";
 import Contact from "./pages/Contact";
 import AdminPanel from "./pages/AdminPanel";
 import TechBackground3D from "./components/TechBackground3D";
-import SoundToggle from "./components/SoundToggle";
-import WhatsAppWidget from "./components/WhatsAppWidget";
 import AIAssistant from "./components/AIAssistant";
 import SkeletonLoader from "./components/SkeletonLoader";
 import { playTransition } from "./utils/soundManager";
@@ -67,12 +65,9 @@ function AppContent() {
         </Routes>
       </main>
 
-      {/* Hide footer on hidden admin panel */}
+      {/* Hide footer and floating actions on hidden admin panel */}
       {!isAdminPath && <Footer />}
-      {!isAdminPath && <WhatsAppWidget />}
       {!isAdminPath && <AIAssistant />}
-
-      <SoundToggle />
     </>
   );
 }

@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { MessageSquare, X, Send, Bot, Sparkles } from "lucide-react";
 import { playClick, playHover, playSuccess } from "../utils/soundManager";
+import WhatsAppWidget from "./WhatsAppWidget";
+import SoundToggle from "./SoundToggle";
 
 export default function AIAssistant() {
   const navigate = useNavigate();
@@ -237,42 +239,63 @@ export default function AIAssistant() {
 
   return (
     <>
-      {/* Floating Launcher Button */}
-      <button
-        onClick={toggleChat}
-        onMouseEnter={playHover}
-        className="fixed bottom-24 right-6 z-50 p-3.5 rounded-full glass-card border border-white/10 text-white/70 hover:text-brand-cyan hover:border-brand-cyan/40 hover:shadow-[0_0_20px_rgba(0,245,255,0.2)] transition-all duration-300 pointer-events-auto flex items-center justify-center cursor-pointer group"
-        aria-label="AI Assistant Chatbot"
+      {/* Floating Action Utility System (Bottom-Right Cluster) */}
+      <motion.div
+        initial={{ opacity: 0, y: 12 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.4, delay: 0.6, ease: [0.22, 1, 0.36, 1] }}
+        className="fixed bottom-[calc(16px+env(safe-area-inset-bottom))] right-3.5 sm:bottom-6 sm:right-6 z-40 flex flex-col items-end gap-2 sm:gap-2.5 pointer-events-auto select-none"
       >
-        <Bot className="w-5 h-5 transition-transform duration-300 group-hover:scale-110 text-brand-cyan" />
-        <span className="max-w-0 overflow-hidden group-hover:max-w-xs transition-all duration-500 ease-in-out whitespace-nowrap text-xs pl-0 group-hover:pl-2 font-mono text-brand-cyan font-bold">
-          AI Assistant
-        </span>
-      </button>
+        {/* Primary AI Assistant Launcher */}
+        <button
+          onClick={toggleChat}
+          onMouseEnter={playHover}
+          className="h-11 sm:h-12 px-3.5 sm:px-[18px] py-2 sm:py-2.5 rounded-full bg-[#111318] hover:bg-[#1f222a] border border-white/10 text-white shadow-[0_8px_30px_rgba(15,23,42,0.14)] hover:shadow-[0_12px_36px_rgba(15,23,42,0.22)] hover:-translate-y-0.5 active:scale-[0.98] transition-all duration-200 flex items-center gap-2 sm:gap-2.5 cursor-pointer group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#5B5CF6]"
+          aria-label={isOpen ? "Close AI Assistant" : "Ask Nexnam AI Assistant"}
+        >
+          <div className="w-5.5 h-5.5 sm:w-6 sm:h-6 rounded-full bg-[#5B5CF6]/15 border border-[#5B5CF6]/30 flex items-center justify-center shrink-0">
+            {isOpen ? (
+              <X className="w-3.5 h-3.5 text-white" />
+            ) : (
+              <Sparkles className="w-3.5 h-3.5 text-[#5B5CF6]" />
+            )}
+          </div>
+          <span className="text-xs font-semibold tracking-wide text-white whitespace-nowrap">
+            {isOpen ? "Close Chat" : "Ask Nexnam AI"}
+          </span>
+          <span className="w-2 h-2 rounded-full bg-[#5B5CF6] shrink-0" aria-hidden="true" />
+        </button>
+
+        {/* Secondary Utility Row: WhatsApp & Sound */}
+        <div className="flex items-center gap-2 sm:gap-2.5 justify-end">
+          <WhatsAppWidget />
+          <SoundToggle />
+        </div>
+      </motion.div>
 
       {/* Chat Window Panel */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            initial={{ opacity: 0, scale: 0.9, y: 20 }}
+            initial={{ opacity: 0, scale: 0.95, y: 15 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.9, y: 20 }}
-            transition={{ duration: 0.3, cubicBezier: [0.16, 1, 0.3, 1] }}
-            className="fixed bottom-36 right-4 sm:right-6 z-50 w-[calc(100%-2rem)] sm:w-[380px] h-[480px] max-h-[70vh] sm:max-h-[600px] glass-card rounded-3xl border border-white/10 flex flex-col overflow-hidden shadow-[0_10px_50px_rgba(0,0,0,0.8)]"
+            exit={{ opacity: 0, scale: 0.95, y: 15 }}
+            transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
+            className="fixed bottom-[125px] sm:bottom-[135px] right-3 sm:right-6 z-50 w-[calc(100%-1.5rem)] sm:w-[380px] h-[460px] sm:h-[480px] max-h-[68vh] sm:max-h-[600px] bg-white/95 backdrop-blur-xl rounded-2xl sm:rounded-3xl border border-slate-200 flex flex-col overflow-hidden shadow-[0_20px_60px_rgba(15,23,42,0.14)]"
           >
             {/* Chat Header */}
-            <div className="p-4 border-b border-white/5 bg-gradient-to-r from-brand-dark to-brand-black flex items-center justify-between">
+            <div className="p-4 border-b border-slate-100 bg-slate-50/90 flex items-center justify-between">
               <div className="flex items-center gap-2.5">
-                <div className="w-9 h-9 rounded-xl bg-brand-cyan/10 border border-brand-cyan/25 flex items-center justify-center relative">
-                  <Bot className="w-5 h-5 text-brand-cyan" />
-                  <span className="absolute bottom-0 right-0 w-2 h-2 rounded-full bg-green-500 border border-brand-black" />
+                <div className="w-9 h-9 rounded-xl bg-indigo-50 border border-indigo-100 flex items-center justify-center relative shadow-2xs">
+                  <Bot className="w-5 h-5 text-indigo-600" />
+                  <span className="absolute bottom-0 right-0 w-2 h-2 rounded-full bg-emerald-500 border border-white" />
                 </div>
                 <div>
-                  <h3 className="text-sm font-bold text-white leading-none mb-1 flex items-center gap-1 font-mono">
+                  <h3 className="text-sm font-bold text-slate-900 leading-none mb-1 flex items-center gap-1 font-mono">
                     Nexnam AI Assistant
-                    <Sparkles className="w-3.5 h-3.5 text-brand-cyan animate-pulse" />
+                    <Sparkles className="w-3.5 h-3.5 text-indigo-600 animate-pulse" />
                   </h3>
-                  <span className="text-[10px] text-white/40 font-mono tracking-wider uppercase">
+                  <span className="text-[10px] text-slate-500 font-mono tracking-wider uppercase">
                     Ask about services, pricing, projects or contact
                   </span>
                 </div>
@@ -280,7 +303,7 @@ export default function AIAssistant() {
               <button
                 onClick={toggleChat}
                 onMouseEnter={playHover}
-                className="p-1.5 rounded-lg border border-white/5 hover:border-brand-cyan/20 bg-white/5 text-white/50 hover:text-white transition-colors cursor-pointer"
+                className="p-1.5 rounded-lg border border-slate-200 hover:border-indigo-300 bg-white text-slate-500 hover:text-slate-900 transition-colors cursor-pointer shadow-2xs"
                 aria-label="Close Chat"
               >
                 <X className="w-4 h-4" />
@@ -288,7 +311,7 @@ export default function AIAssistant() {
             </div>
 
             {/* Chat Messages Log */}
-            <div className="flex-grow p-4 overflow-y-auto space-y-4">
+            <div className="flex-grow p-4 overflow-y-auto space-y-4 bg-slate-50/30">
               {messages.map((msg, idx) => (
                 <div
                   key={idx}
@@ -297,23 +320,23 @@ export default function AIAssistant() {
                   <div
                     className={`max-w-[85%] rounded-2xl px-4 py-3 text-xs leading-relaxed ${
                       msg.sender === "user"
-                        ? "bg-gradient-to-r from-brand-cyan to-brand-blue text-brand-black font-semibold rounded-tr-none"
-                        : "bg-white/5 border border-white/5 text-white/80 rounded-tl-none"
+                        ? "bg-gradient-to-r from-indigo-600 to-violet-600 text-white font-medium rounded-tr-none shadow-xs"
+                        : "bg-white border border-slate-200/80 text-slate-800 rounded-tl-none shadow-2xs"
                     }`}
                   >
                     {msg.text}
                   </div>
-                  <span className="text-[9px] text-white/30 font-mono mt-1 px-1">{msg.time}</span>
+                  <span className="text-[9px] text-slate-400 font-mono mt-1 px-1">{msg.time}</span>
                 </div>
               ))}
               
               {/* Animated Typing Indicator */}
               {isTyping && (
                 <div className="flex flex-col items-start">
-                  <div className="flex items-center gap-1.5 px-4 py-3 bg-white/5 border border-white/5 text-white/50 rounded-2xl rounded-tl-none w-16">
-                    <span className="w-1.5 h-1.5 rounded-full bg-brand-cyan animate-bounce" style={{ animationDelay: "0ms" }} />
-                    <span className="w-1.5 h-1.5 rounded-full bg-brand-cyan animate-bounce" style={{ animationDelay: "150ms" }} />
-                    <span className="w-1.5 h-1.5 rounded-full bg-brand-cyan animate-bounce" style={{ animationDelay: "300ms" }} />
+                  <div className="flex items-center gap-1.5 px-4 py-3 bg-white border border-slate-200/80 text-slate-400 rounded-2xl rounded-tl-none w-16 shadow-2xs">
+                    <span className="w-1.5 h-1.5 rounded-full bg-indigo-600 animate-bounce" style={{ animationDelay: "0ms" }} />
+                    <span className="w-1.5 h-1.5 rounded-full bg-indigo-600 animate-bounce" style={{ animationDelay: "150ms" }} />
+                    <span className="w-1.5 h-1.5 rounded-full bg-indigo-600 animate-bounce" style={{ animationDelay: "300ms" }} />
                   </div>
                 </div>
               )}
@@ -321,7 +344,7 @@ export default function AIAssistant() {
             </div>
 
             {/* Chat Suggestions & Form */}
-            <div className="p-3 border-t border-white/5 bg-brand-black/60 backdrop-blur-md">
+            <div className="p-3 border-t border-slate-100 bg-white">
               {/* Suggested Quick Actions */}
               <div className="flex flex-wrap gap-2 mb-3">
                 {QUICK_ACTIONS.map((action, idx) => (
@@ -330,7 +353,7 @@ export default function AIAssistant() {
                     type="button"
                     onClick={() => handleQuickAction(action)}
                     onMouseEnter={playHover}
-                    className="px-2.5 py-1.5 rounded-full border border-white/5 bg-white/5 hover:border-brand-cyan/35 hover:bg-brand-cyan/5 text-[10px] text-white/70 hover:text-white font-mono transition-all duration-300 cursor-pointer"
+                    className="px-2.5 py-1.5 rounded-full border border-slate-200 bg-slate-50 hover:border-indigo-300 hover:bg-indigo-50/60 text-[10px] text-slate-700 font-mono transition-all duration-300 cursor-pointer shadow-2xs"
                   >
                     {action.label}
                   </button>
@@ -351,12 +374,12 @@ export default function AIAssistant() {
                   onChange={(e) => setInputVal(e.target.value)}
                   placeholder="Ask a question..."
                   aria-label="Ask a question"
-                  className="flex-grow px-3.5 py-2.5 rounded-xl bg-white/5 border border-white/10 text-xs text-white placeholder-white/30 focus:outline-none focus:border-brand-cyan transition-colors"
+                  className="flex-grow px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-900 placeholder-slate-400 focus:outline-none focus:border-indigo-500 transition-colors"
                 />
                 <button
                   type="submit"
                   disabled={!inputVal.trim()}
-                  className="p-2.5 rounded-xl bg-brand-cyan hover:bg-brand-blue disabled:opacity-50 text-brand-black transition-colors flex items-center justify-center shrink-0 cursor-pointer"
+                  className="p-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 disabled:opacity-50 text-white transition-colors flex items-center justify-center shrink-0 cursor-pointer shadow-xs"
                   aria-label="Send Message"
                 >
                   <Send className="w-3.5 h-3.5" />
