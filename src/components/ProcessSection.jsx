@@ -44,12 +44,12 @@ export default function ProcessSection() {
   ];
 
   return (
-    <section className="py-24 px-6 sm:px-8 bg-[#FAFAFA] relative overflow-hidden">
+    <section className="py-24 px-6 sm:px-8 bg-[#FAFAFA] dark:bg-[#0D0F13] relative overflow-hidden transition-colors duration-200">
       {/* Subtle radial wash for premium depth */}
       <div 
         className="absolute inset-0 pointer-events-none"
         style={{
-          background: "radial-gradient(circle at 50% 30%, rgba(91, 92, 246, 0.04), transparent 60%)"
+          background: "radial-gradient(circle at 50% 30%, rgba(124, 125, 255, 0.06), transparent 60%)"
         }}
       />
 
@@ -61,7 +61,7 @@ export default function ProcessSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.4 }}
-            className="text-xs font-semibold tracking-widest text-[#5B5CF6] uppercase mb-3 block"
+            className="text-xs font-semibold tracking-widest text-[#5B5CF6] dark:text-[#7C7DFF] uppercase mb-3 block"
           >
             How We Work
           </motion.span>
@@ -71,7 +71,7 @@ export default function ProcessSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.1 }}
-            className="text-3xl sm:text-4xl font-extrabold tracking-tight text-[#0B0D12] mb-4 font-sans"
+            className="text-3xl sm:text-4xl font-extrabold tracking-tight text-[#0B0D12] dark:text-[#F8FAFC] mb-4 font-sans"
           >
             Our Process
           </motion.h2>
@@ -81,7 +81,7 @@ export default function ProcessSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="text-sm sm:text-base text-[#5F6470] leading-relaxed font-normal"
+            className="text-sm sm:text-base text-[#5F6470] dark:text-[#9CA3AF] leading-relaxed font-normal"
           >
             We break down custom software development into reliable milestones.
           </motion.p>
@@ -90,13 +90,13 @@ export default function ProcessSection() {
         {/* DESKTOP CONNECTED TIMELINE WORKFLOW (Hidden on Mobile) */}
         <div className="hidden lg:block relative">
           {/* Continuous Connecting Line Background */}
-          <div className="absolute top-[130px] left-[10%] right-[10%] h-[2px] bg-slate-200/80 pointer-events-none z-0">
+          <div className="absolute top-[130px] left-[10%] right-[10%] h-[2px] bg-slate-200/80 dark:bg-white/10 pointer-events-none z-0">
             <motion.div
               initial={{ scaleX: 0 }}
               whileInView={{ scaleX: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
-              className="h-full w-full bg-gradient-to-r from-[#5B5CF6]/30 via-[#5B5CF6] to-[#5B5CF6]/30 origin-left"
+              className="h-full w-full bg-gradient-to-r from-[#5B5CF6]/30 via-[#5B5CF6] to-[#5B5CF6]/30 dark:from-[#7C7DFF]/30 dark:via-[#7C7DFF] dark:to-[#7C7DFF]/30 origin-left"
             />
           </div>
 
@@ -111,36 +111,36 @@ export default function ProcessSection() {
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: idx * 0.12, ease: [0.22, 1, 0.36, 1] }}
                   onMouseEnter={playHover}
-                  className={`p-7 sm:p-8 rounded-[22px] bg-white border border-slate-900/[0.08] shadow-[0_4px_20px_rgba(15,23,42,0.03)] hover:shadow-[0_12px_36px_rgba(15,23,42,0.08)] hover:border-[#5B5CF6]/40 hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between group overflow-hidden ${
+                  className={`p-7 sm:p-8 rounded-[22px] bg-white dark:bg-[#13151A] border border-slate-900/[0.08] dark:border-white/[0.08] shadow-[0_4px_20px_rgba(15,23,42,0.03)] hover:shadow-[0_12px_36px_rgba(15,23,42,0.08)] hover:border-[#5B5CF6]/40 dark:hover:border-[#7C7DFF]/40 hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between group overflow-hidden ${
                     idx === 1 ? "lg:translate-y-3" : ""
                   }`}
                 >
                   {/* Large Subtle Background Step Number */}
-                  <span className="absolute top-4 right-5 text-[40px] font-extrabold text-[#5B5CF6]/12 group-hover:text-[#5B5CF6]/25 transition-colors pointer-events-none select-none font-sans leading-none">
+                  <span className="absolute top-4 right-5 text-[40px] font-extrabold text-[#5B5CF6]/12 dark:text-[#7C7DFF]/15 group-hover:text-[#5B5CF6]/25 dark:group-hover:text-[#7C7DFF]/30 transition-colors pointer-events-none select-none font-sans leading-none">
                     {step.num}
                   </span>
 
                   <div>
                     {/* Top Icon & Connector Dot */}
                     <div className="flex items-center justify-between mb-6">
-                      <div className="w-12 h-12 rounded-2xl bg-[#5B5CF6]/8 border border-[#5B5CF6]/15 group-hover:bg-[#5B5CF6] group-hover:border-[#5B5CF6] flex items-center justify-center transition-all duration-300 shadow-2xs">
-                        <Icon className="w-5 h-5 text-[#5B5CF6] group-hover:text-white transition-colors duration-300" />
+                      <div className="w-12 h-12 rounded-2xl bg-[#5B5CF6]/8 border border-[#5B5CF6]/15 dark:bg-[#7C7DFF]/10 dark:border-[#7C7DFF]/20 group-hover:bg-[#5B5CF6] dark:group-hover:bg-[#7C7DFF] group-hover:border-[#5B5CF6] dark:group-hover:border-[#7C7DFF] flex items-center justify-center transition-all duration-300 shadow-2xs">
+                        <Icon className="w-5 h-5 text-[#5B5CF6] dark:text-[#7C7DFF] group-hover:text-white transition-colors duration-300" />
                       </div>
-                      <span className="w-3 h-3 rounded-full bg-white border-2 border-[#5B5CF6]/40 group-hover:border-[#5B5CF6] group-hover:scale-125 transition-all duration-300" />
+                      <span className="w-3 h-3 rounded-full bg-white dark:bg-[#13151A] border-2 border-[#5B5CF6]/40 dark:border-[#7C7DFF]/40 group-hover:border-[#5B5CF6] dark:group-hover:border-[#7C7DFF] group-hover:scale-125 transition-all duration-300" />
                     </div>
 
                     {/* Step Badge & Name */}
                     <div className="flex items-center gap-2 mb-2">
-                      <span className="text-[11px] font-semibold text-[#5B5CF6] bg-[#5B5CF6]/8 px-2.5 py-0.5 rounded-full">
+                      <span className="text-[11px] font-semibold text-[#5B5CF6] dark:text-[#7C7DFF] bg-[#5B5CF6]/8 dark:bg-[#7C7DFF]/10 px-2.5 py-0.5 rounded-full">
                         Step {step.num}
                       </span>
-                      <h3 className="text-lg font-bold text-[#0B0D12] tracking-tight font-sans">
+                      <h3 className="text-lg font-bold text-[#0B0D12] dark:text-[#F8FAFC] tracking-tight font-sans">
                         {step.name}
                       </h3>
                     </div>
 
                     {/* Description */}
-                    <p className="text-xs sm:text-[13px] text-[#5F6470] leading-relaxed">
+                    <p className="text-xs sm:text-[13px] text-[#5F6470] dark:text-[#9CA3AF] leading-relaxed">
                       {step.desc}
                     </p>
                   </div>
@@ -150,13 +150,13 @@ export default function ProcessSection() {
           </div>
 
           {/* Row 2 Timeline Line */}
-          <div className="absolute bottom-[130px] left-[10%] right-[10%] h-[2px] bg-slate-200/80 pointer-events-none z-0">
+          <div className="absolute bottom-[130px] left-[10%] right-[10%] h-[2px] bg-slate-200/80 dark:bg-white/10 pointer-events-none z-0">
             <motion.div
               initial={{ scaleX: 0 }}
               whileInView={{ scaleX: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 1.2, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
-              className="h-full w-full bg-gradient-to-r from-[#5B5CF6]/30 via-[#5B5CF6] to-[#5B5CF6]/30 origin-left"
+              className="h-full w-full bg-gradient-to-r from-[#5B5CF6]/30 via-[#5B5CF6] to-[#5B5CF6]/30 dark:from-[#7C7DFF]/30 dark:via-[#7C7DFF] dark:to-[#7C7DFF]/30 origin-left"
             />
           </div>
 
@@ -171,36 +171,36 @@ export default function ProcessSection() {
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: (idx + 3) * 0.12, ease: [0.22, 1, 0.36, 1] }}
                   onMouseEnter={playHover}
-                  className={`p-7 sm:p-8 rounded-[22px] bg-white border border-slate-900/[0.08] shadow-[0_4px_20px_rgba(15,23,42,0.03)] hover:shadow-[0_12px_36px_rgba(15,23,42,0.08)] hover:border-[#5B5CF6]/40 hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between group overflow-hidden ${
+                  className={`p-7 sm:p-8 rounded-[22px] bg-white dark:bg-[#13151A] border border-slate-900/[0.08] dark:border-white/[0.08] shadow-[0_4px_20px_rgba(15,23,42,0.03)] hover:shadow-[0_12px_36px_rgba(15,23,42,0.08)] hover:border-[#5B5CF6]/40 dark:hover:border-[#7C7DFF]/40 hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between group overflow-hidden ${
                     idx === 1 ? "lg:translate-y-3" : ""
                   }`}
                 >
                   {/* Large Subtle Background Step Number */}
-                  <span className="absolute top-4 right-5 text-[40px] font-extrabold text-[#5B5CF6]/12 group-hover:text-[#5B5CF6]/25 transition-colors pointer-events-none select-none font-sans leading-none">
+                  <span className="absolute top-4 right-5 text-[40px] font-extrabold text-[#5B5CF6]/12 dark:text-[#7C7DFF]/15 group-hover:text-[#5B5CF6]/25 dark:group-hover:text-[#7C7DFF]/30 transition-colors pointer-events-none select-none font-sans leading-none">
                     {step.num}
                   </span>
 
                   <div>
                     {/* Top Icon & Connector Dot */}
                     <div className="flex items-center justify-between mb-6">
-                      <div className="w-12 h-12 rounded-2xl bg-[#5B5CF6]/8 border border-[#5B5CF6]/15 group-hover:bg-[#5B5CF6] group-hover:border-[#5B5CF6] flex items-center justify-center transition-all duration-300 shadow-2xs">
-                        <Icon className="w-5 h-5 text-[#5B5CF6] group-hover:text-white transition-colors duration-300" />
+                      <div className="w-12 h-12 rounded-2xl bg-[#5B5CF6]/8 border border-[#5B5CF6]/15 dark:bg-[#7C7DFF]/10 dark:border-[#7C7DFF]/20 group-hover:bg-[#5B5CF6] dark:group-hover:bg-[#7C7DFF] group-hover:border-[#5B5CF6] dark:group-hover:border-[#7C7DFF] flex items-center justify-center transition-all duration-300 shadow-2xs">
+                        <Icon className="w-5 h-5 text-[#5B5CF6] dark:text-[#7C7DFF] group-hover:text-white transition-colors duration-300" />
                       </div>
-                      <span className="w-3 h-3 rounded-full bg-white border-2 border-[#5B5CF6]/40 group-hover:border-[#5B5CF6] group-hover:scale-125 transition-all duration-300" />
+                      <span className="w-3 h-3 rounded-full bg-white dark:bg-[#13151A] border-2 border-[#5B5CF6]/40 dark:border-[#7C7DFF]/40 group-hover:border-[#5B5CF6] dark:group-hover:border-[#7C7DFF] group-hover:scale-125 transition-all duration-300" />
                     </div>
 
                     {/* Step Badge & Name */}
                     <div className="flex items-center gap-2 mb-2">
-                      <span className="text-[11px] font-semibold text-[#5B5CF6] bg-[#5B5CF6]/8 px-2.5 py-0.5 rounded-full">
+                      <span className="text-[11px] font-semibold text-[#5B5CF6] dark:text-[#7C7DFF] bg-[#5B5CF6]/8 dark:bg-[#7C7DFF]/10 px-2.5 py-0.5 rounded-full">
                         Step {step.num}
                       </span>
-                      <h3 className="text-lg font-bold text-[#0B0D12] tracking-tight font-sans">
+                      <h3 className="text-lg font-bold text-[#0B0D12] dark:text-[#F8FAFC] tracking-tight font-sans">
                         {step.name}
                       </h3>
                     </div>
 
                     {/* Description */}
-                    <p className="text-xs sm:text-[13px] text-[#5F6470] leading-relaxed">
+                    <p className="text-xs sm:text-[13px] text-[#5F6470] dark:text-[#9CA3AF] leading-relaxed">
                       {step.desc}
                     </p>
                   </div>
@@ -222,27 +222,27 @@ export default function ProcessSection() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.4, delay: idx * 0.08 }}
                 onMouseEnter={playHover}
-                className="p-7 rounded-[22px] bg-white border border-slate-900/[0.08] shadow-[0_4px_20px_rgba(15,23,42,0.03)] hover:shadow-[0_12px_36px_rgba(15,23,42,0.08)] hover:border-[#5B5CF6]/40 hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between group relative overflow-hidden"
+                className="p-7 rounded-[22px] bg-white dark:bg-[#13151A] border border-slate-900/[0.08] dark:border-white/[0.08] shadow-[0_4px_20px_rgba(15,23,42,0.03)] hover:shadow-[0_12px_36px_rgba(15,23,42,0.08)] hover:border-[#5B5CF6]/40 dark:hover:border-[#7C7DFF]/40 hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between group relative overflow-hidden"
               >
-                <span className="absolute top-4 right-5 text-[38px] font-extrabold text-[#5B5CF6]/12 group-hover:text-[#5B5CF6]/25 transition-colors pointer-events-none select-none font-sans leading-none">
+                <span className="absolute top-4 right-5 text-[38px] font-extrabold text-[#5B5CF6]/12 dark:text-[#7C7DFF]/15 group-hover:text-[#5B5CF6]/25 dark:group-hover:text-[#7C7DFF]/30 transition-colors pointer-events-none select-none font-sans leading-none">
                   {step.num}
                 </span>
 
                 <div>
-                  <div className="w-11 h-11 rounded-2xl bg-[#5B5CF6]/8 border border-[#5B5CF6]/15 group-hover:bg-[#5B5CF6] group-hover:border-[#5B5CF6] flex items-center justify-center mb-5 transition-all duration-300">
-                    <Icon className="w-5 h-5 text-[#5B5CF6] group-hover:text-white transition-colors duration-300" />
+                  <div className="w-11 h-11 rounded-2xl bg-[#5B5CF6]/8 border border-[#5B5CF6]/15 dark:bg-[#7C7DFF]/10 dark:border-[#7C7DFF]/20 group-hover:bg-[#5B5CF6] dark:group-hover:bg-[#7C7DFF] group-hover:border-[#5B5CF6] dark:group-hover:border-[#7C7DFF] flex items-center justify-center mb-5 transition-all duration-300">
+                    <Icon className="w-5 h-5 text-[#5B5CF6] dark:text-[#7C7DFF] group-hover:text-white transition-colors duration-300" />
                   </div>
 
                   <div className="flex items-center gap-2 mb-2">
-                    <span className="text-[11px] font-semibold text-[#5B5CF6] bg-[#5B5CF6]/8 px-2.5 py-0.5 rounded-full">
+                    <span className="text-[11px] font-semibold text-[#5B5CF6] dark:text-[#7C7DFF] bg-[#5B5CF6]/8 dark:bg-[#7C7DFF]/10 px-2.5 py-0.5 rounded-full">
                       Step {step.num}
                     </span>
-                    <h3 className="text-base font-bold text-[#0B0D12] font-sans">
+                    <h3 className="text-base font-bold text-[#0B0D12] dark:text-[#F8FAFC] font-sans">
                       {step.name}
                     </h3>
                   </div>
 
-                  <p className="text-xs text-[#5F6470] leading-relaxed">
+                  <p className="text-xs text-[#5F6470] dark:text-[#9CA3AF] leading-relaxed">
                     {step.desc}
                   </p>
                 </div>
@@ -254,7 +254,7 @@ export default function ProcessSection() {
         {/* MOBILE VERTICAL CONNECTED TIMELINE (Stacked with continuous vertical line) */}
         <div className="sm:hidden relative pl-6 space-y-6">
           {/* Vertical Connecting Line */}
-          <div className="absolute left-[11px] top-6 bottom-6 w-[2px] bg-gradient-to-b from-[#5B5CF6] via-[#5B5CF6]/40 to-[#5B5CF6]/20 pointer-events-none" />
+          <div className="absolute left-[11px] top-6 bottom-6 w-[2px] bg-gradient-to-b from-[#5B5CF6] via-[#5B5CF6]/40 to-[#5B5CF6]/20 dark:from-[#7C7DFF] dark:via-[#7C7DFF]/40 dark:to-[#7C7DFF]/20 pointer-events-none" />
 
           {processSteps.map((step, idx) => {
             const Icon = step.icon;
@@ -268,30 +268,30 @@ export default function ProcessSection() {
                 className="relative pl-6"
               >
                 {/* Node dot on vertical timeline */}
-                <div className="absolute -left-[19px] top-5 w-4 h-4 rounded-full bg-white border-2 border-[#5B5CF6] flex items-center justify-center shadow-2xs z-10">
-                  <div className="w-1.5 h-1.5 rounded-full bg-[#5B5CF6]" />
+                <div className="absolute -left-[19px] top-5 w-4 h-4 rounded-full bg-white dark:bg-[#13151A] border-2 border-[#5B5CF6] dark:border-[#7C7DFF] flex items-center justify-center shadow-2xs z-10">
+                  <div className="w-1.5 h-1.5 rounded-full bg-[#5B5CF6] dark:bg-[#7C7DFF]" />
                 </div>
 
-                <div className="p-6 rounded-[20px] bg-white border border-slate-900/[0.08] shadow-[0_4px_16px_rgba(15,23,42,0.03)] active:border-[#5B5CF6]/40 transition-all relative overflow-hidden">
-                  <span className="absolute top-3 right-4 text-[32px] font-extrabold text-[#5B5CF6]/12 pointer-events-none select-none font-sans leading-none">
+                <div className="p-6 rounded-[20px] bg-white dark:bg-[#13151A] border border-slate-900/[0.08] dark:border-white/[0.08] shadow-[0_4px_16px_rgba(15,23,42,0.03)] active:border-[#5B5CF6]/40 dark:active:border-[#7C7DFF]/40 transition-all relative overflow-hidden">
+                  <span className="absolute top-3 right-4 text-[32px] font-extrabold text-[#5B5CF6]/12 dark:text-[#7C7DFF]/15 pointer-events-none select-none font-sans leading-none">
                     {step.num}
                   </span>
 
                   <div className="flex items-center gap-3 mb-3">
-                    <div className="w-9 h-9 rounded-xl bg-[#5B5CF6]/8 border border-[#5B5CF6]/15 flex items-center justify-center shrink-0">
-                      <Icon className="w-4 h-4 text-[#5B5CF6]" />
+                    <div className="w-9 h-9 rounded-xl bg-[#5B5CF6]/8 border border-[#5B5CF6]/15 dark:bg-[#7C7DFF]/10 dark:border-[#7C7DFF]/20 flex items-center justify-center shrink-0">
+                      <Icon className="w-4 h-4 text-[#5B5CF6] dark:text-[#7C7DFF]" />
                     </div>
                     <div>
-                      <span className="text-[10px] font-semibold text-[#5B5CF6] block uppercase tracking-wider">
+                      <span className="text-[10px] font-semibold text-[#5B5CF6] dark:text-[#7C7DFF] block uppercase tracking-wider">
                         Step {step.num}
                       </span>
-                      <h3 className="text-base font-bold text-[#0B0D12] font-sans">
+                      <h3 className="text-base font-bold text-[#0B0D12] dark:text-[#F8FAFC] font-sans">
                         {step.name}
                       </h3>
                     </div>
                   </div>
 
-                  <p className="text-xs text-[#5F6470] leading-relaxed">
+                  <p className="text-xs text-[#5F6470] dark:text-[#9CA3AF] leading-relaxed">
                     {step.desc}
                   </p>
                 </div>

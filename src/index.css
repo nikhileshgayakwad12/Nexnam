@@ -1,5 +1,27 @@
 @import "tailwindcss";
 
+@variant dark (&:where(.dark, .dark *));
+
+:root {
+  --bg: #FAFAFA;
+  --surface: #FFFFFF;
+  --surface-soft: #F7F7F8;
+  --text: #0B0D12;
+  --text-muted: #5F6470;
+  --border: rgba(15, 23, 42, 0.08);
+  --accent: #5B5CF6;
+}
+
+html.dark {
+  --bg: #090A0D;
+  --surface: #111318;
+  --surface-soft: #15171D;
+  --text: #F8FAFC;
+  --text-muted: #9CA3AF;
+  --border: rgba(255, 255, 255, 0.09);
+  --accent: #7C7DFF;
+}
+
 @theme {
   --font-sans: 'Inter', 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif;
   --font-mono: 'Space Mono', monospace;
@@ -32,14 +54,26 @@
     linear-gradient(to bottom, rgba(15, 23, 42, 0.03) 1px, transparent 1px);
 }
 
+.dark .bg-grid-pattern {
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+}
+
 @utility glass-card {
   background: #FFFFFF;
   border: 1px solid rgba(15, 23, 42, 0.08);
   box-shadow: 0 4px 20px rgba(15, 23, 42, 0.03);
 }
 
+.dark .glass-card {
+  background: #111318;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
 @utility glass-card-hover {
-  transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+  transition: background-color 0.3s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.3s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.3s cubic-bezier(0.22, 1, 0.36, 1), transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
   
   &:hover {
     background: #FFFFFF;
@@ -49,21 +83,34 @@
   }
 }
 
+.dark .glass-card-hover:hover {
+  background: #15171D;
+  border-color: rgba(124, 125, 255, 0.3);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5);
+}
+
 /* Custom Scrollbar */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #FAFAFA;
+  background: var(--bg);
 }
 ::-webkit-scrollbar-thumb {
   background: rgba(15, 23, 42, 0.15);
   border-radius: 9999px;
   border: 1px solid rgba(15, 23, 42, 0.04);
 }
+.dark ::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
 ::-webkit-scrollbar-thumb:hover {
   background: rgba(91, 92, 246, 0.5);
+}
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: rgba(124, 125, 255, 0.5);
 }
 
 html, body {
@@ -80,6 +127,15 @@ html, body {
   padding: 0;
   min-height: 100vh;
   -webkit-font-smoothing: antialiased;
+  transition: background-color 250ms ease, color 250ms ease;
+}
+
+html.dark, html.dark body {
+  background-color: #090A0D;
+  background-image: 
+    radial-gradient(circle at 75% 20%, rgba(124, 125, 255, 0.07), transparent 40%),
+    #090A0D;
+  color: #F8FAFC;
 }
 
 #root {
@@ -99,5 +155,6 @@ html, body {
   z-index: -999;
   cursor: default;
 }
+
 
 

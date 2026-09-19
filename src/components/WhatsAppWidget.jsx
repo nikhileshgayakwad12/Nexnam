@@ -12,7 +12,7 @@ export default function WhatsAppWidget({ className = "" }) {
         rel="noopener noreferrer"
         onClick={playClick}
         onMouseEnter={playHover}
-        className="w-11 h-11 rounded-full bg-white border border-slate-900/[0.08] hover:border-emerald-300 shadow-[0_4px_16px_rgba(15,23,42,0.06)] hover:shadow-[0_8px_24px_rgba(37,211,102,0.15)] hover:-translate-y-0.5 active:scale-95 transition-all duration-200 flex items-center justify-center cursor-pointer pointer-events-auto focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500"
+        className="w-11 h-11 rounded-full bg-white dark:bg-[#111318] border border-slate-900/[0.08] dark:border-white/[0.08] hover:border-emerald-300 shadow-[0_4px_16px_rgba(15,23,42,0.06)] hover:shadow-[0_8px_24px_rgba(37,211,102,0.15)] hover:-translate-y-0.5 active:scale-95 transition-all duration-200 flex items-center justify-center cursor-pointer pointer-events-auto focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500"
         aria-label="Chat on WhatsApp"
       >
         <svg

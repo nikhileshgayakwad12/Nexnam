@@ -14,6 +14,7 @@ import TechBackground3D from "./components/TechBackground3D";
 import AIAssistant from "./components/AIAssistant";
 import SkeletonLoader from "./components/SkeletonLoader";
 import { playTransition } from "./utils/soundManager";
+import { ThemeProvider } from "./context/ThemeContext";
 
 // Scroll To Top on route change helper
 function ScrollToTop() {
@@ -74,9 +75,14 @@ function AppContent() {
 
 export default function App() {
   return (
-    <BrowserRouter>
-      <AppContent />
-    </BrowserRouter>
+    <ThemeProvider>
+      <BrowserRouter>
+        <AppContent />
+      </BrowserRouter>
+    </ThemeProvider>
   );
 }
+
+
+
 

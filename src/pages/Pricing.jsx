@@ -26,7 +26,7 @@ function FAQItem({ question, answer }) {
   const [isOpen, setIsOpen] = useState(false);
   
   return (
-    <div className="rounded-2xl bg-white border border-slate-900/[0.08] shadow-2xs overflow-hidden transition-all duration-300">
+    <div className="rounded-2xl bg-white dark:bg-[#111318] border border-slate-900/[0.08] dark:border-white/10 shadow-2xs overflow-hidden transition-all duration-300">
       <button
         type="button"
         onClick={() => {
@@ -34,7 +34,7 @@ function FAQItem({ question, answer }) {
           setIsOpen(!isOpen);
         }}
         onMouseEnter={playHover}
-        className="w-full px-6 py-5 flex items-center justify-between text-left text-[#0B0D12] hover:text-[#5B5CF6] transition-colors font-mono font-semibold text-sm cursor-pointer"
+        className="w-full px-6 py-5 flex items-center justify-between text-left text-[#0B0D12] dark:text-white hover:text-[#5B5CF6] dark:hover:text-[#7C7DFF] transition-colors font-mono font-semibold text-sm cursor-pointer"
         aria-expanded={isOpen}
       >
         <span>{question}</span>
@@ -48,7 +48,7 @@ function FAQItem({ question, answer }) {
         transition={{ duration: 0.3, ease: "easeInOut" }}
         className="overflow-hidden"
       >
-        <p className="px-6 pb-5 pt-1 text-xs text-[#5F6470] leading-relaxed border-t border-slate-100">
+        <p className="px-6 pb-5 pt-1 text-xs text-[#5F6470] dark:text-slate-300 leading-relaxed border-t border-slate-100 dark:border-white/10">
           {answer}
         </p>
       </motion.div>
@@ -213,10 +213,10 @@ export default function Pricing() {
   };
 
   return (
-    <div className="flex-grow z-10 w-full pt-24 sm:pt-32 pb-16 sm:pb-20 px-4 sm:px-8 bg-[#FAFAFA]">
+    <div className="flex-grow z-10 w-full pt-24 sm:pt-32 pb-16 sm:pb-20 px-4 sm:px-8 bg-[#FAFAFA] dark:bg-[#090A0D] transition-colors duration-250">
       <SEO
-        title="Pricing | Nexnam Website & Digital Solution Packages"
-        description="Explore Nexnam pricing for landing pages, business websites, portfolios, web apps, SEO setup and digital solutions."
+        title="Pricing | Nexnam"
+        description="Transparent pricing packages for landing pages, custom websites, web apps, and digital solutions with no hidden fees."
         keywords="Nexnam pricing, website pricing India, landing page price, business website package, portfolio website price, web app development price"
       />
 
@@ -227,9 +227,9 @@ export default function Pricing() {
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.5 }}
-            className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[rgba(91,92,246,0.08)] border border-[rgba(91,92,246,0.16)] text-xs text-[#5B5CF6] font-semibold tracking-wide uppercase font-mono mb-4 sm:mb-6"
+            className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[rgba(91,92,246,0.08)] dark:bg-[rgba(124,125,255,0.12)] border border-[rgba(91,92,246,0.16)] dark:border-[rgba(124,125,255,0.25)] text-xs text-[#5B5CF6] dark:text-[#7C7DFF] font-semibold tracking-wide uppercase font-mono mb-4 sm:mb-6"
           >
-            <Sparkles className="w-3.5 h-3.5 text-[#5B5CF6]" />
+            <Sparkles className="w-3.5 h-3.5 text-[#5B5CF6] dark:text-[#7C7DFF]" />
             Transparent Pricing
           </motion.div>
 
@@ -237,10 +237,10 @@ export default function Pricing() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="text-3xl sm:text-5xl font-bold tracking-tight text-[#0B0D12] mb-4 sm:mb-6 leading-tight font-sans"
+            className="text-3xl sm:text-5xl font-bold tracking-tight text-[#0B0D12] dark:text-white mb-4 sm:mb-6 leading-tight font-sans"
           >
             Simple Pricing for{" "}
-            <span className="text-[#5B5CF6]">
+            <span className="text-[#5B5CF6] dark:text-[#7C7DFF]">
               Modern Digital Products
             </span>
           </motion.h1>
@@ -249,7 +249,7 @@ export default function Pricing() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-sm sm:text-lg text-[#5F6470] leading-relaxed mb-6 sm:mb-8 font-normal"
+            className="text-sm sm:text-lg text-[#5F6470] dark:text-slate-400 leading-relaxed mb-6 sm:mb-8 font-normal"
           >
             Choose a package that fits your business needs. Nexnam builds websites, landing pages, portfolios, dashboards and digital solutions that help businesses scale online.
           </motion.p>
@@ -259,18 +259,18 @@ export default function Pricing() {
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.25 }}
-            className="inline-flex flex-wrap items-center justify-center gap-2 sm:gap-3 p-2 sm:p-1.5 rounded-2xl bg-white border border-slate-900/[0.08] shadow-2xs mb-8 sm:mb-10 max-w-full select-none cursor-pointer"
+            className="inline-flex flex-wrap items-center justify-center gap-2 sm:gap-3 p-2 sm:p-1.5 rounded-2xl bg-white dark:bg-[#111318] border border-slate-900/[0.08] dark:border-white/10 shadow-2xs mb-8 sm:mb-10 max-w-full select-none cursor-pointer"
             onClick={() => handleToggleBilling(!isAnnual)}
           >
             <span className={`text-xs font-semibold px-3 py-1.5 rounded-xl transition-colors ${
-              !isAnnual ? "bg-[#111318] text-white" : "text-slate-600 hover:text-slate-900"
+              !isAnnual ? "bg-[#111318] dark:bg-white text-white dark:text-[#090A0D]" : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white"
             }`}>
               Standard Project
             </span>
             
             {/* Custom Toggle Pill */}
             <div className={`w-11 h-6 rounded-full p-0.5 transition-colors duration-300 flex items-center ${
-              isAnnual ? "bg-[#5B5CF6]" : "bg-slate-200"
+              isAnnual ? "bg-[#5B5CF6] dark:bg-[#7C7DFF]" : "bg-slate-200 dark:bg-slate-800"
             }`}>
               <motion.div
                 className="w-5 h-5 rounded-full bg-white shadow-xs"
@@ -280,7 +280,7 @@ export default function Pricing() {
             </div>
 
             <span className={`text-xs font-semibold px-3 py-1.5 rounded-xl transition-colors flex items-center gap-1.5 ${
-              isAnnual ? "bg-[#5B5CF6] text-white" : "text-slate-600 hover:text-slate-900"
+              isAnnual ? "bg-[#5B5CF6] dark:bg-[#7C7DFF] text-white" : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white"
             }`}>
               Annual Support Bundle
               <span className="bg-emerald-500 text-white text-[9px] font-bold px-1.5 py-0.5 rounded-full font-mono uppercase">
@@ -290,7 +290,7 @@ export default function Pricing() {
           </motion.div>
 
           {/* Trust points line */}
-          <div className="flex flex-wrap items-center justify-center gap-x-6 sm:gap-x-8 gap-y-2.5 pt-6 border-t border-slate-900/[0.07]">
+          <div className="flex flex-wrap items-center justify-center gap-x-6 sm:gap-x-8 gap-y-2.5 pt-6 border-t border-slate-900/[0.07] dark:border-white/10">
             {[
               "Mobile Responsive",
               "WhatsApp Integration",
@@ -298,8 +298,8 @@ export default function Pricing() {
               "Fast Delivery",
               "Support After Launch"
             ].map((pt, idx) => (
-              <span key={idx} className="flex items-center gap-1.5 text-xs text-[#5F6470] font-mono font-medium">
-                <Check className="w-3.5 h-3.5 text-[#5B5CF6]" />
+              <span key={idx} className="flex items-center gap-1.5 text-xs text-[#5F6470] dark:text-slate-400 font-mono font-medium">
+                <Check className="w-3.5 h-3.5 text-[#5B5CF6] dark:text-[#7C7DFF]" />
                 {pt}
               </span>
             ))}
@@ -320,15 +320,15 @@ export default function Pricing() {
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: idx * 0.1 }}
                   onMouseEnter={playHover}
-                  className={`relative rounded-3xl p-6 sm:p-8 md:p-9 bg-white flex flex-col justify-between transition-all duration-300 group ${
+                  className={`relative rounded-3xl p-6 sm:p-8 md:p-9 bg-white dark:bg-[#111318] flex flex-col justify-between transition-all duration-300 group ${
                     pkg.isPopular
-                      ? "border-2 border-[#5B5CF6] shadow-[0_16px_40px_rgba(91,92,246,0.12)] lg:-translate-y-4 lg:scale-[1.02] z-20"
-                      : "border border-slate-900/[0.08] hover:border-slate-900/[0.18] shadow-2xs lg:scale-[0.98] z-10"
+                      ? "border-2 border-[#5B5CF6] dark:border-[#7C7DFF] shadow-[0_16px_40px_rgba(91,92,246,0.12)] lg:-translate-y-4 lg:scale-[1.02] z-20"
+                      : "border border-slate-900/[0.08] dark:border-white/10 hover:border-slate-900/[0.18] dark:hover:border-white/20 shadow-2xs lg:scale-[0.98] z-10"
                   }`}
                 >
                   {/* Popular Badge */}
                   {pkg.isPopular && (
-                    <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-[#5B5CF6] text-white text-[10px] font-bold uppercase tracking-wider px-3.5 py-1 rounded-full font-mono flex items-center gap-1 shadow-2xs">
+                    <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-[#5B5CF6] dark:bg-[#7C7DFF] text-white text-[10px] font-bold uppercase tracking-wider px-3.5 py-1 rounded-full font-mono flex items-center gap-1 shadow-2xs">
                       <Star className="w-3 h-3 fill-current text-white" />
                       {pkg.badgeText}
                     </div>
@@ -336,17 +336,17 @@ export default function Pricing() {
 
                   <div>
                     {/* Category Label */}
-                    <span className="text-[10px] font-mono font-bold tracking-widest text-slate-400 uppercase block mb-1">
+                    <span className="text-[10px] font-mono font-bold tracking-widest text-slate-400 dark:text-slate-500 uppercase block mb-1">
                       Package
                     </span>
-                    <h2 className="text-2xl font-bold text-[#0B0D12] mb-4 group-hover:text-[#5B5CF6] transition-colors">
+                    <h2 className="text-2xl font-bold text-[#0B0D12] dark:text-white mb-4 group-hover:text-[#5B5CF6] dark:group-hover:text-[#7C7DFF] transition-colors">
                       {pkg.name}
                     </h2>
 
                     {/* Animated NumberFlow Price block */}
-                    <div className="mb-5 pb-4 border-b border-slate-100 flex items-baseline gap-1">
-                      <span className="text-xs text-slate-400 font-mono self-start mt-1">Starting</span>
-                      <div className="text-4xl font-black font-mono tracking-tight text-[#0B0D12]">
+                    <div className="mb-5 pb-4 border-b border-slate-100 dark:border-white/10 flex items-baseline gap-1">
+                      <span className="text-xs text-slate-400 dark:text-slate-500 font-mono self-start mt-1">Starting</span>
+                      <div className="text-4xl font-black font-mono tracking-tight text-[#0B0D12] dark:text-white">
                         <NumberFlow
                           value={currentPrice}
                           format={{
@@ -356,34 +356,34 @@ export default function Pricing() {
                           }}
                         />
                       </div>
-                      <span className="text-xs text-slate-400 font-mono">
+                      <span className="text-xs text-slate-400 dark:text-slate-500 font-mono">
                         {isAnnual ? "/yr bundle" : "one-time"}
                       </span>
                     </div>
 
                     {/* Best for */}
                     <div className="mb-5">
-                      <span className="text-[9px] font-mono font-bold text-slate-400 tracking-wider uppercase block mb-1">
+                      <span className="text-[9px] font-mono font-bold text-slate-400 dark:text-slate-500 tracking-wider uppercase block mb-1">
                         Best For:
                       </span>
-                      <p className="text-xs text-[#5F6470] leading-relaxed font-normal">
+                      <p className="text-xs text-[#5F6470] dark:text-[#B4BAC4] leading-relaxed font-normal">
                         {pkg.bestFor}
                       </p>
                     </div>
 
                     {/* Brief description */}
-                    <p className="text-xs text-slate-500 leading-relaxed mb-6 font-normal">
+                    <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed mb-6 font-normal">
                       {pkg.description}
                     </p>
 
                     {/* List of features */}
-                    <span className="text-[9px] font-mono font-bold text-slate-400 tracking-wider uppercase block mb-3">
+                    <span className="text-[9px] font-mono font-bold text-slate-400 dark:text-slate-500 tracking-wider uppercase block mb-3">
                       Includes:
                     </span>
                     <ul className="space-y-2.5 mb-8">
                       {pkg.features.map((feat, fidx) => (
-                        <li key={fidx} className="flex items-start gap-2 text-xs text-[#5F6470]">
-                          <CheckCircle2 className="w-4 h-4 shrink-0 mt-0.5 text-[#5B5CF6]" />
+                        <li key={fidx} className="flex items-start gap-2 text-xs text-[#5F6470] dark:text-[#B4BAC4]">
+                          <CheckCircle2 className="w-4 h-4 shrink-0 mt-0.5 text-[#5B5CF6] dark:text-[#7C7DFF]" />
                           <span>{feat}</span>
                         </li>
                       ))}
@@ -395,8 +395,8 @@ export default function Pricing() {
                     onClick={() => handleChoosePackage(pkg.name)}
                     className={`w-full py-3.5 rounded-xl border text-xs font-bold font-mono tracking-wider uppercase transition-all duration-300 cursor-pointer flex items-center justify-center gap-1.5 shadow-2xs hover:-translate-y-[1px] ${
                       pkg.isPopular 
-                        ? "bg-[#111318] border-[#111318] text-white hover:bg-[#1E222B]" 
-                        : "border-slate-200 hover:border-slate-900 bg-white hover:bg-slate-50 text-slate-800"
+                        ? "bg-[#111318] dark:bg-white border-[#111318] dark:border-white text-white dark:text-[#090A0D] hover:bg-[#1E222B] dark:hover:bg-slate-100" 
+                        : "border-slate-200 dark:border-white/10 hover:border-slate-900 dark:hover:border-white bg-white dark:bg-[#15171D] hover:bg-slate-50 dark:hover:bg-[#1C1F27] text-slate-800 dark:text-slate-200"
                     }`}
                   >
                     {pkg.ctaText}
@@ -411,32 +411,32 @@ export default function Pricing() {
         {/* COMPARISON GRID TABLE */}
         <section className="mb-32">
           <div className="text-center max-w-2xl mx-auto mb-12">
-            <span className="text-xs font-mono font-bold tracking-widest text-[#5B5CF6] uppercase mb-3 block">
+            <span className="text-xs font-mono font-bold tracking-widest text-[#5B5CF6] dark:text-[#7C7DFF] uppercase mb-3 block">
               Feature Matrix
             </span>
-            <h2 className="text-3xl font-bold text-[#0B0D12]">Compare Packages</h2>
+            <h2 className="text-3xl font-bold text-[#0B0D12] dark:text-white">Compare Packages</h2>
           </div>
 
-          <div className="bg-white rounded-2xl border border-slate-900/[0.08] shadow-2xs overflow-hidden">
+          <div className="bg-white dark:bg-[#111318] rounded-2xl border border-slate-900/[0.08] dark:border-white/10 shadow-2xs overflow-hidden">
             <div className="overflow-x-auto">
               <table className="w-full text-left text-xs font-mono">
                 <thead>
-                  <tr className="border-b border-slate-200 bg-slate-50/80 text-slate-500 uppercase">
+                  <tr className="border-b border-slate-200 dark:border-white/10 bg-slate-50/80 dark:bg-[#15171D] text-slate-500 dark:text-slate-400 uppercase">
                     <th className="py-4 px-6 font-bold tracking-wider">Feature</th>
-                    <th className="py-4 px-6 font-bold tracking-wider text-[#0B0D12]">Landing Page</th>
-                    <th className="py-4 px-6 font-bold tracking-wider text-[#5B5CF6]">Business Website</th>
-                    <th className="py-4 px-6 font-bold tracking-wider text-[#0B0D12]">Portfolio</th>
-                    <th className="py-4 px-6 font-bold tracking-wider text-[#0B0D12]">Web App / Dashboard</th>
+                    <th className="py-4 px-6 font-bold tracking-wider text-[#0B0D12] dark:text-white">Landing Page</th>
+                    <th className="py-4 px-6 font-bold tracking-wider text-[#5B5CF6] dark:text-[#7C7DFF]">Business Website</th>
+                    <th className="py-4 px-6 font-bold tracking-wider text-[#0B0D12] dark:text-white">Portfolio</th>
+                    <th className="py-4 px-6 font-bold tracking-wider text-[#0B0D12] dark:text-white">Web App / Dashboard</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-slate-100">
+                <tbody className="divide-y divide-slate-100 dark:divide-white/5">
                   {comparison.features.map((row, idx) => (
-                    <tr key={idx} className="hover:bg-slate-50/60 transition-colors">
-                      <td className="py-4 px-6 text-[#0B0D12] font-semibold">{row.name}</td>
-                      <td className="py-4 px-6 text-slate-600">{row.landing}</td>
-                      <td className="py-4 px-6 text-slate-600 font-medium">{row.business}</td>
-                      <td className="py-4 px-6 text-slate-600">{row.portfolio}</td>
-                      <td className="py-4 px-6 text-slate-600">{row.webapp}</td>
+                    <tr key={idx} className="hover:bg-slate-50/60 dark:hover:bg-white/[0.02] transition-colors">
+                      <td className="py-4 px-6 text-[#0B0D12] dark:text-white font-semibold">{row.name}</td>
+                      <td className="py-4 px-6 text-slate-600 dark:text-slate-300">{row.landing}</td>
+                      <td className="py-4 px-6 text-slate-600 dark:text-slate-300 font-medium">{row.business}</td>
+                      <td className="py-4 px-6 text-slate-600 dark:text-slate-300">{row.portfolio}</td>
+                      <td className="py-4 px-6 text-slate-600 dark:text-slate-300">{row.webapp}</td>
                     </tr>
                   ))}
                 </tbody>
@@ -448,13 +448,13 @@ export default function Pricing() {
         {/* SAMPLE WEBSITE CONCEPTS SECTION */}
         <section className="mb-32">
           <div className="text-center max-w-3xl mx-auto mb-16">
-            <span className="text-xs font-mono font-bold tracking-widest text-[#5B5CF6] uppercase mb-3 block">
+            <span className="text-xs font-mono font-bold tracking-widest text-[#5B5CF6] dark:text-[#7C7DFF] uppercase mb-3 block">
               Inspiration Catalog
             </span>
-            <h2 className="text-3xl sm:text-4xl font-bold text-[#0B0D12] mb-4">
+            <h2 className="text-3xl sm:text-4xl font-bold text-[#0B0D12] dark:text-white mb-4">
               Sample Website Concepts
             </h2>
-            <p className="text-sm sm:text-base text-slate-600 leading-relaxed">
+            <p className="text-sm sm:text-base text-slate-600 dark:text-slate-400 leading-relaxed">
               Explore sample website ideas designed for local businesses, startups, creators and professionals. These demo concepts show the type of digital presence Nexnam can create for your brand.
             </p>
           </div>
@@ -470,28 +470,28 @@ export default function Pricing() {
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: idx * 0.08 }}
                   onMouseEnter={playHover}
-                  className="bg-white rounded-2xl overflow-hidden flex flex-col h-full border border-slate-900/[0.08] shadow-2xs hover:border-slate-900/[0.2] transition-all duration-300 group"
+                  className="bg-white dark:bg-[#111318] rounded-2xl overflow-hidden flex flex-col h-full border border-slate-900/[0.08] dark:border-white/10 shadow-2xs hover:border-slate-900/[0.2] dark:hover:border-white/20 transition-all duration-300 group"
                 >
                   {/* Mini Browser Preview Mockup */}
-                  <div className="relative w-full h-44 bg-slate-100 border-b border-slate-200/80 overflow-hidden flex flex-col">
-                    <div className="h-6 w-full bg-slate-200/60 border-b border-slate-300/40 flex items-center px-3 gap-1.5 shrink-0 select-none">
-                      <div className="w-2 h-2 rounded-full bg-slate-300" />
-                      <div className="w-2 h-2 rounded-full bg-slate-300" />
-                      <div className="w-2 h-2 rounded-full bg-slate-300" />
-                      <div className="ml-4 bg-white rounded px-2 py-0.5 text-[8px] text-slate-500 font-mono w-40 text-center truncate shadow-2xs">
+                  <div className="relative w-full h-44 bg-slate-100 dark:bg-[#15171D] border-b border-slate-200/80 dark:border-white/10 overflow-hidden flex flex-col">
+                    <div className="h-6 w-full bg-slate-200/60 dark:bg-[#1A1D24] border-b border-slate-300/40 dark:border-white/5 flex items-center px-3 gap-1.5 shrink-0 select-none">
+                      <div className="w-2 h-2 rounded-full bg-slate-300 dark:bg-slate-700" />
+                      <div className="w-2 h-2 rounded-full bg-slate-300 dark:bg-slate-700" />
+                      <div className="w-2 h-2 rounded-full bg-slate-300 dark:bg-slate-700" />
+                      <div className="ml-4 bg-white dark:bg-[#111318] rounded px-2 py-0.5 text-[8px] text-slate-500 dark:text-slate-400 font-mono w-40 text-center truncate shadow-2xs">
                         {concept.name.toLowerCase().replace(/\s+/g, "")}.demo
                       </div>
                     </div>
 
-                    <div className="p-3 flex-grow flex flex-col justify-start relative overflow-hidden bg-slate-50">
+                    <div className="p-3 flex-grow flex flex-col justify-start relative overflow-hidden bg-slate-50 dark:bg-[#111318]">
                       <div className="absolute inset-0 bg-grid-pattern opacity-10 pointer-events-none" />
 
-                      <div className="flex items-center justify-between border-b border-slate-200 pb-1.5 mb-2 relative z-10 shrink-0">
+                      <div className="flex items-center justify-between border-b border-slate-200 dark:border-white/10 pb-1.5 mb-2 relative z-10 shrink-0">
                         <div className="flex items-center gap-1">
-                          <CategoryIcon className="w-2.5 h-2.5 text-[#5B5CF6]" />
-                          <span className="text-[8px] font-bold text-slate-900 font-mono">{concept.name}</span>
+                          <CategoryIcon className="w-2.5 h-2.5 text-[#5B5CF6] dark:text-[#7C7DFF]" />
+                          <span className="text-[8px] font-bold text-slate-900 dark:text-white font-mono">{concept.name}</span>
                         </div>
-                        <div className="flex gap-1.5 text-[5px] text-slate-500">
+                        <div className="flex gap-1.5 text-[5px] text-slate-500 dark:text-slate-400">
                           <span>Home</span>
                           <span>Services</span>
                           <span>Contact</span>
@@ -499,23 +499,23 @@ export default function Pricing() {
                       </div>
 
                       <div className="flex flex-col items-start text-left gap-1 mb-2 relative z-10">
-                        <span className="text-[5px] px-1 py-0.5 rounded bg-slate-200/60 text-slate-700 font-mono font-bold tracking-wide uppercase">
+                        <span className="text-[5px] px-1 py-0.5 rounded bg-slate-200/60 dark:bg-slate-800 text-slate-700 dark:text-slate-300 font-mono font-bold tracking-wide uppercase">
                           CONCEPT v1.0
                         </span>
-                        <h4 className="text-[10px] font-black text-slate-900 leading-tight">
+                        <h4 className="text-[10px] font-black text-slate-900 dark:text-white leading-tight">
                           Modern Digital Presence for {concept.category.split("/")[0]}
                         </h4>
                       </div>
 
                       <div className="grid grid-cols-3 gap-1 relative z-10 mt-auto pb-1 select-none">
-                        <div className="bg-white border border-slate-200 rounded p-1 flex flex-col gap-0.5 shadow-2xs">
-                          <span className="text-[5px] text-slate-700 font-mono truncate">Responsive</span>
+                        <div className="bg-white dark:bg-[#1A1D24] border border-slate-200 dark:border-white/10 rounded p-1 flex flex-col gap-0.5 shadow-2xs">
+                          <span className="text-[5px] text-slate-700 dark:text-slate-300 font-mono truncate">Responsive</span>
                         </div>
-                        <div className="bg-white border border-slate-200 rounded p-1 flex flex-col gap-0.5 shadow-2xs">
-                          <span className="text-[5px] text-slate-700 font-mono truncate">Optimized</span>
+                        <div className="bg-white dark:bg-[#1A1D24] border border-slate-200 dark:border-white/10 rounded p-1 flex flex-col gap-0.5 shadow-2xs">
+                          <span className="text-[5px] text-slate-700 dark:text-slate-300 font-mono truncate">Optimized</span>
                         </div>
-                        <div className="bg-white border border-slate-200 rounded p-1 flex flex-col gap-0.5 shadow-2xs">
-                          <span className="text-[5px] text-slate-700 font-mono truncate">Inquiries</span>
+                        <div className="bg-white dark:bg-[#1A1D24] border border-slate-200 dark:border-white/10 rounded p-1 flex flex-col gap-0.5 shadow-2xs">
+                          <span className="text-[5px] text-slate-700 dark:text-slate-300 font-mono truncate">Inquiries</span>
                         </div>
                       </div>
                     </div>
@@ -524,37 +524,37 @@ export default function Pricing() {
                   <div className="p-6 md:p-8 flex flex-col flex-grow justify-between text-left">
                     <div>
                       <div className="flex items-center gap-1.5 mb-2.5">
-                        <span className="w-1.5 h-1.5 rounded-full bg-[#5B5CF6]" />
-                        <span className="text-xs font-mono font-bold tracking-wider text-[#5B5CF6] uppercase">
+                        <span className="w-1.5 h-1.5 rounded-full bg-[#5B5CF6] dark:bg-[#7C7DFF]" />
+                        <span className="text-xs font-mono font-bold tracking-wider text-[#5B5CF6] dark:text-[#7C7DFF] uppercase">
                           {concept.category}
                         </span>
                       </div>
 
-                      <h3 className="text-xl font-bold tracking-tight text-[#0B0D12] mb-3 group-hover:text-[#5B5CF6] transition-colors">
+                      <h3 className="text-xl font-bold tracking-tight text-[#0B0D12] dark:text-white mb-3 group-hover:text-[#5B5CF6] dark:group-hover:text-[#7C7DFF] transition-colors">
                         {concept.name}
                       </h3>
 
-                      <p className="text-xs text-slate-600 leading-relaxed mb-4">
+                      <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed mb-4">
                         {concept.desc}
                       </p>
 
-                      <div className="mb-4 pt-2 border-t border-slate-100">
-                        <span className="text-[9px] font-mono font-bold text-slate-400 tracking-wider uppercase block mb-1">
+                      <div className="mb-4 pt-2 border-t border-slate-100 dark:border-white/10">
+                        <span className="text-[9px] font-mono font-bold text-slate-400 dark:text-slate-500 tracking-wider uppercase block mb-1">
                           Best For:
                         </span>
-                        <p className="text-[11px] text-slate-600 leading-relaxed italic">
+                        <p className="text-[11px] text-slate-600 dark:text-slate-400 leading-relaxed italic">
                           {concept.bestFor}
                         </p>
                       </div>
 
-                      <span className="text-[9px] font-mono font-bold text-slate-400 tracking-wider uppercase block mb-2">
+                      <span className="text-[9px] font-mono font-bold text-slate-400 dark:text-slate-500 tracking-wider uppercase block mb-2">
                         Sections Included:
                       </span>
                       <div className="flex flex-wrap gap-1.5 mb-6">
                         {concept.sections.map((sect, sidx) => (
                           <span
                             key={sidx}
-                            className="px-2 py-1 rounded bg-slate-100 border border-slate-200/60 text-[9px] font-mono text-slate-600"
+                            className="px-2 py-1 rounded bg-slate-100 dark:bg-slate-800/80 border border-slate-200/60 dark:border-white/10 text-[9px] font-mono text-slate-600 dark:text-slate-300"
                           >
                             {sect}
                           </span>
@@ -564,7 +564,7 @@ export default function Pricing() {
 
                     <button
                       onClick={() => handleChoosePackage(concept.name + " Concept")}
-                      className="w-full mt-auto py-3 rounded-xl border border-slate-200 hover:border-slate-900 bg-white hover:bg-slate-50 text-xs font-bold text-slate-800 tracking-wider uppercase font-mono transition-all duration-300 cursor-pointer flex items-center justify-center gap-1 group/btn shadow-2xs"
+                      className="w-full mt-auto py-3 rounded-xl border border-slate-200 dark:border-white/10 hover:border-slate-900 dark:hover:border-white bg-white dark:bg-[#15171D] hover:bg-slate-50 dark:hover:bg-[#1C1F27] text-xs font-bold text-slate-800 dark:text-slate-200 tracking-wider uppercase font-mono transition-all duration-300 cursor-pointer flex items-center justify-center gap-1 group/btn shadow-2xs"
                     >
                       View Sample Style
                       <ArrowRight className="w-3.5 h-3.5 group-hover/btn:translate-x-1 transition-transform" />
@@ -579,10 +579,10 @@ export default function Pricing() {
         {/* ADD-ON SERVICES SECTION */}
         <section className="mb-32">
           <div className="text-center max-w-2xl mx-auto mb-16">
-            <span className="text-xs font-mono font-bold tracking-widest text-[#5B5CF6] uppercase mb-3 block">
+            <span className="text-xs font-mono font-bold tracking-widest text-[#5B5CF6] dark:text-[#7C7DFF] uppercase mb-3 block">
               Enhance Your Site
             </span>
-            <h2 className="text-3xl font-bold text-[#0B0D12]">Add-On Services</h2>
+            <h2 className="text-3xl font-bold text-[#0B0D12] dark:text-white">Add-On Services</h2>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -593,22 +593,22 @@ export default function Pricing() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.4, delay: idx * 0.05 }}
-                className="bg-white rounded-2xl p-6 border border-slate-900/[0.08] hover:border-slate-900/[0.18] transition-all duration-300 text-left flex flex-col justify-between shadow-2xs"
+                className="bg-white dark:bg-[#111318] rounded-2xl p-6 border border-slate-900/[0.08] dark:border-white/10 hover:border-slate-900/[0.18] dark:hover:border-white/20 transition-all duration-300 text-left flex flex-col justify-between shadow-2xs"
               >
                 <div>
                   <div className="flex items-center justify-between gap-4 mb-3">
-                    <h3 className="text-base font-bold text-[#0B0D12] font-mono">{add.name}</h3>
-                    <span className="text-xs font-bold font-mono text-[#5B5CF6] whitespace-nowrap bg-[rgba(91,92,246,0.08)] border border-[rgba(91,92,246,0.16)] px-2 py-0.5 rounded">
+                    <h3 className="text-base font-bold text-[#0B0D12] dark:text-white font-mono">{add.name}</h3>
+                    <span className="text-xs font-bold font-mono text-[#5B5CF6] dark:text-[#7C7DFF] bg-[rgba(91,92,246,0.08)] dark:bg-[rgba(124,125,255,0.12)] border border-[rgba(91,92,246,0.16)] dark:border-[rgba(124,125,255,0.25)] px-2 py-0.5 rounded">
                       {add.price}
                     </span>
                   </div>
-                  <p className="text-xs text-slate-500 leading-relaxed mb-4">
+                  <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed mb-4">
                     {add.desc}
                   </p>
                 </div>
                 <button
                   onClick={() => handleChoosePackage(add.name + " Add-on")}
-                  className="text-xs font-mono font-bold text-[#5B5CF6] hover:underline text-left cursor-pointer inline-flex items-center gap-1 mt-2"
+                  className="text-xs font-mono font-bold text-[#5B5CF6] dark:text-[#7C7DFF] hover:underline text-left cursor-pointer inline-flex items-center gap-1 mt-2"
                 >
                   Add to Brief <PlusIcon className="w-3 h-3" />
                 </button>
@@ -620,10 +620,10 @@ export default function Pricing() {
         {/* FAQ ACCORDION SECTION */}
         <section className="mb-32">
           <div className="text-center max-w-2xl mx-auto mb-16">
-            <span className="text-xs font-mono font-bold tracking-widest text-[#5B5CF6] uppercase mb-3 block">
+            <span className="text-xs font-mono font-bold tracking-widest text-[#5B5CF6] dark:text-[#7C7DFF] uppercase mb-3 block">
               Need Answers?
             </span>
-            <h2 className="text-3xl font-bold text-[#0B0D12]">Frequently Asked Questions</h2>
+            <h2 className="text-3xl font-bold text-[#0B0D12] dark:text-white">Frequently Asked Questions</h2>
           </div>
 
           <div className="max-w-3xl mx-auto space-y-4 text-left">
@@ -665,17 +665,17 @@ export default function Pricing() {
               initial={{ opacity: 0, scale: 0.95 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
-              className="relative rounded-3xl p-8 md:p-14 bg-[#111318] text-white shadow-xl text-center overflow-hidden border border-slate-800"
+              className="relative rounded-3xl p-8 md:p-14 bg-[#111318] dark:bg-[#15171D] text-white shadow-xl text-center overflow-hidden border border-slate-800 dark:border-white/10"
             >
               <div className="relative z-10 flex flex-col items-center">
                 <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/10 border border-white/15 text-xs text-white font-semibold tracking-wider uppercase font-mono mb-6">
-                  <Sparkles className="w-3.5 h-3.5 text-[#5B5CF6]" />
+                  <Sparkles className="w-3.5 h-3.5 text-[#5B5CF6] dark:text-[#7C7DFF]" />
                   Free Consultation
                 </div>
 
                 <h2 className="text-3xl md:text-5xl font-bold tracking-tight text-white mb-6 max-w-2xl leading-tight">
                   Not Sure Which Package Is{" "}
-                  <span className="text-[#5B5CF6]">
+                  <span className="text-[#5B5CF6] dark:text-[#7C7DFF]">
                     Right for You?
                   </span>
                 </h2>
@@ -716,3 +716,4 @@ export default function Pricing() {
     </div>
   );
 }
+

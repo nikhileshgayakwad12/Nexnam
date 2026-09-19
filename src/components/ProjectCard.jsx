@@ -19,7 +19,7 @@ export default function ProjectCard({ project, onOpenCaseStudy, index, isDark = 
       className={`rounded-2xl overflow-hidden flex flex-col h-full border transition-all duration-300 group ${
         isDark
           ? "bg-[#111318] border-slate-800 shadow-[0_10px_30px_rgba(0,0,0,0.3)] hover:border-slate-700 hover:shadow-[0_20px_40px_rgba(0,0,0,0.5)]"
-          : "bg-white border-slate-900/[0.08] shadow-[0_4px_20px_rgba(15,23,42,0.03)] hover:shadow-[0_16px_40px_rgba(15,23,42,0.07)] hover:border-[#5B5CF6]/30"
+          : "bg-white dark:bg-[#111318] border-slate-900/[0.08] dark:border-white/[0.08] shadow-[0_4px_20px_rgba(15,23,42,0.03)] hover:shadow-[0_16px_40px_rgba(15,23,42,0.07)] hover:border-[#5B5CF6]/30 dark:hover:border-[#7C7DFF]/40"
       }`}
     >
       {/* Browser Frame Preview Mockup (16:10 ratio) */}
@@ -81,9 +81,9 @@ export default function ProjectCard({ project, onOpenCaseStudy, index, isDark = 
         <div>
           {/* Category */}
           <div className="flex items-center gap-1.5 mb-2">
-            <span className={`w-1.5 h-1.5 rounded-full ${isDark ? "bg-[#5B5CF6]" : "bg-[#5B5CF6]"}`} />
+            <span className={`w-1.5 h-1.5 rounded-full ${isDark ? "bg-[#5B5CF6]" : "bg-[#5B5CF6] dark:bg-[#7C7DFF]"}`} />
             <span className={`text-xs font-semibold tracking-wide uppercase ${
-              isDark ? "text-slate-400" : "text-[#5B5CF6]"
+              isDark ? "text-slate-400" : "text-[#5B5CF6] dark:text-[#7C7DFF]"
             }`}>
               {project.category}
             </span>
@@ -91,14 +91,14 @@ export default function ProjectCard({ project, onOpenCaseStudy, index, isDark = 
 
           {/* Title */}
           <h3 className={`text-xl font-bold tracking-tight mb-2 transition-colors duration-200 ${
-            isDark ? "text-white group-hover:text-[#5B5CF6]" : "text-[#0B0D12] group-hover:text-[#5B5CF6]"
+            isDark ? "text-white group-hover:text-[#5B5CF6]" : "text-[#0B0D12] dark:text-[#F8FAFC] group-hover:text-[#5B5CF6] dark:group-hover:text-[#7C7DFF]"
           }`}>
             {project.title}
           </h3>
 
           {/* Short description */}
           <p className={`text-xs leading-relaxed mb-5 ${
-            isDark ? "text-slate-400" : "text-[#5F6470]"
+            isDark ? "text-slate-400" : "text-[#5F6470] dark:text-[#9CA3AF]"
           }`}>
             {project.shortDesc}
           </p>
@@ -112,7 +112,7 @@ export default function ProjectCard({ project, onOpenCaseStudy, index, isDark = 
                   className={`px-2.5 py-0.5 rounded text-[11px] font-medium ${
                     isDark
                       ? "bg-slate-800/80 border border-slate-700/60 text-slate-300"
-                      : "bg-slate-100 border border-slate-200/70 text-slate-700"
+                      : "bg-slate-100 dark:bg-[#15171D] border border-slate-200/70 dark:border-white/[0.08] text-slate-700 dark:text-slate-300"
                   }`}
                 >
                   {tech}
@@ -132,7 +132,7 @@ export default function ProjectCard({ project, onOpenCaseStudy, index, isDark = 
             className={`flex items-center justify-center gap-1.5 py-2.5 rounded-xl border text-xs font-semibold transition-all duration-200 cursor-pointer ${
               isDark
                 ? "border-slate-700 hover:border-slate-500 bg-slate-900 text-slate-200"
-                : "border-slate-200 hover:border-[#0B0D12] bg-white text-[#0B0D12]"
+                : "border-slate-200 dark:border-white/[0.12] hover:border-[#0B0D12] dark:hover:border-[#7C7DFF] bg-white dark:bg-[#15171D] text-[#0B0D12] dark:text-[#F8FAFC]"
             }`}
           >
             Case Study
@@ -145,7 +145,7 @@ export default function ProjectCard({ project, onOpenCaseStudy, index, isDark = 
             target="_blank"
             rel="noopener noreferrer"
             onClick={playClick}
-            className="flex items-center justify-center gap-1.5 py-2.5 rounded-xl bg-[#5B5CF6] hover:bg-[#4F50E2] text-white text-xs font-semibold transition-all duration-200 cursor-pointer shadow-xs"
+            className="flex items-center justify-center gap-1.5 py-2.5 rounded-xl bg-[#5B5CF6] dark:bg-[#7C7DFF] hover:bg-[#4F50E2] dark:hover:bg-[#6869E8] text-white text-xs font-semibold transition-all duration-200 cursor-pointer shadow-xs"
           >
             Live Demo
             <ExternalLink className="w-3.5 h-3.5" />

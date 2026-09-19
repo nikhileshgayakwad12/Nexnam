@@ -281,21 +281,21 @@ export default function AIAssistant() {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 15 }}
             transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
-            className="fixed bottom-[125px] sm:bottom-[135px] right-3 sm:right-6 z-50 w-[calc(100%-1.5rem)] sm:w-[380px] h-[460px] sm:h-[480px] max-h-[68vh] sm:max-h-[600px] bg-white/95 backdrop-blur-xl rounded-2xl sm:rounded-3xl border border-slate-200 flex flex-col overflow-hidden shadow-[0_20px_60px_rgba(15,23,42,0.14)]"
+            className="fixed bottom-[125px] sm:bottom-[135px] right-3 sm:right-6 z-50 w-[calc(100%-1.5rem)] sm:w-[380px] h-[460px] sm:h-[480px] max-h-[68vh] sm:max-h-[600px] bg-white/95 dark:bg-[#111318]/95 backdrop-blur-xl rounded-2xl sm:rounded-3xl border border-slate-200 dark:border-white/[0.08] flex flex-col overflow-hidden shadow-[0_20px_60px_rgba(15,23,42,0.14)]"
           >
             {/* Chat Header */}
-            <div className="p-4 border-b border-slate-100 bg-slate-50/90 flex items-center justify-between">
+            <div className="p-4 border-b border-slate-100 dark:border-white/[0.08] bg-slate-50/90 dark:bg-[#15171D]/90 flex items-center justify-between">
               <div className="flex items-center gap-2.5">
-                <div className="w-9 h-9 rounded-xl bg-indigo-50 border border-indigo-100 flex items-center justify-center relative shadow-2xs">
-                  <Bot className="w-5 h-5 text-indigo-600" />
-                  <span className="absolute bottom-0 right-0 w-2 h-2 rounded-full bg-emerald-500 border border-white" />
+                <div className="w-9 h-9 rounded-xl bg-indigo-50 dark:bg-[#7C7DFF]/10 border border-indigo-100 dark:border-[#7C7DFF]/20 flex items-center justify-center relative shadow-2xs">
+                  <Bot className="w-5 h-5 text-indigo-600 dark:text-[#7C7DFF]" />
+                  <span className="absolute bottom-0 right-0 w-2 h-2 rounded-full bg-emerald-500 border border-white dark:border-[#15171D]" />
                 </div>
                 <div>
-                  <h3 className="text-sm font-bold text-slate-900 leading-none mb-1 flex items-center gap-1 font-mono">
+                  <h3 className="text-sm font-bold text-slate-900 dark:text-[#F8FAFC] leading-none mb-1 flex items-center gap-1 font-mono">
                     Nexnam AI Assistant
-                    <Sparkles className="w-3.5 h-3.5 text-indigo-600 animate-pulse" />
+                    <Sparkles className="w-3.5 h-3.5 text-indigo-600 dark:text-[#7C7DFF] animate-pulse" />
                   </h3>
-                  <span className="text-[10px] text-slate-500 font-mono tracking-wider uppercase">
+                  <span className="text-[10px] text-slate-500 dark:text-[#9CA3AF] font-mono tracking-wider uppercase">
                     Ask about services, pricing, projects or contact
                   </span>
                 </div>
@@ -303,7 +303,7 @@ export default function AIAssistant() {
               <button
                 onClick={toggleChat}
                 onMouseEnter={playHover}
-                className="p-1.5 rounded-lg border border-slate-200 hover:border-indigo-300 bg-white text-slate-500 hover:text-slate-900 transition-colors cursor-pointer shadow-2xs"
+                className="p-1.5 rounded-lg border border-slate-200 dark:border-white/[0.12] hover:border-indigo-300 dark:hover:border-[#7C7DFF] bg-white dark:bg-[#15171D] text-slate-500 dark:text-[#9CA3AF] hover:text-slate-900 dark:hover:text-[#F8FAFC] transition-colors cursor-pointer shadow-2xs"
                 aria-label="Close Chat"
               >
                 <X className="w-4 h-4" />
@@ -311,7 +311,7 @@ export default function AIAssistant() {
             </div>
 
             {/* Chat Messages Log */}
-            <div className="flex-grow p-4 overflow-y-auto space-y-4 bg-slate-50/30">
+            <div className="flex-grow p-4 overflow-y-auto space-y-4 bg-slate-50/30 dark:bg-[#090A0D]/50">
               {messages.map((msg, idx) => (
                 <div
                   key={idx}
@@ -320,23 +320,23 @@ export default function AIAssistant() {
                   <div
                     className={`max-w-[85%] rounded-2xl px-4 py-3 text-xs leading-relaxed ${
                       msg.sender === "user"
-                        ? "bg-gradient-to-r from-indigo-600 to-violet-600 text-white font-medium rounded-tr-none shadow-xs"
-                        : "bg-white border border-slate-200/80 text-slate-800 rounded-tl-none shadow-2xs"
+                        ? "bg-gradient-to-r from-indigo-600 to-violet-600 dark:from-[#7C7DFF] dark:to-[#6869E8] text-white font-medium rounded-tr-none shadow-xs"
+                        : "bg-white dark:bg-[#15171D] border border-slate-200/80 dark:border-white/[0.08] text-slate-800 dark:text-[#F8FAFC] rounded-tl-none shadow-2xs"
                     }`}
                   >
                     {msg.text}
                   </div>
-                  <span className="text-[9px] text-slate-400 font-mono mt-1 px-1">{msg.time}</span>
+                  <span className="text-[9px] text-slate-400 dark:text-slate-500 font-mono mt-1 px-1">{msg.time}</span>
                 </div>
               ))}
               
               {/* Animated Typing Indicator */}
               {isTyping && (
                 <div className="flex flex-col items-start">
-                  <div className="flex items-center gap-1.5 px-4 py-3 bg-white border border-slate-200/80 text-slate-400 rounded-2xl rounded-tl-none w-16 shadow-2xs">
-                    <span className="w-1.5 h-1.5 rounded-full bg-indigo-600 animate-bounce" style={{ animationDelay: "0ms" }} />
-                    <span className="w-1.5 h-1.5 rounded-full bg-indigo-600 animate-bounce" style={{ animationDelay: "150ms" }} />
-                    <span className="w-1.5 h-1.5 rounded-full bg-indigo-600 animate-bounce" style={{ animationDelay: "300ms" }} />
+                  <div className="flex items-center gap-1.5 px-4 py-3 bg-white dark:bg-[#15171D] border border-slate-200/80 dark:border-white/[0.08] text-slate-400 dark:text-slate-500 rounded-2xl rounded-tl-none w-16 shadow-2xs">
+                    <span className="w-1.5 h-1.5 rounded-full bg-indigo-600 dark:bg-[#7C7DFF] animate-bounce" style={{ animationDelay: "0ms" }} />
+                    <span className="w-1.5 h-1.5 rounded-full bg-indigo-600 dark:bg-[#7C7DFF] animate-bounce" style={{ animationDelay: "150ms" }} />
+                    <span className="w-1.5 h-1.5 rounded-full bg-indigo-600 dark:bg-[#7C7DFF] animate-bounce" style={{ animationDelay: "300ms" }} />
                   </div>
                 </div>
               )}
@@ -344,7 +344,7 @@ export default function AIAssistant() {
             </div>
 
             {/* Chat Suggestions & Form */}
-            <div className="p-3 border-t border-slate-100 bg-white">
+            <div className="p-3 border-t border-slate-100 dark:border-white/[0.08] bg-white dark:bg-[#111318]">
               {/* Suggested Quick Actions */}
               <div className="flex flex-wrap gap-2 mb-3">
                 {QUICK_ACTIONS.map((action, idx) => (
@@ -353,7 +353,7 @@ export default function AIAssistant() {
                     type="button"
                     onClick={() => handleQuickAction(action)}
                     onMouseEnter={playHover}
-                    className="px-2.5 py-1.5 rounded-full border border-slate-200 bg-slate-50 hover:border-indigo-300 hover:bg-indigo-50/60 text-[10px] text-slate-700 font-mono transition-all duration-300 cursor-pointer shadow-2xs"
+                    className="px-2.5 py-1.5 rounded-full border border-slate-200 dark:border-white/[0.12] bg-slate-50 dark:bg-[#15171D] hover:border-indigo-300 dark:hover:border-[#7C7DFF] hover:bg-indigo-50/60 dark:hover:bg-[#7C7DFF]/10 text-[10px] text-slate-700 dark:text-slate-300 font-mono transition-all duration-300 cursor-pointer shadow-2xs"
                   >
                     {action.label}
                   </button>
@@ -374,12 +374,12 @@ export default function AIAssistant() {
                   onChange={(e) => setInputVal(e.target.value)}
                   placeholder="Ask a question..."
                   aria-label="Ask a question"
-                  className="flex-grow px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-900 placeholder-slate-400 focus:outline-none focus:border-indigo-500 transition-colors"
+                  className="flex-grow px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-[#16181E] border border-slate-200 dark:border-white/[0.08] text-xs text-slate-900 dark:text-[#F8FAFC] placeholder-slate-400 dark:placeholder-[#717784] focus:outline-none focus:border-indigo-500 dark:focus:border-[#7C7DFF] transition-colors"
                 />
                 <button
                   type="submit"
                   disabled={!inputVal.trim()}
-                  className="p-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 disabled:opacity-50 text-white transition-colors flex items-center justify-center shrink-0 cursor-pointer shadow-xs"
+                  className="p-2.5 rounded-xl bg-indigo-600 dark:bg-[#7C7DFF] hover:bg-indigo-700 dark:hover:bg-[#6869E8] disabled:opacity-50 text-white transition-colors flex items-center justify-center shrink-0 cursor-pointer shadow-xs"
                   aria-label="Send Message"
                 >
                   <Send className="w-3.5 h-3.5" />

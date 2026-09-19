@@ -119,10 +119,10 @@ export default function Projects() {
   );
 
   return (
-    <div className="flex-grow z-10 w-full pt-24 sm:pt-28 pb-16 sm:pb-20 px-4 sm:px-8 bg-[#FAFAFA]">
+    <div className="flex-grow z-10 w-full pt-24 sm:pt-28 pb-16 sm:pb-20 px-4 sm:px-8 bg-[#FAFAFA] dark:bg-[#090A0D] transition-colors duration-200">
       <SEO
-        title="Projects Built with Nexnam Vision | Nexnam"
-        description="View Nexnam projects, website concepts, apps and digital solutions built for businesses, learning and productivity."
+        title="Projects & Case Studies | Nexnam"
+        description="Explore digital product case studies, web applications, and website concepts engineered by Nexnam for startups and businesses."
       />
       <div className="mx-auto max-w-7xl">
         {/* Page Header */}
@@ -131,9 +131,9 @@ export default function Projects() {
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-            className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-100 border border-slate-200 text-xs text-[#0B0D12] font-semibold mb-6 shadow-2xs"
+            className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-100 dark:bg-[#15171D] border border-slate-200 dark:border-white/[0.08] text-xs text-[#0B0D12] dark:text-[#F8FAFC] font-semibold mb-6 shadow-2xs"
           >
-            <Sparkles className="w-3.5 h-3.5 text-[#5B5CF6]" />
+            <Sparkles className="w-3.5 h-3.5 text-[#5B5CF6] dark:text-[#7C7DFF]" />
             Launch Gallery
           </motion.div>
 
@@ -141,10 +141,10 @@ export default function Projects() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-            className="text-4xl sm:text-5xl font-extrabold tracking-tight text-[#0B0D12] mb-6"
+            className="text-4xl sm:text-5xl font-extrabold tracking-tight text-[#0B0D12] dark:text-[#F8FAFC] mb-6"
           >
             Projects Built with{" "}
-            <span className="bg-gradient-to-r from-[#0B0D12] via-[#5B5CF6] to-[#7C3AED] bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-[#0B0D12] via-[#5B5CF6] to-[#7C3AED] dark:from-[#F8FAFC] dark:via-[#7C7DFF] dark:to-[#A78BFA] bg-clip-text text-transparent">
               Nexnam Vision
             </span>
           </motion.h1>
@@ -153,7 +153,7 @@ export default function Projects() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-            className="text-base sm:text-lg text-[#5F6470] leading-relaxed"
+            className="text-base sm:text-lg text-[#5F6470] dark:text-[#9CA3AF] leading-relaxed"
           >
             Explore digital product concepts and web solutions designed for learning, business, productivity, and smart user experiences.
           </motion.p>
@@ -171,8 +171,8 @@ export default function Projects() {
               onMouseEnter={playHover}
               className={`px-5 py-2 rounded-xl border text-xs font-semibold tracking-wide transition-all duration-200 cursor-pointer ${
                 selectedCategory === cat
-                  ? "bg-[#111318] border-[#111318] text-white shadow-sm"
-                  : "bg-white border-slate-900/[0.08] text-[#5F6470] hover:border-slate-400 hover:text-[#0B0D12] shadow-2xs"
+                  ? "bg-[#111318] dark:bg-[#7C7DFF] border-[#111318] dark:border-[#7C7DFF] text-white shadow-sm"
+                  : "bg-white dark:bg-[#111318] border-slate-900/[0.08] dark:border-white/[0.08] text-[#5F6470] dark:text-[#9CA3AF] hover:border-slate-400 dark:hover:border-white/20 hover:text-[#0B0D12] dark:hover:text-[#F8FAFC] shadow-2xs"
               }`}
             >
               {cat}
@@ -183,22 +183,22 @@ export default function Projects() {
         {/* Loading State */}
         {loading && (
           <div className="text-center py-20">
-            <div className="inline-block w-8 h-8 border-4 border-[#5B5CF6] border-t-transparent rounded-full animate-spin mb-4" />
-            <p className="text-[#5F6470] font-mono text-sm">Syncing projects with Supabase...</p>
+            <div className="inline-block w-8 h-8 border-4 border-[#5B5CF6] dark:border-[#7C7DFF] border-t-transparent rounded-full animate-spin mb-4" />
+            <p className="text-[#5F6470] dark:text-[#9CA3AF] font-mono text-sm">Syncing projects with Supabase...</p>
           </div>
         )}
 
         {/* Error State */}
         {error && (
-          <div className="text-center py-10 max-w-md mx-auto bg-red-50 border border-red-200 rounded-2xl p-6 mb-10 shadow-2xs">
-            <p className="text-red-600 font-mono text-sm mb-4">{error}</p>
+          <div className="text-center py-10 max-w-md mx-auto bg-red-50 dark:bg-red-950/40 border border-red-200 dark:border-red-800/50 rounded-2xl p-6 mb-10 shadow-2xs">
+            <p className="text-red-600 dark:text-red-400 font-mono text-sm mb-4">{error}</p>
             <button
               onClick={() => {
                 playClick();
                 setLoading(true);
                 fetchProjects();
               }}
-              className="px-4 py-2 bg-white border border-slate-200 hover:border-slate-300 text-[#0B0D12] text-xs font-mono rounded-lg transition-all cursor-pointer shadow-2xs"
+              className="px-4 py-2 bg-white dark:bg-[#15171D] border border-slate-200 dark:border-white/[0.08] hover:border-slate-300 dark:hover:border-white/20 text-[#0B0D12] dark:text-[#F8FAFC] text-xs font-mono rounded-lg transition-all cursor-pointer shadow-2xs"
             >
               Try Reconnecting
             </button>
@@ -211,8 +211,8 @@ export default function Projects() {
             <div className="space-y-16">
               {/* Featured Digital Products Section */}
               <div>
-                <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-[#0B0D12] mb-6 flex items-center gap-2">
-                  <span className="w-2 h-2 rounded-full bg-[#5B5CF6]" />
+                <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-[#0B0D12] dark:text-[#F8FAFC] mb-6 flex items-center gap-2">
+                  <span className="w-2 h-2 rounded-full bg-[#5B5CF6] dark:bg-[#7C7DFF]" />
                   Featured Digital Products
                 </h2>
                 <motion.div
@@ -242,8 +242,8 @@ export default function Projects() {
 
               {/* Client-Ready Website Concepts Section */}
               <div>
-                <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-[#0B0D12] mb-6 flex items-center gap-2">
-                  <span className="w-2 h-2 rounded-full bg-[#7C3AED]" />
+                <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-[#0B0D12] dark:text-[#F8FAFC] mb-6 flex items-center gap-2">
+                  <span className="w-2 h-2 rounded-full bg-[#7C3AED] dark:bg-[#A78BFA]" />
                   Client-Ready Website Concepts
                 </h2>
                 <motion.div
@@ -300,8 +300,8 @@ export default function Projects() {
 
         {/* Empty state */}
         {!loading && !error && filteredProjects.length === 0 && (
-          <div className="text-center py-20 bg-white rounded-2xl border border-slate-200 shadow-2xs">
-            <p className="text-[#8A8F98] text-sm font-medium">
+          <div className="text-center py-20 bg-white dark:bg-[#111318] rounded-2xl border border-slate-200 dark:border-white/[0.08] shadow-2xs">
+            <p className="text-[#8A8F98] dark:text-[#9CA3AF] text-sm font-medium">
               No matching case studies found.
             </p>
           </div>
@@ -310,7 +310,7 @@ export default function Projects() {
         {/* Case Study Detailed Modal */}
         <AnimatePresence>
           {activeCaseStudy && (
-            <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#0B0D12]/70 backdrop-blur-md">
+            <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#0B0D12]/70 dark:bg-black/80 backdrop-blur-md">
               <div
                 className="absolute inset-0 cursor-default"
                 onClick={() => {
@@ -324,7 +324,7 @@ export default function Projects() {
                 animate={{ opacity: 1, scale: 1, y: 0 }}
                 exit={{ opacity: 0, scale: 0.96, y: 15 }}
                 transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-                className="relative w-full max-w-3xl max-h-[90vh] overflow-y-auto bg-white rounded-3xl border border-slate-200 p-6 md:p-10 z-10 shadow-2xl"
+                className="relative w-full max-w-3xl max-h-[90vh] overflow-y-auto bg-white dark:bg-[#111318] rounded-3xl border border-slate-200 dark:border-white/[0.08] p-6 md:p-10 z-10 shadow-2xl"
               >
                 {/* Close Button */}
                 <button
@@ -333,7 +333,7 @@ export default function Projects() {
                     setActiveCaseStudy(null);
                   }}
                   onMouseEnter={playHover}
-                  className="absolute top-6 right-6 p-2 rounded-xl border border-slate-200 hover:border-slate-400 bg-slate-50 text-[#0B0D12] transition-all cursor-pointer shadow-2xs"
+                  className="absolute top-6 right-6 p-2 rounded-xl border border-slate-200 dark:border-white/[0.12] hover:border-slate-400 dark:hover:border-white/20 bg-slate-50 dark:bg-[#15171D] text-[#0B0D12] dark:text-[#F8FAFC] transition-all cursor-pointer shadow-2xs"
                   aria-label="Close modal"
                 >
                   <X className="w-4 h-4" />
@@ -357,35 +357,35 @@ export default function Projects() {
 
                 {/* Category & Title */}
                 <div className="flex items-center gap-2 mb-2">
-                  <span className="w-2 h-2 rounded-full bg-[#5B5CF6]" />
-                  <span className="text-xs font-semibold text-[#5B5CF6] uppercase">
+                  <span className="w-2 h-2 rounded-full bg-[#5B5CF6] dark:bg-[#7C7DFF]" />
+                  <span className="text-xs font-semibold text-[#5B5CF6] dark:text-[#7C7DFF] uppercase">
                     {activeCaseStudy.category}
                   </span>
                 </div>
-                <h2 className="text-3xl font-extrabold text-[#0B0D12] mb-4">
+                <h2 className="text-3xl font-extrabold text-[#0B0D12] dark:text-[#F8FAFC] mb-4">
                   {activeCaseStudy.title}
                 </h2>
 
-                <p className="text-sm text-[#5F6470] leading-relaxed mb-8">
+                <p className="text-sm text-[#5F6470] dark:text-[#9CA3AF] leading-relaxed mb-8">
                   {activeCaseStudy.longDesc || activeCaseStudy.shortDesc}
                 </p>
 
                 {/* Features List */}
-                <h3 className="text-xs font-bold text-[#0B0D12] uppercase tracking-wider mb-4 font-mono">
+                <h3 className="text-xs font-bold text-[#0B0D12] dark:text-[#F8FAFC] uppercase tracking-wider mb-4 font-mono">
                   Core Engineering Milestones
                 </h3>
                 <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-8">
                   {activeCaseStudy.features &&
                     activeCaseStudy.features.map((feat, i) => (
-                      <li key={i} className="flex items-start gap-2.5 text-xs text-[#5F6470]">
-                        <CheckCircle className="w-4 h-4 text-[#5B5CF6] mt-0.5 shrink-0" />
+                      <li key={i} className="flex items-start gap-2.5 text-xs text-[#5F6470] dark:text-[#9CA3AF]">
+                        <CheckCircle className="w-4 h-4 text-[#5B5CF6] dark:text-[#7C7DFF] mt-0.5 shrink-0" />
                         <span>{feat}</span>
                       </li>
                     ))}
                 </ul>
 
                 {/* Tech Stack */}
-                <h3 className="text-xs font-bold text-[#0B0D12] uppercase tracking-wider mb-4 font-mono">
+                <h3 className="text-xs font-bold text-[#0B0D12] dark:text-[#F8FAFC] uppercase tracking-wider mb-4 font-mono">
                   System Architecture Stack
                 </h3>
                 <div className="flex flex-wrap gap-2 mb-8">
@@ -393,7 +393,7 @@ export default function Projects() {
                     activeCaseStudy.technologies.map((tech) => (
                       <span
                         key={tech}
-                        className="px-3 py-1 rounded-lg text-xs font-medium bg-slate-100 border border-slate-200 text-[#0B0D12]"
+                        className="px-3 py-1 rounded-lg text-xs font-medium bg-slate-100 dark:bg-[#15171D] border border-slate-200 dark:border-white/[0.08] text-[#0B0D12] dark:text-[#F8FAFC]"
                       >
                         {tech}
                       </span>
@@ -401,13 +401,13 @@ export default function Projects() {
                 </div>
 
                 {/* Modal CTAs */}
-                <div className="flex flex-col sm:flex-row items-center gap-4 pt-2 border-t border-slate-100">
+                <div className="flex flex-col sm:flex-row items-center gap-4 pt-2 border-t border-slate-100 dark:border-white/[0.08]">
                   <a
                     href={activeCaseStudy.demoUrl}
                     target="_blank"
                     rel="noopener noreferrer"
                     onClick={playClick}
-                    className="w-full sm:w-auto relative inline-flex items-center justify-center px-6 py-3.5 text-xs font-semibold text-white rounded-xl bg-[#5B5CF6] hover:bg-[#4F50E2] transition-all duration-200 cursor-pointer shadow-sm"
+                    className="w-full sm:w-auto relative inline-flex items-center justify-center px-6 py-3.5 text-xs font-semibold text-white rounded-xl bg-[#5B5CF6] dark:bg-[#7C7DFF] hover:bg-[#4F50E2] dark:hover:bg-[#6869E8] transition-all duration-200 cursor-pointer shadow-sm"
                   >
                     Open Live Deployment
                     <ExternalLink className="ml-2 w-3.5 h-3.5" />
@@ -420,7 +420,7 @@ export default function Projects() {
                       navigate("/contact");
                       window.scrollTo({ top: 0, behavior: "smooth" });
                     }}
-                    className="w-full sm:w-auto px-6 py-3.5 rounded-xl border border-slate-200 hover:border-[#0B0D12] bg-white text-xs font-semibold text-[#0B0D12] transition-all duration-200 cursor-pointer shadow-2xs"
+                    className="w-full sm:w-auto px-6 py-3.5 rounded-xl border border-slate-200 dark:border-white/[0.12] hover:border-[#0B0D12] dark:hover:border-[#7C7DFF] bg-white dark:bg-[#15171D] text-xs font-semibold text-[#0B0D12] dark:text-[#F8FAFC] transition-all duration-200 cursor-pointer shadow-2xs"
                   >
                     Discuss Similar Build
                   </button>
@@ -436,12 +436,12 @@ export default function Projects() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="mt-20 p-8 md:p-12 bg-[#111318] text-white rounded-3xl border border-slate-800 text-center max-w-4xl mx-auto relative overflow-hidden shadow-xl"
+          className="mt-20 p-8 md:p-12 bg-[#111318] text-white rounded-3xl border border-slate-800 dark:border-white/[0.08] text-center max-w-4xl mx-auto relative overflow-hidden shadow-xl"
         >
           <h2 className="text-2xl md:text-4xl font-extrabold text-white mb-4">
             Have an Idea Like This?
           </h2>
-          <p className="text-sm text-slate-400 leading-relaxed mb-8 max-w-xl mx-auto">
+          <p className="text-sm text-slate-400 dark:text-[#9CA3AF] leading-relaxed mb-8 max-w-xl mx-auto">
             Nexnam can help you turn your idea into a modern website, app, dashboard, or digital product.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
