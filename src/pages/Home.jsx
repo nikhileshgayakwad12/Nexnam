@@ -96,7 +96,7 @@ export default function Home() {
       />
 
       {/* Editorial Hero Section */}
-      <section className="relative flex items-center justify-center pt-20 sm:pt-24 lg:pt-28 pb-12 sm:pb-16 lg:pb-20 px-4 sm:px-8 bg-[#FAFAFA] dark:bg-[#090A0D] transition-colors duration-250">
+      <section className="relative flex items-center justify-center pt-10 sm:pt-14 lg:pt-16 pb-12 sm:pb-16 lg:pb-20 px-4 sm:px-8 bg-[#FAFAFA] dark:bg-[#090A0D] transition-colors duration-250">
         <div className="mx-auto max-w-7xl w-full grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-10 lg:gap-12 items-center">
           
           {/* Hero Left Content (56% desktop width) */}

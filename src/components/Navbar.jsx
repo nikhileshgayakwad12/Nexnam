@@ -4,6 +4,7 @@ import { Menu, X, ArrowUpRight, Sun, Moon } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { playHover, playClick } from "../utils/soundManager";
 import { useTheme } from "../context/ThemeContext";
+import nexnamLogo from "../assets/brand/nexnam-logo.png";
 
 export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -33,17 +34,24 @@ export default function Navbar() {
         transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
         className="sticky top-0 z-40 w-full border-b border-slate-900/[0.08] dark:border-white/[0.07] bg-white/90 dark:bg-[#090A0D]/88 backdrop-blur-[14px] shadow-[0_2px_15px_rgba(15,23,42,0.03)] transition-colors duration-250"
       >
-        <div className="mx-auto flex max-w-7xl h-16 sm:h-20 items-center justify-between px-4 sm:px-8">
+        <div className="mx-auto flex max-w-7xl h-16 sm:h-20 items-center justify-between px-4 sm:px-6 lg:px-8">
           {/* Logo / Navbar Brand */}
           <Link
             to="/"
             onClick={handleNavClick}
             onMouseEnter={playHover}
-            className="flex items-center group cursor-pointer select-none py-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#5B5CF6] rounded-md"
+            className="flex items-center gap-2.5 sm:gap-3 group cursor-pointer select-none py-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#5B5CF6] rounded-md"
             aria-label="Nexnam Home"
           >
+            <div className="flex items-center justify-center p-1 sm:p-1.5 rounded-[9px] bg-[#111318] dark:bg-[#15171D] border border-slate-900/10 dark:border-white/10 shadow-xs transition-transform duration-200 group-hover:scale-105 shrink-0">
+              <img
+                src={nexnamLogo}
+                alt="Nexnam"
+                className="h-[24px] sm:h-[28px] w-auto object-contain"
+              />
+            </div>
             <span className="text-[20px] sm:text-[24px] font-[750] tracking-[-0.04em] text-[#0B0D12] dark:text-white group-hover:opacity-90 transition-opacity font-sans leading-none">
-              Nexnam<span className="text-[#5B5CF6] dark:text-[#7C7DFF]">.</span>
+              Nexnam
             </span>
           </Link>
 
